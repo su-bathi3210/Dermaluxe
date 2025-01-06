@@ -1,0 +1,126 @@
+.blog-title {
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    color: brown;
+    text-align: center;
+    margin-bottom: -3px;
+    margin-top: 70px;
+}
+
+.blog-paragraph {
+    font-size: 17px;
+    line-height: 1.8;
+    color: black;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    width: 1200px;
+    margin-left: 160px;
+    margin-bottom: 10px;
+}
+
+.blog-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.tab {
+    margin: 0 5px;
+    font-size: 17px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #555;
+    position: relative;
+    margin-bottom: -12px;
+}
+
+.tab.active-tab {
+    font-weight: bold;
+    color: black;
+}
+
+.tab.active-tab::after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 2px;
+    width: 100%;
+    background: black;
+    margin-top: 5px;
+}
+
+.blog-images,
+.how-to-images {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.blog-image,
+.how-to-image {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: -80px;
+}
+
+.blog-image:hover,
+.how-to-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.icon-section {
+    background-color: #c9c6c4;
+    color: black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: left;
+    margin-top: 130px;
+    margin-bottom: -100px;
+}
+
+.icon-item {
+    margin: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    max-width: 300px;
+}
+
+.icon-item .icon {
+    font-size: 23px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.icon-item .label-description {
+    display: flex;
+    flex-direction: column;
+}
+
+.icon-item .label {
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.icon-item .description {
+    font-size: 12px;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
+.icon-item .details {
+    color: brown;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}

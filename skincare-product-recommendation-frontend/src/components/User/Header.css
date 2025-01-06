@@ -1,0 +1,95 @@
+.header {
+    font-family: Arial, sans-serif;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-top: 18px;
+}
+
+.header-logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.header-logo img {
+    width: 280px;
+    margin-top: -100px;
+    margin-bottom: -115px;
+}
+
+.header-nav {
+    background-color: #894c2b;
+    padding: 10px 0;
+}
+
+.header-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header-nav li {
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.header-nav li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.header-nav li a:hover {
+    text-decoration: underline;
+}
+
+
+
+.header-promo {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background-color: #f0f0f0;
+    padding: 10px 0;
+    font-size: 14px;
+    color: black;
+    border-top: 1px solid #ddd;
+}
+
+.header-promo-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-promo-item img {
+    width: 20px;
+    height: 20px;
+}
+
+.header-promo-item span {
+    cursor: pointer;
+}
+
+.header-promo-item span:hover {
+    text-decoration: underline;
+}
+
+.header-promo-item a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.header-promo-item a:hover {
+    text-decoration: none;
+}

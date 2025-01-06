@@ -1,0 +1,78 @@
+/** StartPage.css **/
+.start-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.background-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.overlay {
+    position: relative;
+    z-index: 2;
+    color: white;
+    padding: 20px;
+
+}
+
+.headline1 {
+    font-size: 55px;
+    font-weight: bold;
+    margin-left: 1068px;
+    margin-top: 60px;
+}
+
+.headline2 {
+    font-size: 55px;
+    font-weight: bold;
+    margin-left: 680px;
+    margin-top: -45px;
+}
+
+.headline3 {
+    font-size: 17.5px;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 864px;
+    line-height: 1.7;
+    margin-top: -22px;
+}
+
+.headline4 {
+    font-size: 17.5px;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 1177px;
+    line-height: 0.5;
+}
+
+.get-started-button {
+    padding: 12px 11px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border: none;
+    margin-left: 1210px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+}
+
+.get-started-button:hover {
+    background-color: #444;
+}
