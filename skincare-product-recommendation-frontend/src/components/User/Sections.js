@@ -20,6 +20,24 @@ const Sections = () => {
 
     return (
         <div>
+
+            <div className="promo-section">
+                <h2 className="promo-title">EXPERT RECOMMENDATIONS FOR GLOWING, HEALTHY SKIN!</h2>
+                <p className="promo-paragraph">
+                    At Dermaluxe Skincare, we offer a curated selection of premium skincare products designed to promote long-term skin health.
+                    Our formulations feature innovative, skin-identical active ingredients with advanced delivery systems, all scientifically backed
+                    for efficacy. We believe in complete transparency what you see is what you get. As both a user or stockist, you can trust that our
+                    products are carefully designed to support your skin’s health, providing noticeable improvements just shy of prescription-level
+                    treatments. Embrace a pro-aging approach and enjoy glowing, healthy skin at every age.
+                </p>
+                <p className="promo-paragraph">
+                    Our platform also supports a wide variety of trusted brands, ensuring you have access to a diverse range of solutions for
+                    all skin concerns. Whether you are looking for personalized skincare advice or need professional recommendations from our
+                    specialized dermatologists, we provide tailored solutions based on your unique skin type and needs. Let us help you find the
+                    perfect products for a radiant complexion that’s as individual as you are.
+                </p>
+            </div>
+
             <div className="blog-section">
                 <h2 className="blog-title">FROM THE BLOG</h2>
                 <p className="blog-paragraph">Welcome to Dermaluxe Skin Notes, your ultimate destination for all things skincare! <br /></p>

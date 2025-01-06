@@ -5,11 +5,11 @@ import Home from './components/User/Home';
 import Footer from './components/User/Footer';
 import { About } from './components/User/About';
 import Contact from './components/User/Contact';
-import Expert from './components/User/Expert';
 import AppOrder from './components/User/AppOrder';
 import Offers from './components/User/Offers';
 import { Reward } from './components/User/Reward';
 import Shipping from './components/User/Shipping';
+import Expert from './components/User/Expert';
 
 function App() {
   const shouldShowFooter = true;
@@ -20,7 +20,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/Expert' element={<Expert />} />
+        <Route path='/consultation' element={<Expert />} />
         <Route path='/Apporder' element={<AppOrder />} />
         <Route path='/Offers' element={<Offers />} />
         <Route path='/Reward' element={<Reward />} />

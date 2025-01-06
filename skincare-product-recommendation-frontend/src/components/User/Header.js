@@ -43,8 +43,8 @@ const Header = () => {
                 </div>
                 <div className="header-promo-item">
                     <img src={expertIcon} alt="Expert Icon" />
-                    <Link to="/expert">
-                        <span>Ask an Expert</span>
+                    <Link to="/consultation">
+                        <span>Skin Consultation</span>
                     </Link>
                 </div>
                 <div className="header-promo-item">

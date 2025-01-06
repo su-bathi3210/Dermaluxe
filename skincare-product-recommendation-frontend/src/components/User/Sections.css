@@ -1,3 +1,27 @@
+.promo-section {
+    background-color: #f8f4f1;
+    padding: 25px 80px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.promo-title {
+    font-size: 28px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #546486;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.promo-paragraph {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 0px;
+}
+
 .blog-title {
     font-size: 30px;
     font-family: Arial, sans-serif;

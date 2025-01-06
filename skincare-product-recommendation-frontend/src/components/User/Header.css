@@ -45,7 +45,7 @@
 }
 
 .header-nav li a {
-    color: black;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -53,15 +53,13 @@
     text-decoration: underline;
 }
 
-
-
 .header-promo {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    background-color: black;
+    gap: 24px;
+    background-color: #f0f0f0;
     padding: 10px 0;
-    font-size: 14px;
+    font-size: 15px;
     color: black;
     border-top: 1px solid #ddd;
 }
@@ -69,7 +67,7 @@
 .header-promo-item {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
 }
 
 .header-promo-item img {
