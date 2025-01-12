@@ -27,9 +27,9 @@ export const Footer = () => {
                     <ul>
                         <li>Dermaluxe Values</li>
                         <li><Link to='/contact'>Contact Dermaluxe</Link></li>
-                        <li><Link to='/about'>About Us</Link></li>
-                        <li>Gift Card</li>
-                        <li>Dermaluxe Events</li>
+                        <li><Link to='/about'>About Us</Link></li><br />
+                        <li>Gift Card</li><br />
+                        <li>Dermaluxe Events</li><br />
                         <li>Careers</li>
                         <li>Beauty (Re)Purposed</li>
                         <li>Supply Chain Transparency</li>
@@ -39,10 +39,11 @@ export const Footer = () => {
                 <div className='footer-content-right'>
                     <h2>Help</h2>
                     <ul>
+                        <li><Link to='/consultation'>Dermaluxe Consultation</Link></li>
                         <li>Customer Service</li>
                         <li><Link to='/shipping'>Returns & Exchanges</Link></li>
-                        <li>Beauty Services FAQ</li>
-                        <li><Link to='/Reward'>Reward</Link></li>
+                        <li>Beauty Services FAQ</li><br />
+                        <li><Link to='/Reward'>Reward</Link></li><br />
                         <li>Store Locations</li>
                         <li>Flexible Payments</li>
                         <li>Delivery and Pickup Options</li>

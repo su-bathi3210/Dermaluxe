@@ -9,7 +9,8 @@ import AppOrder from './components/User/AppOrder';
 import Offers from './components/User/Offers';
 import { Reward } from './components/User/Reward';
 import Shipping from './components/User/Shipping';
-import Expert from './components/User/Expert';
+import Expert from './components/Customer/Expert';
+import Consultation from './components/Customer/Consultation';
 
 function App() {
   const shouldShowFooter = true;
@@ -20,11 +21,12 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/consultation' element={<Expert />} />
+        <Route path='/expert' element={<Expert />} />
         <Route path='/Apporder' element={<AppOrder />} />
         <Route path='/Offers' element={<Offers />} />
         <Route path='/Reward' element={<Reward />} />
         <Route path='/shipping' element={<Shipping />} />
+        <Route path='/consultation' element={<Consultation />} />
 
       </Routes>
 
