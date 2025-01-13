@@ -49,37 +49,9 @@
     margin-top: -11px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .header-nav {
     background-color: #894c2b;
-    padding: 10px 0;
+    padding: 12px 0;
 }
 
 .header-nav ul {
@@ -92,7 +64,7 @@
 }
 
 .header-nav li {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
 }

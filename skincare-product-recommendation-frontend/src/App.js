@@ -4,7 +4,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Admin from './components/Admin/Admin';
 import AdminRoute from './components/Admin/AdminRoute';
 import Consultation from './components/Customer/Consultation';
-import Expert from './components/Customer/Expert';
+import Expert from './components/User/Expert';
 import Login from './components/Logins/Login';
 import { About } from './components/User/About';
 import AppOrder from './components/User/AppOrder';

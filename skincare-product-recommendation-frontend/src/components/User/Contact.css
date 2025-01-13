@@ -1,0 +1,11 @@
+.contact-image {
+    text-align: center;
+    cursor: pointer;
+}
+
+.contact-image img {
+    max-width: 100%;
+}
+
+
+

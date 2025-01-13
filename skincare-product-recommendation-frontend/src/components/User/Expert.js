@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../App.css';
-import Header from '../User/Header';
+import Header from './Header';
 
 import brightness from '../../images/brightness.png';
 import consu from '../../images/Consu.png';
