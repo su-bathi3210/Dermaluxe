@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 5.5px 50px;
     margin-top: 18px;
 }
 
@@ -16,13 +16,66 @@
     display: flex;
     justify-content: center;
     cursor: pointer;
+
 }
 
 .header-logo img {
     width: 280px;
     margin-top: -100px;
     margin-bottom: -115px;
+    margin-left: 110px;
 }
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.user-options {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.user-options:hover {
+    transform: scale(1.05);
+}
+
+.icon {
+    width: 28px;
+    height: 28px;
+    margin-top: -11px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .header-nav {
     background-color: #894c2b;

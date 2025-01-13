@@ -1,32 +1,34 @@
 /** StartPage.css **/
 .start-page {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    width: 100%;
+    height: 518px;
+    overflow: hidden;
+    position: relative;
 }
 
 .section {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    overflow: hidden;
+    align-items: center;
 }
 
 .background-image {
-    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 1;
 }
 
 .overlay {
-    position: relative;
-    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: white;
+    text-align: center;
+    z-index: 10;
     padding: 20px;
 
 }

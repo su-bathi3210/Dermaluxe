@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./StartPage.css";
 
 import heading from "../../images/heading.png";
 import heading1 from "../../images/heading1.png";
 import heading2 from "../../images/heading2.png";
-import heading5 from "../../images/heading5.png";
+import heading6 from "../../images/heading6.png";
 
 const StartPage = () => {
-  const images = [heading, heading1, heading2, heading5];
+  const images = [heading, heading1, heading2, heading6];
+  const links = ["/consultation", "/page2", "/page3", "/consultation"];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [images.length]);
@@ -21,11 +23,13 @@ const StartPage = () => {
   return (
     <div className="start-page">
       <div className="section first-section">
-        <img
-          src={images[currentIndex]}
-          alt={`Slide ${currentIndex + 1}`}
-          className="background-image"
-        />
+        <Link to={links[currentIndex]}>
+          <img
+            src={images[currentIndex]}
+            alt={`Slide ${currentIndex + 1}`}
+            className="background-image"
+          />
+        </Link>
         {currentIndex === 0 && (
           <div className="overlay">
             <h1 className="headline1">SKINCARE</h1> <br></br>
@@ -34,7 +38,7 @@ const StartPage = () => {
               Get closer to your skin and hair goals with a treatment that's <br></br>
             </p>
             <p className="headline4">customized for you.</p>
-            <button className="get-started-button">Get Started</button>
+            <Link to="/consultation"><button className="get-started-button">Get Started</button></Link>
           </div>
         )}
       </div>

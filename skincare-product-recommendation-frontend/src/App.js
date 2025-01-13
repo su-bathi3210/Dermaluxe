@@ -1,23 +1,28 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
-import Home from './components/User/Home';
-import Footer from './components/User/Footer';
+import Admin from './components/Admin/Admin';
+import AdminRoute from './components/Admin/AdminRoute';
+import Consultation from './components/Customer/Consultation';
+import Expert from './components/Customer/Expert';
+import Login from './components/Logins/Login';
 import { About } from './components/User/About';
-import Contact from './components/User/Contact';
 import AppOrder from './components/User/AppOrder';
+import Contact from './components/User/Contact';
+import Footer from './components/User/Footer';
+import Home from './components/User/Home';
 import Offers from './components/User/Offers';
 import { Reward } from './components/User/Reward';
 import Shipping from './components/User/Shipping';
-import Expert from './components/Customer/Expert';
-import Consultation from './components/Customer/Consultation';
 
 function App() {
-  const shouldShowFooter = true;
+  const shouldShowFooter = window.location.pathname !== '/login'
+    && window.location.pathname !== '/admin';
 
   return (
     <Router>
       <Routes>
+        {/* Customer routes wrapped in Route */}
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
@@ -27,9 +32,13 @@ function App() {
         <Route path='/Reward' element={<Reward />} />
         <Route path='/shipping' element={<Shipping />} />
         <Route path='/consultation' element={<Consultation />} />
+        <Route path='/login' element={<Login />} />
 
+        {/* Admin routes wrapped in AdminRoute */}
+        <Route element={<AdminRoute />}>
+          <Route path='/admin' element={<Admin />} />
+        </Route>
       </Routes>
-
 
       {shouldShowFooter && <Footer />}
     </Router>

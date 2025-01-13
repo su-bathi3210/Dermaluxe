@@ -8,16 +8,35 @@ import orderIcon from '../../images/phone.png';
 import referIcon from '../../images/refer.png';
 import rewardsIcon from '../../images/reward.png';
 import shippingIcon from '../../images/shipping.png';
+import sign from '../../images/log.png';
+import cart from '../../images/cart.png';
+import search from '../../images/search.png';
 
 const Header = () => {
     return (
         <header className="header">
             <div className="header-container">
                 <div className="header-logo">
-                    <Link to='/'>
+                    <Link to="/">
                         <img src={logo} alt="Dermaluxe Logo" />
                     </Link>
                 </div>
+
+                {/* Right Section (Currency, Sign In, Cart) */}
+                <div className="header-right">
+                    <div className="user-options">
+                        <img src={search} alt="Search Icon" className="icon" />
+                    </div>
+
+                    <div className="user-options">
+                        <Link to='/login'><img src={sign} alt="Login Icon" className="icon" /></Link>
+                    </div>
+
+                    <div className="user-options">
+                        <Link to='/'><img src={cart} alt="Cart Icon" className="icon" /></Link>
+                    </div>
+                </div>
+
             </div>
 
             {/* Navigation Bar */}
