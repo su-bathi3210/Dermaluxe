@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
-import './Sections.css';
 import { Link } from "react-router-dom";
+import './Sections.css';
 
-import Face from '../../images/Face.png'
-import Serum from '../../images/Serum.png'
-import Retinol from '../../images/Retinoal.png'
-import VitaminC from '../../images/VitamiC.png'
-import Tips from '../../images/Tips.png'
-import Cleanser from '../../images/Cleanser.png'
-import Scrub from '../../images/Scrub.png'
-import Routine from '../../images/Routine.png'
+import Cleanser from '../../images/Cleanser.png';
+import Face from '../../images/Face.png';
+import Retinol from '../../images/Retinoal.png';
+import Routine from '../../images/Routine.png';
+import Scrub from '../../images/Scrub.png';
+import Serum from '../../images/Serum.png';
+import Tips from '../../images/Tips.png';
+import VitaminC from '../../images/VitamiC.png';
+
+import Video from '../../images/Video4.mp4';
+
+
+import judithafter from '../../images-gallery/judith-afte.png';
+import judithbefore from '../../images-gallery/judith-before.png';
+import nicolaafter from '../../images-gallery/nicola-after.png';
+import nicolabefore from '../../images-gallery/nicola-before.png';
+import rubyafter from '../../images-gallery/ruby-after.png';
+import rubybefore from '../../images-gallery/ruby-before.png';
+
 
 const Sections = () => {
     const [activeTab, setActiveTab] = useState('Ingredient Index');
@@ -18,9 +29,34 @@ const Sections = () => {
         setActiveTab(tabName);
     };
 
+
+    const transformations = [
+        {
+            beforeImg: judithbefore,
+            afterImg: judithafter,
+            title: 'Blemishes',
+            description:
+                '“I’ve been using this serum for about a month, and the difference in my blemishes is remarkable. My skin feels smoother, and the dark spots have noticeably faded. ”'
+        },
+        {
+            beforeImg: rubybefore,
+            afterImg: rubyafter,
+            title: 'Redness',
+            description:
+                '“I’ve been been struggling with redness and rosacea for years. After two weeks, my redness was significantly reduced. Its gentle, absorbs quickly, and works well with my sensitive skin.”'
+        },
+        {
+            beforeImg: nicolabefore,
+            afterImg: nicolaafter,
+            title: 'Blemishes & Pigmentation',
+            description:
+                '“I’ve been been using it for 3 weeks and my dark spots have noticeably faded. It absorbs quickly, isnt greasy, and makes my skin look brighter and more even!.”'
+        },
+    ];
+
+
     return (
         <div>
-
             <div className="promo-section">
                 <h2 className="promo-title">EXPERT RECOMMENDATIONS FOR GLOWING, HEALTHY SKIN!</h2>
                 <p className="promo-paragraph">
@@ -37,6 +73,7 @@ const Sections = () => {
                     perfect products for a radiant complexion that’s as individual as you are.
                 </p>
             </div>
+
 
             <div className="blog-section">
                 <h2 className="blog-title">FROM THE BLOG</h2>
@@ -134,6 +171,42 @@ const Sections = () => {
                     </div>
                 )}
             </div>
+
+
+            <div className="start-section-video">
+                <video controls autoPlay loop muted>
+                    <source src={Video} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+
+
+            <div className="real-result">
+                <h2 className="real-result-title">REAL ROUTINES, REAL RESULTS</h2>
+                <p className="real-result-description">
+                    Whatever your skin concern, we have solutions. Build a simple, effective routine with <br />
+                    science-backed ingredients and skin-nourishing formulas.
+                </p>
+                <div className="transformation-container">
+                    {transformations.map((item, index) => (
+                        <div key={index} className="transformation-card">
+                            <div className="image-comparison">
+                                <img src={item.beforeImg} alt="Before" className="before-image" />
+                                <img src={item.afterImg} alt="After" className="after-image" />
+                                <div className="slider"></div>
+                            </div>
+                            <h3 className="transformation-title">{item.title}</h3>
+                            <p className="transformation-description">{item.description}</p>
+                        </div>
+                    ))}
+                </div>
+                <button className="real-result-button">SEE MORE SKIN TRANSFIRMATIONS</button>
+            </div>
+
+
+
+
 
             <div className="icon-section">
                 <div className="icon-item">
