@@ -21,4 +21,5 @@ public class Consultation {
     private String concerns; // Skin concerns (e.g., acne, aging, sensitivity)
     private String consultantName; // Name of the assigned consultant
     private String consultationStatus; // Status of the consultation (e.g., scheduled, completed, canceled)
+    private String responseMessage; // Custom response or feedback message for the client
 }
