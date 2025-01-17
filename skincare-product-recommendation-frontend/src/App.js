@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import Admin from './components/Admin/Admin';
 import AdminRoute from './components/Admin/AdminRoute';
+import AdminConsultation from './components/Admin/AdminConsultation';
 import Consultation from './components/Customer/Consultation';
 import Expert from './components/User/Expert';
 import Login from './components/Logins/Login';
@@ -17,7 +18,8 @@ import Shipping from './components/User/Shipping';
 
 function App() {
   const shouldShowFooter = window.location.pathname !== '/login'
-    && window.location.pathname !== '/admin';
+    && window.location.pathname !== '/admin'
+    && window.location.pathname !== '/adminconsultation';
 
   return (
     <Router>
@@ -37,6 +39,7 @@ function App() {
         {/* Admin routes wrapped in AdminRoute */}
         <Route element={<AdminRoute />}>
           <Route path='/admin' element={<Admin />} />
+          <Route path='/adminconsultation' element={<AdminConsultation />} />
         </Route>
       </Routes>
 

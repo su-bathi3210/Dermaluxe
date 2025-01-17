@@ -5,7 +5,6 @@ import Header from './Header';
 
 import brightness from '../../images/brightness.png';
 import consu from '../../images/Consu.png';
-import consultation from '../../images/Consultation.png';
 import deep from '../../images/deep.png';
 import expertImage from '../../images/expert.png';
 import facial from '../../images/facial.png';
@@ -16,6 +15,7 @@ import understand from '../../images/understand.png';
 import wash from '../../images/wash-face.png';
 
 import Video from '../../images/Video3.mp4';
+import Video1 from '../../images/Video6.mp4';
 
 
 const Expert = () => {
@@ -23,8 +23,11 @@ const Expert = () => {
         <div>
             <Header />
 
-            <div className="consultation-image">
-                <img src={consultation} alt="consultation Customer" />
+            <div className="free-video">
+                <video controls autoPlay loop muted>
+                    <source src={Video1} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
             </div>
 
             <div className="consultation-content">
