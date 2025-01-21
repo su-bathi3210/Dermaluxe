@@ -15,6 +15,7 @@ import Home from './components/User/Home';
 import Offers from './components/User/Offers';
 import { Reward } from './components/User/Reward';
 import Shipping from './components/User/Shipping';
+import ProductPrediction from './components/AI/ProductPrediction';
 
 function App() {
   const shouldShowFooter = window.location.pathname !== '/login'
@@ -35,6 +36,7 @@ function App() {
         <Route path='/shipping' element={<Shipping />} />
         <Route path='/consultation' element={<Consultation />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/productPrediction' element={<ProductPrediction />} />
 
         {/* Admin routes wrapped in AdminRoute */}
         <Route element={<AdminRoute />}>
