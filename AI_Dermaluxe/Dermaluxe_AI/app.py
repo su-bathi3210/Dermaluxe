@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
 import pickle
-from flack_cros import CORS
+
 
 app = Flask(__name__)
 CORS(app)
 
 # Load the model and encoders
-with open('dermaluxe_skincare_producttt.pkl', 'rb') as file:
+with open('skincare_product.pkl', 'rb') as file:
     data = pickle.load(file)
 
 model = data["model"]
@@ -14,6 +15,8 @@ le_age = data["le_age"]
 le_skin_type = data["le_skin_type"]
 le_skin_tone = data["le_skin_tone"]
 le_skin_concern = data["le_skin_concern"]
+le_environmental_impact = data["le_environmental_impact"]
+le_skin_goals = data["le_skin_goals"]
 le_product_name = data["le_product_name"]
 le_brand = data["le_brand"]
 le_product_type = data["le_product_type"]
@@ -41,16 +44,18 @@ def predict():
         skin_type = le_skin_type.transform([input_data["skin_type"]])[0]
         skin_tone = le_skin_tone.transform([input_data["skin_tone"]])[0]
         skin_concern = le_skin_concern.transform([input_data["skin_concern"]])[0]
+        environmental_impact = le_environmental_impact.transform([input_data["environmental_impact"]])[0]
+        skin_goals = le_skin_goals.transform([input_data["skin_goals"]])[0]
 
         # Prepare feature array
-        features = [[age, skin_type, skin_tone, skin_concern]]
+        features = [[age, skin_type, skin_tone, skin_concern, environmental_impact, skin_goals]]
 
         # Predict product attributes
         predictions = model.predict(features)
 
         # Ensure predictions output is valid
-        if len(predictions[0]) < 8:
-            raise ValueError("Model output does not have the expected 8 predictions.")
+        if len(predictions[0]) < 15:
+            raise ValueError("Model output does not have the expected 15 predictions.")
 
         # Extract predictions
         product_name_prediction = predictions[0][0]
