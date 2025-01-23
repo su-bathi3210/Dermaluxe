@@ -37,7 +37,7 @@ export const Footer = () => {
                 </div>
 
                 <div className='footer-content-right'>
-                    <h2>Help</h2>
+                    <h3>Help</h3>
                     <ul>
                         <li><Link to='/consultation'>Dermaluxe Consultation</Link></li>
                         <li>Customer Service</li>

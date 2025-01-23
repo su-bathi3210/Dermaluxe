@@ -38,7 +38,7 @@ const StartPage = () => {
               Get closer to your skin and hair goals with a treatment that's <br></br>
             </p>
             <p className="headline4">customized for you.</p>
-            <Link to="/consultation"><button className="get-started-button">Get Started</button></Link>
+            <Link to="/skin"><button className="get-started-button">Get Started</button></Link>
           </div>
         )}
       </div>

@@ -15,7 +15,8 @@ import Home from './components/User/Home';
 import Offers from './components/User/Offers';
 import { Reward } from './components/User/Reward';
 import Shipping from './components/User/Shipping';
-import PredictForm from './components/AI/PredictForm';
+import Dermaluxe from './components/AI/Dermaluxe';
+import { Quiz } from './components/AI/Quiz';
 
 function App() {
   const shouldShowFooter = window.location.pathname !== '/login'
@@ -36,7 +37,8 @@ function App() {
         <Route path='/shipping' element={<Shipping />} />
         <Route path='/consultation' element={<Consultation />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/predictform' element={<PredictForm />} />
+        <Route path='/skin-dermaluxe' element={<Dermaluxe />} />
+        <Route path='/skin' element={<Quiz />} />
 
         {/* Admin routes wrapped in AdminRoute */}
         <Route element={<AdminRoute />}>
