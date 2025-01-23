@@ -19,7 +19,6 @@ const Dermaluxe = () => {
     const [prediction, setPrediction] = useState(null);
     const [error, setError] = useState(null);
     const [validationError, setValidationError] = useState(false);
-    const [isOptionSelected, setIsOptionSelected] = useState(false); // Track if an option is selected
 
     const formSteps = [
         {
@@ -81,17 +80,11 @@ const Dermaluxe = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
         setValidationError(false); // Reset validation error on change
-        setIsOptionSelected(true); // Mark that an option has been selected
     };
 
     const handleNext = () => {
-        if (isOptionSelected) {
-            setIsOptionSelected(false); // Reset after moving to the next step
-            if (currentStep < formSteps.length - 1) {
-                setCurrentStep(currentStep + 1);
-            }
-        } else {
-            setValidationError(true); // Show validation error message
+        if (currentStep < formSteps.length - 1) {
+            setCurrentStep(currentStep + 1);
         }
     };
 
@@ -160,7 +153,7 @@ const Dermaluxe = () => {
 
                     {validationError && (
                         <div className="validation-error">
-                            Please select an answer before proceeding.
+                            Please complete all fields before submitting.
                         </div>
                     )}
 

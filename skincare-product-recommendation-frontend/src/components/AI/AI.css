@@ -8,83 +8,120 @@
 
 
 /* AI.css */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
 
 .dermaluxe-container {
-    max-width: 500px;
-    margin: 100px auto;
-    padding: 20px;
-    background-color: white;
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.dermaluxe-title {
+    overflow: hidden;
+    padding: 2rem;
+    margin: 50px 280px;
     text-align: center;
-    color: #333;
-    margin-bottom: 20px;
 }
 
+/* Title Styling */
+.dermaluxe-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #444;
+}
+
+/* Form Group Styling */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
 }
 
 .form-label {
     display: block;
-    margin-bottom: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
     color: #555;
 }
 
-.form-input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: border-color 0.3s ease;
+.radio-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
 
-.form-input:focus {
-    outline: none;
-    border-color: #007BFF;
+.radio-option {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.radio-option:hover {
+    background: #eaeaea;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked + .radio-label {
+    background: #ffcc80;
+    border-color: #ffb74d;
+    color: #fff;
+    font-weight: bold;
+}
+
+.radio-label {
+    display: block;
+    padding: 10px;
+}
+
+/* Navigation Buttons */
+.nav-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ffb74d;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    background: #ffa726;
 }
 
 .predict-button {
-    background-color: #007BFF;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    background: #ff7043;
     color: white;
     border: none;
-    padding: 10px;
-    width: 100%;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s;
 }
 
 .predict-button:hover {
-    background-color: #0056b3;
+    background: #ff5722;
 }
 
-.error-message {
-    color: red;
+/* Validation Error */
+.validation-error {
+    color: #d32f2f;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 1rem;
 }
 
-.prediction-result {
-    margin-top: 20px;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-}
-
-.prediction-image {
-    max-width: 300px;
-    width: 100%;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Progress Bar */
+.progress-bar {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
 }
