@@ -75,6 +75,7 @@ const Sections = () => {
             </div>
 
 
+
             <div className="blog-section">
                 <h2 className="blog-title">FROM THE BLOG</h2>
                 <p className="blog-paragraph">Welcome to Dermaluxe Skin Notes, your ultimate destination for all things skincare! <br /></p>
@@ -171,6 +172,7 @@ const Sections = () => {
                     </div>
                 )}
             </div>
+
 
 
             <div className="start-section-video">

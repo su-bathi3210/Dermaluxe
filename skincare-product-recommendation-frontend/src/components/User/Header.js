@@ -16,28 +16,40 @@ const Header = () => {
     return (
         <header className="header">
             <div className="header-container">
+                {/* Search Bar */}
+                <div className="header-left">
+                    <input type="text" placeholder="Search" className="search-bar" />
+                    <img src={search} alt="Search Icon" className="search-icon" />
+                </div>
+
+                {/* Logo */}
                 <div className="header-logo">
                     <Link to="/">
                         <img src={logo} alt="Dermaluxe Logo" />
                     </Link>
                 </div>
 
-                {/* Right Section (Currency, Sign In, Cart) */}
+                {/* Right Section */}
                 <div className="header-right">
+                    {/* Cart Section */}
                     <div className="user-options">
-                        <img src={search} alt="Search Icon" className="icon" />
+                        <Link to="/cart">
+                            <img src={cart} alt="Cart Icon" className="icon" />
+                            <p>Cart</p>
+                        </Link>
                     </div>
 
+                    {/* Sign In Button */}
                     <div className="user-options">
-                        <Link to='/login'><img src={sign} alt="Login Icon" className="icon" /></Link>
-                    </div>
-
-                    <div className="user-options">
-                        <Link to='/'><img src={cart} alt="Cart Icon" className="icon" /></Link>
+                        <Link to="/skin"><button className="sign-in-button">
+                            <img src={sign} alt="Login Icon" className="icon1" />
+                            <span1>Sign In</span1>
+                        </button></Link>
                     </div>
                 </div>
 
             </div>
+
 
             {/* Navigation Bar */}
             <nav className="header-nav">
@@ -45,7 +57,7 @@ const Header = () => {
                     <li><Link to="/">PRODUCTS</Link></li>
                     <li><Link to="/about">ABOUT</Link></li>
                     <li><Link to="">GALLERY</Link></li>
-                    <li><Link to="">REVIEWS</Link></li>
+                    <li><Link to="/skin">QUIZ</Link></li>
                     <li><Link to="">HOT DEALS</Link></li>
                     <li><Link to="">COMMUNITY</Link></li>
                     <li><Link to="">BLOG</Link></li>

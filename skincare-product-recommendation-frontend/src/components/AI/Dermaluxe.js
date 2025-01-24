@@ -4,6 +4,12 @@ import axios from "axios";
 import { useSwipeable } from "react-swipeable";
 import "./AI.css";
 
+import dry from '../../images/Dry.png';
+import oily from '../../images/Oily.png';
+import normal from '../../images/Normal.png';
+import combination from '../../images/Combination.png';
+import sensitive from '../../images/Sensitive.png';
+
 const Dermaluxe = () => {
     const [formData, setFormData] = useState({
         age: "",
@@ -19,7 +25,7 @@ const Dermaluxe = () => {
     const [prediction, setPrediction] = useState(null);
     const [error, setError] = useState(null);
     const [validationError, setValidationError] = useState(false);
-    const [isOptionSelected, setIsOptionSelected] = useState(false); // Track if an option is selected
+    const [isOptionSelected, setIsOptionSelected] = useState(false);
 
     const formSteps = [
         {
@@ -30,17 +36,29 @@ const Dermaluxe = () => {
         {
             label: "What is your gender?",
             name: "gender",
-            options: ["Female", "Male", "Non-Binary", "Prefer not to say"],
+            options: ["Female", "Male"],
         },
         {
             label: "What is your skin type?",
             name: "skin_type",
-            options: ["Dry", "Oily", "Normal", "Combination", "Sensitive"],
+            options: [
+                { label: "Dry", image: dry },
+                { label: "Oily", image: oily },
+                { label: "Normal", image: normal },
+                { label: "Combination", image: combination },
+                { label: "Sensitive", image: sensitive },
+            ],
         },
         {
             label: "What best describes your skin tone?",
             name: "skin_tone",
-            options: ["Fair", "Medium", "Deep", "Dark", "Olive"],
+            options: [
+                { label: "Fair", image: "fair_skin_image_url" },
+                { label: "Medium", image: "medium_skin_image_url" },
+                { label: "Deep", image: "deep_skin_image_url" },
+                { label: "Dark", image: "dark_skin_image_url" },
+                { label: "Olive", image: "olive_skin_image_url" },
+            ],
         },
         {
             label: "What are your primary skin concerns?",
@@ -80,18 +98,18 @@ const Dermaluxe = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-        setValidationError(false); // Reset validation error on change
-        setIsOptionSelected(true); // Mark that an option has been selected
+        setValidationError(false);
+        setIsOptionSelected(true);
     };
 
     const handleNext = () => {
         if (isOptionSelected) {
-            setIsOptionSelected(false); // Reset after moving to the next step
+            setIsOptionSelected(false);
             if (currentStep < formSteps.length - 1) {
                 setCurrentStep(currentStep + 1);
             }
         } else {
-            setValidationError(true); // Show validation error message
+            setValidationError(true);
         }
     };
 
@@ -106,7 +124,6 @@ const Dermaluxe = () => {
         setError(null);
         setPrediction(null);
 
-        // Validation: Check if all fields are filled
         if (Object.values(formData).some((field) => field === "")) {
             setValidationError(true);
             return;
@@ -144,15 +161,16 @@ const Dermaluxe = () => {
                         <div className="radio-options">
                             {formSteps[currentStep].options.map((option, index) => (
                                 <label key={index} className="radio-option">
+                                    {option.image && <img src={option.image} alt={option.label} className="option-image" />}
                                     <input
                                         type="radio"
                                         name={formSteps[currentStep].name}
-                                        value={option}
-                                        checked={formData[formSteps[currentStep].name] === option}
+                                        value={option.label || option}
+                                        checked={formData[formSteps[currentStep].name] === (option.label || option)}
                                         onChange={handleChange}
                                         required
                                     />
-                                    <span className="radio-label">{option}</span>
+                                    <span className="radio-label">{option.label || option}</span>
                                 </label>
                             ))}
                         </div>
