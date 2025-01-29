@@ -4,9 +4,6 @@ import axios from "axios";
 import { useSwipeable } from "react-swipeable";
 import "./AI.css";
 
-
-import landing from '../../images/landing.png';
-
 import dry from "../../images/Dry.png";
 import oily from "../../images/Oily.png";
 import normal from "../../images/Normal.png";
@@ -15,6 +12,8 @@ import sensitive from "../../images/Sensitive.png";
 
 const Dermaluxe = () => {
     const [formData, setFormData] = useState({
+        name: "",
+        email: "",
         age: "",
         gender: "",
         skin_type: "",
@@ -29,9 +28,18 @@ const Dermaluxe = () => {
     const [error, setError] = useState(null);
     const [validationError, setValidationError] = useState(false);
     const [isOptionSelected, setIsOptionSelected] = useState(false);
-    const [showForm, setShowForm] = useState(false); // Controls form visibility
 
     const formSteps = [
+        {
+            label: "Enter your details",
+            name: "user_details",
+            type: "text",
+            fields: [
+                { label: "Full Name", name: "name", type: "text" },
+                { label: "Email Address", name: "email", type: "email" }
+            ]
+        },
+
         { label: "Which age group do you belong to?", name: "age", options: ["16-19", "20-25", "26-30", "31 Above"] },
         { label: "What is your gender?", name: "gender", options: ["Female", "Male"] },
         { label: "What is your skin type?", name: "skin_type", options: [{ label: "Dry", image: dry }, { label: "Oily", image: oily }, { label: "Normal", image: normal }, { label: "Combination", image: combination }, { label: "Sensitive", image: sensitive }] },
@@ -49,13 +57,19 @@ const Dermaluxe = () => {
     };
 
     const handleNext = () => {
-        if (isOptionSelected) {
-            setIsOptionSelected(false);
-            if (currentStep < formSteps.length - 1) {
-                setCurrentStep(currentStep + 1);
+        if (currentStep === 0) {
+            if (!formData.name || !formData.email) {
+                setValidationError(true);
+                return;
             }
-        } else {
+        } else if (!isOptionSelected) {
             setValidationError(true);
+            return;
+        }
+
+        setIsOptionSelected(false);
+        if (currentStep < formSteps.length - 1) {
+            setCurrentStep(currentStep + 1);
         }
     };
 
@@ -92,40 +106,40 @@ const Dermaluxe = () => {
     return (
         <div>
             <Header />
-            {!showForm ? (
-                <div className="landing-section">
-                    <div className="landing-content">
-                        <div>
-                            <img
-                                src={landing}
-                                alt="landing"
-                                className="landing-image"
-                                onClick={() => setShowForm(true)}
-                            />
-                        </div>
-                    </div>
-                    <div className="info-section">
-                        <p>Looking for a skincare routine backed by dermatologists? We're here to help! <br></br>
-
-                            This Solution Finder is offered for informational purposes only. The content is not intended
-                            to substitute for professional medical advice, diagnoses, <br></br>or suggested treatments. Please
-                            consult your dermatologist or doctor if you have any skin issues or concerns. <br></br>
-
-                            By taking this quiz you agree to Our Terms of Use and acknowledge you read
-                            Our Privacy Policy
-                        </p>
-                    </div>
+            <div className="dermaluxe-container" {...handlers}>
+                <div className="progress-container">
+                    {formSteps.map((_, index) => (
+                        <div
+                            key={index}
+                            className={`progress-step ${index <= currentStep ? "active" : ""}`}
+                        ></div>
+                    ))}
                 </div>
 
-            ) : (
-                <div className="dermaluxe-container" {...handlers}>
-                    <h2 className="dermaluxe-title">Let's start with your facial skincare</h2>
-                    
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor={formSteps[currentStep].name} className="form-label">
-                                {formSteps[currentStep].label}:
-                            </label>
+                <h2 className="dermaluxe-title">Let's start with your facial skincare</h2>
+
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor={formSteps[currentStep].name} className="form-label">
+                            {formSteps[currentStep].label}:
+                        </label>
+
+                        {formSteps[currentStep].fields ? (
+                            <div className="text-input-group">
+                                {formSteps[currentStep].fields.map((field, index) => (
+                                    <input
+                                        key={index}
+                                        type={field.type}
+                                        name={field.name}
+                                        value={formData[field.name]}
+                                        onChange={handleChange}
+                                        placeholder={field.label}
+                                        className="text-input"
+                                        required
+                                    />
+                                ))}
+                            </div>
+                        ) : formSteps[currentStep].options ? (
                             <div className="radio-options">
                                 {formSteps[currentStep].options.map((option, index) => (
                                     <label key={index} className="radio-option">
@@ -142,45 +156,45 @@ const Dermaluxe = () => {
                                     </label>
                                 ))}
                             </div>
-                        </div>
+                        ) : null}
+                    </div>
 
-                        {validationError && <div className="validation-error">Please select an answer before proceeding.</div>}
+                    {validationError && <div className="validation-error">Please enter valid details before proceeding.</div>}
 
-                        <div className="form-navigation">
-                            {currentStep > 0 && (
-                                <button type="button" className="nav-button" onClick={handlePrevious}>
-                                    Previous
-                                </button>
-                            )}
-                            {currentStep < formSteps.length - 1 ? (
-                                <button type="button" className="nav-button" onClick={handleNext}>
-                                    Next
-                                </button>
-                            ) : (
-                                <button type="submit" className="predict-button">
-                                    Predict
-                                </button>
-                            )}
-                        </div>
-                    </form>
+                    <div className="form-navigation">
+                        {currentStep > 0 && (
+                            <button type="button" className="nav-button" onClick={handlePrevious}>
+                                Previous
+                            </button>
+                        )}
+                        {currentStep < formSteps.length - 1 ? (
+                            <button type="button" className="nav-button" onClick={handleNext}>
+                                Next
+                            </button>
+                        ) : (
+                            <button type="submit" className="predict-button">
+                                Predict
+                            </button>
+                        )}
+                    </div>
+                </form>
 
-                    {error && <div className="error-message">Error: {error}</div>}
-                    {prediction && (
-                        <div className="prediction-result">
-                            <h3>This Is Your Personalized Product According to Your Skin:</h3>
-                            <p><strong>Product Name:</strong> {prediction["Product Name"]}</p>
-                            <p><strong>Brand:</strong> {prediction.Brand}</p>
-                            <p><strong>Product Type:</strong> {prediction["Product Type"]}</p>
-                            <p><strong>Ingredients:</strong> {prediction.Ingredients}</p>
-                            <p><strong>Price:</strong> {prediction.Price}</p>
-                            {prediction.Image_URL && <img src={prediction.Image_URL} alt="Product" className="prediction-image" />}
-                            <p><strong>Benefit:</strong> {prediction.Benefit}</p>
-                            <p><strong>How to Use:</strong> {prediction["How To Use"]}</p>
-                        </div>
-                    )}
-                    <div className="progress-bar">Step {currentStep + 1} of {formSteps.length}</div>
-                </div>
-            )}
+                {error && <div className="error-message">Error: {error}</div>}
+                {prediction && (
+                    <div className="prediction-result">
+                        <h3>This Is Your Personalized Product According to Your Skin:</h3>
+                        <p><strong>Product Name:</strong> {prediction["Product Name"]}</p>
+                        <p><strong>Brand:</strong> {prediction.Brand}</p>
+                        <p><strong>Product Type:</strong> {prediction["Product Type"]}</p>
+                        <p><strong>Ingredients:</strong> {prediction.Ingredients}</p>
+                        <p><strong>Price:</strong> {prediction.Price}</p>
+                        {prediction.Image_URL && <img src={prediction.Image_URL} alt="Product" className="prediction-image" />}
+                        <p><strong>Benefit:</strong> {prediction.Benefit}</p>
+                        <p><strong>How to Use:</strong> {prediction["How To Use"]}</p>
+                    </div>
+                )}
+
+            </div>
         </div>
     );
 };

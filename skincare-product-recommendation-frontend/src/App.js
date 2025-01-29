@@ -17,11 +17,14 @@ import { Reward } from './components/User/Reward';
 import Shipping from './components/User/Shipping';
 import Dermaluxe from './components/AI/Dermaluxe';
 import { Quiz } from './components/AI/Quiz';
+import AdminAI from './components/Admin/AdminAI';
+
 
 function App() {
   const shouldShowFooter = window.location.pathname !== '/login'
     && window.location.pathname !== '/admin'
-    && window.location.pathname !== '/adminconsultation';
+    && window.location.pathname !== '/adminconsultation'
+    && window.location.pathname !== '/admindashboard';;
 
   return (
     <Router>
@@ -44,6 +47,7 @@ function App() {
         <Route element={<AdminRoute />}>
           <Route path='/admin' element={<Admin />} />
           <Route path='/adminconsultation' element={<AdminConsultation />} />
+          <Route path='/adminAI' element={<AdminAI />} />
         </Route>
       </Routes>
 

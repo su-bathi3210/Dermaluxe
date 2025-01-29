@@ -4,14 +4,16 @@ import axios from "axios";
 import { useSwipeable } from "react-swipeable";
 import "./AI.css";
 
-import dry from '../../images/Dry.png';
-import oily from '../../images/Oily.png';
-import normal from '../../images/Normal.png';
-import combination from '../../images/Combination.png';
-import sensitive from '../../images/Sensitive.png';
+import dry from "../../images/Dry.png";
+import oily from "../../images/Oily.png";
+import normal from "../../images/Normal.png";
+import combination from "../../images/Combination.png";
+import sensitive from "../../images/Sensitive.png";
 
 const Dermaluxe = () => {
     const [formData, setFormData] = useState({
+        name: "",
+        email: "",
         age: "",
         gender: "",
         skin_type: "",
@@ -29,70 +31,22 @@ const Dermaluxe = () => {
 
     const formSteps = [
         {
-            label: "Which age group do you belong to?",
-            name: "age",
-            options: ["16-19", "20-25", "26-30", "31 Above"],
+            label: "Enter your details:",
+            name: "user_details",
+            type: "text",
+            fields: [
+                { label: "Full Name", name: "name", type: "text" },
+                { label: "Email Address", name: "email", type: "email" }
+            ]
         },
-        {
-            label: "What is your gender?",
-            name: "gender",
-            options: ["Female", "Male"],
-        },
-        {
-            label: "What is your skin type?",
-            name: "skin_type",
-            options: [
-                { label: "Dry", image: dry },
-                { label: "Oily", image: oily },
-                { label: "Normal", image: normal },
-                { label: "Combination", image: combination },
-                { label: "Sensitive", image: sensitive },
-            ],
-        },
-        {
-            label: "What best describes your skin tone?",
-            name: "skin_tone",
-            options: [
-                { label: "Fair", image: "fair_skin_image_url" },
-                { label: "Medium", image: "medium_skin_image_url" },
-                { label: "Deep", image: "deep_skin_image_url" },
-                { label: "Dark", image: "dark_skin_image_url" },
-                { label: "Olive", image: "olive_skin_image_url" },
-            ],
-        },
-        {
-            label: "What are your primary skin concerns?",
-            name: "skin_concern",
-            options: [
-                "Acne, Enlarged Pores",
-                "Redness, Dehydration",
-                "Hyperpigmentation",
-                "Aging, Fine Lines, Dullness",
-                "Uneven Skin Tone",
-                "Wrinkles, Sagging Skin",
-            ],
-        },
-        {
-            label: "What environmental conditions are you most exposed to?",
-            name: "environmental_impact",
-            options: [
-                "Spring – Moderate climate",
-                "Summer – Hot and humid",
-                "Autumn (Fall) – High pollution levels",
-                "Winter – Cold and dry",
-            ],
-        },
-        {
-            label: "What are your skincare goals?",
-            name: "skin_goals",
-            options: [
-                "Reduce acne and blemishes",
-                "Improve hydration",
-                "Even out skin tone",
-                "Prevent aging signs",
-                "General maintenance",
-            ],
-        },
+
+        { label: "Which age group do you belong to?", name: "age", options: ["16-19", "20-25", "26-30", "31 Above"] },
+        { label: "What is your gender?", name: "gender", options: ["Female", "Male"] },
+        { label: "What is your skin type?", name: "skin_type", options: [{ label: "Dry", image: dry }, { label: "Oily", image: oily }, { label: "Normal", image: normal }, { label: "Combination", image: combination }, { label: "Sensitive", image: sensitive }] },
+        { label: "What best describes your skin tone?", name: "skin_tone", options: ["Fair", "Medium", "Deep", "Dark", "Olive"] },
+        { label: "What are your primary skin concerns?", name: "skin_concern", options: ["Acne, Enlarged Pores", "Redness, Dehydration", "Hyperpigmentation", "Aging, Fine Lines, Dullness", "Uneven Skin Tone", "Wrinkles, Sagging Skin"] },
+        { label: "What environmental conditions are you most exposed to?", name: "environmental_impact", options: ["Spring – Moderate climate", "Summer – Hot and humid", "Autumn – High pollution levels", "Winter – Cold and dry"] },
+        { label: "What are your skincare goals?", name: "skin_goals", options: ["Reduce acne and blemishes", "Improve hydration", "Even out skin tone", "Prevent aging signs", "General maintenance"] },
     ];
 
     const handleChange = (e) => {
@@ -103,13 +57,20 @@ const Dermaluxe = () => {
     };
 
     const handleNext = () => {
-        if (isOptionSelected) {
-            setIsOptionSelected(false);
-            if (currentStep < formSteps.length - 1) {
-                setCurrentStep(currentStep + 1);
+        if (currentStep === 0) {
+            // Ensure both name and email are filled before moving to next step
+            if (!formData.name || !formData.email) {
+                setValidationError(true);
+                return;
             }
-        } else {
+        } else if (!isOptionSelected) {
             setValidationError(true);
+            return;
+        }
+
+        setIsOptionSelected(false);
+        if (currentStep < formSteps.length - 1) {
+            setCurrentStep(currentStep + 1);
         }
     };
 
@@ -130,15 +91,10 @@ const Dermaluxe = () => {
         }
 
         try {
-            const response = await axios.post(
-                "http://127.0.0.1:5000/predict",
-                formData
-            );
+            const response = await axios.post("http://127.0.0.1:5000/predict", formData);
             setPrediction(response.data);
         } catch (err) {
-            setError(
-                err.response?.data?.error || "An error occurred. Please try again."
-            );
+            setError(err.response?.data?.error || "An error occurred. Please try again.");
         }
     };
 
@@ -152,35 +108,59 @@ const Dermaluxe = () => {
         <div>
             <Header />
             <div className="dermaluxe-container" {...handlers}>
+                <div className="progress-container">
+                    {formSteps.map((_, index) => (
+                        <div
+                            key={index}
+                            className={`progress-step ${index <= currentStep ? "active" : ""}`}
+                        ></div>
+                    ))}
+                </div>
+
                 <h2 className="dermaluxe-title">Let's start with your facial skincare</h2>
+
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor={formSteps[currentStep].name} className="form-label">
                             {formSteps[currentStep].label}:
                         </label>
-                        <div className="radio-options">
-                            {formSteps[currentStep].options.map((option, index) => (
-                                <label key={index} className="radio-option">
-                                    {option.image && <img src={option.image} alt={option.label} className="option-image" />}
+
+                        {formSteps[currentStep].fields ? (
+                            <div className="text-input-group">
+                                {formSteps[currentStep].fields.map((field, index) => (
                                     <input
-                                        type="radio"
-                                        name={formSteps[currentStep].name}
-                                        value={option.label || option}
-                                        checked={formData[formSteps[currentStep].name] === (option.label || option)}
+                                        key={index}
+                                        type={field.type}
+                                        name={field.name}
+                                        value={formData[field.name]}
                                         onChange={handleChange}
+                                        placeholder={field.label}
+                                        className="text-input"
                                         required
                                     />
-                                    <span className="radio-label">{option.label || option}</span>
-                                </label>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        ) : formSteps[currentStep].options ? (
+                            <div className="radio-options">
+                                {formSteps[currentStep].options.map((option, index) => (
+                                    <label key={index} className="radio-option">
+                                        {typeof option === "object" && option.image && <img src={option.image} alt={option.label} className="option-image" />}
+                                        <input
+                                            type="radio"
+                                            name={formSteps[currentStep].name}
+                                            value={option.label || option}
+                                            checked={formData[formSteps[currentStep].name] === (option.label || option)}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                        <span className="radio-label">{option.label || option}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        ) : null}
                     </div>
 
-                    {validationError && (
-                        <div className="validation-error">
-                            Please select an answer before proceeding.
-                        </div>
-                    )}
+                    {validationError && <div className="validation-error">Please enter valid details before proceeding.</div>}
 
                     <div className="form-navigation">
                         {currentStep > 0 && (
@@ -199,6 +179,7 @@ const Dermaluxe = () => {
                         )}
                     </div>
                 </form>
+
                 {error && <div className="error-message">Error: {error}</div>}
                 {prediction && (
                     <div className="prediction-result">
@@ -208,19 +189,12 @@ const Dermaluxe = () => {
                         <p><strong>Product Type:</strong> {prediction["Product Type"]}</p>
                         <p><strong>Ingredients:</strong> {prediction.Ingredients}</p>
                         <p><strong>Price:</strong> {prediction.Price}</p>
-                        {prediction.Image_URL && (
-                            <div>
-                                <p><strong>Image:</strong></p>
-                                <img src={prediction.Image_URL} alt="Product" className="prediction-image" />
-                            </div>
-                        )}
+                        {prediction.Image_URL && <img src={prediction.Image_URL} alt="Product" className="prediction-image" />}
                         <p><strong>Benefit:</strong> {prediction.Benefit}</p>
                         <p><strong>How to Use:</strong> {prediction["How To Use"]}</p>
                     </div>
                 )}
-                <div className="progress-bar">
-                    Step {currentStep + 1} of {formSteps.length}
-                </div>
+
             </div>
         </div>
     );

@@ -1,9 +1,15 @@
 from flask import Flask, request, jsonify, send_from_directory
 import pickle
 from flask_cors import CORS
+from flask_pymongo import PyMongo
+from bson import ObjectId
 
 app = Flask(__name__)
 CORS(app)
+
+# MongoDB connection URI
+app.config["MONGO_URI"] = "mongodb+srv://ksuba3210:Subathi123456@cluster1.ob9bh.mongodb.net/mydatabase?retryWrites=true&w=majority"
+mongo = PyMongo(app)
 
 # Load the model and encoders
 with open('Dermaluxe_Skincare.pkl', 'rb') as file:
@@ -29,7 +35,6 @@ le_how_to_use = data["le_how_to_use"]
 @app.route('/predict/product-images/<path:filename>')
 def static_files(filename):
     return send_from_directory('product-images', filename)
-
 
 @app.route('/favicon.ico')
 def favicon():
@@ -86,6 +91,31 @@ def predict():
             else:
                 images_URL = base_url + "0011.png"
 
+        # Save the form data along with predictions to the database
+        customer_data = {
+            "name": input_data["name"],
+            "email": input_data["email"],
+            "age": input_data["age"],
+            "gender": input_data["gender"],
+            "skin_type": input_data["skin_type"],
+            "skin_tone": input_data["skin_tone"],
+            "skin_concern": input_data["skin_concern"],
+            "environmental_impact": input_data["environmental_impact"],
+            "skin_goals": input_data["skin_goals"],
+            "predictions": {
+                "product_name": product_name,
+                "brand": brand,
+                "product_type": product_type,
+                "ingredients": ingredients,
+                "price": price,
+                "image_URL": images_URL,
+                "benefit": benefit,
+                "how_to_use": how_to_use
+            }
+        }
+        customer_collection = mongo.db.customers
+        customer_collection.insert_one(customer_data)
+
         # Return predictions as JSON
         return jsonify({
             "Product Name": product_name,
@@ -99,6 +129,33 @@ def predict():
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+
+@app.route('/admin/customers', methods=['GET'])
+def get_customers():
+    # Fetch all customer data from MongoDB
+    customer_collection = mongo.db.customers
+    customers = list(customer_collection.find())
+
+    # Remove MongoDB ObjectId for JSON serialization
+    for customer in customers:
+        customer["_id"] = str(customer["_id"])
+
+    return jsonify(customers)
+
+@app.route('/admin/customer/<id>', methods=['PUT'])
+def update_customer(id):
+    # Get the updated customer data from the request
+    updated_data = request.json
+
+    # Update customer information in MongoDB
+    customer_collection = mongo.db.customers
+    result = customer_collection.update_one({"_id": ObjectId(id)}, {"$set": updated_data})
+
+    if result.matched_count > 0:
+        return jsonify({"message": "Customer information updated successfully!"})
+    else:
+        return jsonify({"error": "Customer not found"}), 404
 
 
 if __name__ == "__main__":

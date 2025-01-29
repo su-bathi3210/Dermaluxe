@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './AdminConsultation.css';
-
 
 const AdminConsultation = () => {
     const [consultations, setConsultations] = useState([]);
