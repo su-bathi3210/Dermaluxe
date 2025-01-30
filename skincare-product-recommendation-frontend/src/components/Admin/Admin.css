@@ -5,8 +5,8 @@
 }
 
 .sidebar {
-    width: 250px;
-    background-color: #cab69e;
+    width: 220px;
+    background-color: #e9e5df;
     color: white;
     padding: 20px;
     display: flex;
@@ -14,10 +14,11 @@
 }
 
 .sidebar-image {
-    width: 114%;
+    display: block;
+    margin: -50px -6px;
+    width: 107%;
     height: auto;
-    margin-left: -19px;
-    margin-top: -70px;
+
 }
 
 ul {

@@ -43,6 +43,11 @@ function App() {
         <Route path='/skin-dermaluxe' element={<Dermaluxe />} />
         <Route path='/skin' element={<Quiz />} />
 
+
+
+
+
+
         {/* Admin routes wrapped in AdminRoute */}
         <Route element={<AdminRoute />}>
           <Route path='/admin' element={<Admin />} />
