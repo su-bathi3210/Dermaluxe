@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import './Header.css';
 
 import expertIcon from '../../images/ask.png';
+import cart from '../../images/cart.png';
 import logo from '../../images/Dermaluxe.png';
+import sign from '../../images/log.png';
 import orderIcon from '../../images/phone.png';
 import referIcon from '../../images/refer.png';
 import rewardsIcon from '../../images/reward.png';
-import shippingIcon from '../../images/shipping.png';
-import sign from '../../images/log.png';
-import cart from '../../images/cart.png';
 import search from '../../images/search.png';
+import shippingIcon from '../../images/shipping.png';
 
 const Header = () => {
     return (
@@ -57,9 +57,9 @@ const Header = () => {
                     <li><Link to="/">PRODUCTS</Link></li>
                     <li><Link to="/about">ABOUT</Link></li>
                     <li><Link to="">GALLERY</Link></li>
-                    <li><Link to="/skin">QUIZ</Link></li>
-                    <li><Link to="">HOT DEALS</Link></li>
-                    <li><Link to="">COMMUNITY</Link></li>
+                    <li><Link to="/skin">REVIEWS</Link></li>
+                    <li><Link to="">OFFERS</Link></li>
+                    <li><Link to='/community'>COMMUNITY</Link></li>
                     <li><Link to="">BLOG</Link></li>
                     <li><Link to="">SKINCARE SERVICES</Link></li>
                 </ul>

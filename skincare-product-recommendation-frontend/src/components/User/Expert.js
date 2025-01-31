@@ -22,7 +22,6 @@ const Expert = () => {
     return (
         <div>
             <Header />
-
             <div className="free-video">
                 <video controls autoPlay loop muted>
                     <source src={Video1} type="video/mp4" />

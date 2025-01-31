@@ -18,6 +18,7 @@ import Shipping from './components/User/Shipping';
 import Dermaluxe from './components/AI/Dermaluxe';
 import { Quiz } from './components/AI/Quiz';
 import AdminAI from './components/Admin/AdminAI';
+import { Community } from './components/User/Community';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/skin-dermaluxe' element={<Dermaluxe />} />
         <Route path='/skin' element={<Quiz />} />
+        <Route path='/community' element={<Community />} />
 
 
 
