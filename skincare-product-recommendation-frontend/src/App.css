@@ -1255,4 +1255,252 @@
 
 
 
-/** Section Page **/
+/** Community Page **/
+.community-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.community-image img {
+  max-width: 100%;
+}
+
+.community-section {
+  background-color: #bfece4;
+  margin-top: 60px;
+  text-align: center;
+  padding: 20px;
+  border: 2px solid black;
+}
+
+.community-section h2 {
+  font-size: 33px;
+  color: brown;
+  TEXT-TRANSFORM: UPPERCASE;
+  margin-bottom: 15px;
+}
+
+.community-section p {
+  font-size: 16.5px;
+  line-height: 1.8;
+  margin: 0px 26px;
+  color: black;
+  margin-bottom: 30px;
+}
+
+.nav-hr {
+  border: none;
+  height: 1.5px;
+  background-color: black;
+  margin: 10px -20px;
+}
+
+.community-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 200px;
+  margin-bottom: 10px;
+}
+
+.community-tabs button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  TEXT-TRANSFORM: UPPERCASE;
+  padding: 10px 20px;
+}
+
+.community-tabs button.active {
+  border-bottom: 2px solid black;
+}
+
+.ambassador-content {
+  display: grid;
+  grid-template-columns: 1fr 5px 1fr 5px 1fr;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.vertical-divider {
+  width: 1.5px;
+  background-color: black;
+  height: 105%;
+  margin-top: -20px;
+  margin-bottom: -30px;
+}
+
+.ambassador-left,
+.ambassador-right {
+  width: 92%;
+  margin: 0px 20px;
+}
+
+.ambassador-left h3,
+.ambassador-right h4 {
+  TEXT-TRANSFORM: UPPERCASE;
+  font-size: 22.5px;
+  margin-bottom: 15px;
+  color: rgb(146, 84, 204);
+}
+
+.ambassador-right h4 {
+  margin-top: -258px;
+}
+
+.ambassador-left h3 {
+  margin-top: -88px;
+}
+
+.ambassador-left p,
+.ambassador-left ul,
+.ambassador-right ul {
+  font-size: 16px;
+  line-height: 2.2;
+}
+
+.ambassador-left ul,
+.ambassador-right ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  margin: 10px 50px;
+}
+
+.apply-btn,
+.learn-btn {
+  font-size: 14px;
+  padding: 10px 120px;
+  border: none;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  TEXT-TRANSFORM: UPPERCASE;
+  margin-right: 10px;
+}
+
+.apply-btn {
+  background-color: #6fea96;
+  color: black;
+}
+
+.learn-btn {
+  background-color: #3fbee9;
+  color: black;
+  margin-left: -5px;
+}
+
+.ambassador-middle h3 {
+  TEXT-TRANSFORM: UPPERCASE;
+  font-size: 22.5px;
+  color: rgb(82, 105, 209);
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+.ambassador-middle p {
+  font-size: 16px;
+  color: black;
+  line-height: 1.5;
+  text-align: center;
+  width: 450px;
+  margin-bottom: 20px;
+}
+
+.ambassador-image {
+  width: 88%;
+  font-size: 16px;
+  line-height: 2.2;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+.ambassador-image img {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.derma-community-section {
+  max-width: 1200px;
+  margin: 80px auto;
+  margin-bottom: -40px;
+}
+
+.derma-community-section-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  align-items: center;
+}
+
+.derma-community-image-container {
+  flex: 1;
+  max-width: 50%;
+}
+
+.derma-community-image {
+  width: 100%;
+}
+
+.derma-community-content-container {
+  flex: 1;
+  max-width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  
+}
+
+.derma-community-card {
+  padding: 20px;
+}
+
+.derma-community-card-orange {
+  background-color: #ffe0b2;
+  border: 2px solid black;
+}
+
+.derma-community-card-teal {
+  background-color: #b2ebf2;
+  border: 2px solid black;
+}
+
+.derma-community-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  TEXT-TRANSFORM: UPPERCASE;
+  margin: 20px 20px;
+  color: brown;
+}
+
+.derma-community-card-text {
+  font-size: 1rem;
+  color: black;
+  margin: 20px 20px;
+  line-height: 1.8;
+  margin-top: -10px;
+}
+
+@media (max-width: 768px) {
+  .derma-community-section-container {
+      flex-direction: column;
+  }
+
+  .derma-community-image-container,
+  .derma-community-content-container {
+      max-width: 100%;
+  }
+}
