@@ -1,11 +1,7 @@
-.contact-image {
-    text-align: center;
+.free-video {
     cursor: pointer;
 }
 
-.contact-image img {
-    max-width: 100%;
+.free-video video {
+    width: 100%;
 }
-
-
-
