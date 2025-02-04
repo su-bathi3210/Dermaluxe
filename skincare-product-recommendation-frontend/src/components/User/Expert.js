@@ -23,7 +23,7 @@ const Expert = () => {
         <div>
             <Header />
             <div className="free-video">
-                <video controls autoPlay loop muted>
+                <video autoPlay loop muted>
                     <source src={Video1} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
@@ -84,7 +84,7 @@ const Expert = () => {
 
             <div className="consultation-video">
                 <Link to='/consultation'>
-                    <video controls autoPlay loop muted>
+                    <video autoPlay loop muted>
                         <source src={Video} type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>

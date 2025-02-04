@@ -14,39 +14,30 @@ public class QueryService {
     @Autowired
     private QueryRepository queryRepository;
 
-    // Add a new query
-    public Query addQuery(Query query) {
+    public Query saveQuery(Query query) {
         return queryRepository.save(query);
     }
 
-    // Get all queries
     public List<Query> getAllQueries() {
         return queryRepository.findAll();
     }
 
-    // Get a specific query by ID
     public Optional<Query> getQueryById(String id) {
         return queryRepository.findById(id);
     }
 
-    // Update a query
-    public Query updateQuery(String id, Query updatedQuery) {
-        Optional<Query> existingQuery = queryRepository.findById(id);
-        if (existingQuery.isPresent()) {
-            Query query = existingQuery.get();
-            query.setName(updatedQuery.getName());
-            query.setEmail(updatedQuery.getEmail());
-            query.setSubject(updatedQuery.getSubject());
-            query.setMessage(updatedQuery.getMessage());
-            query.setStatus(updatedQuery.getStatus());
-            query.setRespond(updatedQuery.getRespond());
-            return queryRepository.save(query);
-        }
-        return null; // Handle not found appropriately in your application
-    }
-
-    // Delete a query by ID
     public void deleteQuery(String id) {
         queryRepository.deleteById(id);
+    }
+
+    public Query updateQuery(String id, Query queryDetails) {
+        Query query = queryRepository.findById(id).orElseThrow(() -> new RuntimeException("Query not found"));
+        query.setName(queryDetails.getName());
+        query.setEmail(queryDetails.getEmail());
+        query.setSubject(queryDetails.getSubject());
+        query.setMessage(queryDetails.getMessage());
+        query.setStatus(queryDetails.getStatus());
+        query.setRespond(queryDetails.getRespond());
+        return queryRepository.save(query);
     }
 }

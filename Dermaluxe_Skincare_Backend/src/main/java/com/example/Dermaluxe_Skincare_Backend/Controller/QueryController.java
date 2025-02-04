@@ -1,8 +1,10 @@
 package com.example.Dermaluxe_Skincare_Backend.Controller;
 
 import com.example.Dermaluxe_Skincare_Backend.Model.Query;
+import com.example.Dermaluxe_Skincare_Backend.Service.EmailService;
 import com.example.Dermaluxe_Skincare_Backend.Service.QueryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,44 +13,73 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/Query")
-@CrossOrigin(origins = "*") // Allow cross-origin requests, adjust as needed
 public class QueryController {
 
     @Autowired
     private QueryService queryService;
 
-    // Add a new query
+    @Autowired
+    private EmailService emailService; // Inject the EmailService
+
+
     @PostMapping
-    public ResponseEntity<Query> addQuery(@RequestBody Query query) {
-        Query newQuery = queryService.addQuery(query);
-        return ResponseEntity.ok(newQuery);
+    public ResponseEntity<Query> createQuery(@RequestBody Query query) {
+        Query savedQuery = queryService.saveQuery(query);
+        return new ResponseEntity<>(savedQuery, HttpStatus.CREATED);
     }
 
-    // Get all queries
     @GetMapping
     public ResponseEntity<List<Query>> getAllQueries() {
         List<Query> queries = queryService.getAllQueries();
-        return ResponseEntity.ok(queries);
+        return new ResponseEntity<>(queries, HttpStatus.OK);
     }
 
-    // Get a specific query by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Query>> getQueryById(@PathVariable String id) {
+    public ResponseEntity<Query> getQueryById(@PathVariable String id) {
         Optional<Query> query = queryService.getQueryById(id);
-        return query.isPresent() ? ResponseEntity.ok(query) : ResponseEntity.notFound().build();
+        return query.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Update a query
     @PutMapping("/{id}")
     public ResponseEntity<Query> updateQuery(@PathVariable String id, @RequestBody Query updatedQuery) {
+        // Update the query in the database
         Query query = queryService.updateQuery(id, updatedQuery);
-        return query != null ? ResponseEntity.ok(query) : ResponseEntity.notFound().build();
+
+        if (query != null) {
+            // Check the status of the updated query
+            String status = query.getStatus();
+            if ("done".equalsIgnoreCase(status)) {
+                // Construct the email body for confirmed status
+                String emailBody = String.format(
+                        "Thank you for reaching out to ABC Restaurant, %s.\n\n" +
+                                "This is regarding your query about: %s\n\n" +
+                                "Response: %s\n\n" +
+                                "If you have any further questions, please contact ABC Restaurant Front Desk.\n\n" +
+                                "ABC RESTAURANT \n" +
+                                "Telephone No: (123) 456-7890",
+                        query.getName(),
+                        query.getSubject(),
+                        query.getRespond()
+                );
+
+                // Send the email for confirmed status
+                emailService.sendEmail(
+                        query.getEmail(), // Assuming the email should be sent to the query's email
+                        "Query Status Respond",
+                        emailBody
+                );
+            }
+
+            return ResponseEntity.ok(query);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    // Delete a query
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteQuery(@PathVariable String id) {
         queryService.deleteQuery(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

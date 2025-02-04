@@ -19,6 +19,7 @@ import Dermaluxe from './components/AI/Dermaluxe';
 import { Quiz } from './components/AI/Quiz';
 import AdminAI from './components/Admin/AdminAI';
 import { Community } from './components/User/Community';
+import AdminQuery from './components/Admin/AdminQuery';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
           <Route path='/admin' element={<Admin />} />
           <Route path='/adminconsultation' element={<AdminConsultation />} />
           <Route path='/adminAI' element={<AdminAI />} />
+          <Route path='/adminquery' element={<AdminQuery />} />
         </Route>
       </Routes>
 

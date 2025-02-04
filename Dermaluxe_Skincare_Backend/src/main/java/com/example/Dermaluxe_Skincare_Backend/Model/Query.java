@@ -10,19 +10,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Query") // Specifies the MongoDB collection
 public class Query {
 
+    // Getters and Setters
     @Id
-    private String id; // Unique identifier for the query
-    private String name; // Name of the person making the query
-    private String email; // Email address of the person making the query
-    private String subject; // Subject of the query
-    private String message; // Message content of the query
-    private String status; // Status of the query (e.g., pending, resolved)
-    private String respond; // Response to the query
+    private String id;
+    private String name;
+    private String email;
+    private String subject;
+    private String message;
+    private String status;
+    private String respond;
 
-    // Default Constructor
+    // Constructors
     public Query() {}
 
-    // Parameterized Constructor
     public Query(String name, String email, String subject, String message, String status, String respond) {
         this.name = name;
         this.email = email;
@@ -31,4 +31,5 @@ public class Query {
         this.status = status;
         this.respond = respond;
     }
+
 }

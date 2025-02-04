@@ -148,7 +148,7 @@ export const Reward = () => {
             </div>
 
             <div className="reward-video">
-                <video controls autoPlay loop muted>
+                <video autoPlay loop muted>
                     <source src={Video} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
