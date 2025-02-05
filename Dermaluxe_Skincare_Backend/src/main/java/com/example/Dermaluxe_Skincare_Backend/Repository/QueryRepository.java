@@ -8,3 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface QueryRepository extends MongoRepository<Query, String> {
     // Custom query methods can be added here if needed
 }
+

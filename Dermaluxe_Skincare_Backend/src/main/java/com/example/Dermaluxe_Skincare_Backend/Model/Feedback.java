@@ -16,9 +16,8 @@ public class Feedback {
     private String name;
     private String customerName;
     private String email;
-    private long phoneNumber;
     private String subject;
     private String message;
     private int rating;
-    private String staffResponse;
+    private String response;
 }

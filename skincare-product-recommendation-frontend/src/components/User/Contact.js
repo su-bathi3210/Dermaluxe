@@ -1,94 +1,69 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../../components/User/Header";
-import "./Contact.css";
+import '../../App.css';
 
 import Video7 from "../../images/Video7.mp4";
 import call from '../../images/call.png';
 import chat from '../../images/chat.png';
-import email from '../../images/email.png';
+import email1 from '../../images/email.png';
 
 const Contact = () => {
     const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
     const [error, setError] = useState("");
 
 
-    const [query, setQuery] = useState({
-        name: "",
-        email: "",
-        subject: "",
-        message: ""
-    });
-
-
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [subject, setSubject] = useState('');
+    const [message, setMessage] = useState('');
     const [errors, setErrors] = useState({});
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setQuery({
-            ...query,
-            [name]: value
-        });
+    const validate = () => {
+        const validationErrors = {};
+        if (!name) validationErrors.name = 'Name is required';
+        if (!email) validationErrors.email = 'Email is required';
+        if (!subject) validationErrors.subject = 'Subject is required';
+        if (!message) validationErrors.message = 'Message is required';
 
-
-        setErrors({ ...errors, [name]: "" });
-    };
-
-    const validateForm = () => {
-        let newErrors = {};
-
-        if (query.name.trim().length < 3) {
-            newErrors.name = "Name must be at least 3 characters";
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (email && !emailRegex.test(email)) {
+            validationErrors.email = 'Please enter a valid email address';
         }
 
-        if (!query.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
-            newErrors.email = "Enter a valid email address";
-        }
-
-        if (query.subject.trim() === "") {
-            newErrors.subject = "Subject cannot be empty";
-        }
-
-        if (query.message.trim().length < 10) {
-            newErrors.message = "Message must be at least 10 characters";
-        }
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+        return validationErrors;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (!validateForm()) {
+        const validationErrors = validate();
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
             return;
         }
 
         try {
-            const response = await axios.post('http://localhost:8081/Query', query, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+            const response = await axios.post('/api/query', {
+                name,
+                email,
+                subject,
+                message,
+                status: 'Pending',
+                respond: '',
             });
 
-            if (response.status === 200) {
-                alert("Your query has been submitted successfully!");
-                setQuery({
-                    name: "",
-                    email: "",
-                    subject: "",
-                    message: ""
-                });
-                setErrors({});
-            } else {
-                alert("Failed to submit query. Please try again.");
-            }
+            console.log('Server response:', response.data);
+
+            // Display the success message as a popup
+            window.alert('Your query has been submitted successfully!');
+
+            // Refresh the page
+            window.location.reload();
         } catch (error) {
-            console.error('Error:', error);
-            alert("An error occurred. Please try again later.");
+            console.error('Error submitting query:', error);
+            setErrors({ submit: 'Failed to submit your query. Please try again later.' });
         }
     };
-
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -122,67 +97,61 @@ const Contact = () => {
             <div className="contact-content">
                 <div className="contact-images">
                     <img src={chat} alt="Chat with us" className="contact--image" />
-                    <img src={email} alt="Email us" className="contact--image" />
+                    <img src={email1} alt="Email us" className="contact--image" />
                     <img src={call} alt="Call us" className="contact--image" />
                 </div>
 
                 <div className="contact-section">
-                    <div className="query-form">
-                        <h2>Send Us Your Query</h2>
-                        <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    value={query.name}
-                                    onChange={handleChange}
-                                    placeholder="Enter Your Name"
-                                    required
-                                />
-                                {errors.name && <p className="error-message">{errors.name}</p>}
-                            </div>
-                            <div className="form-group">
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={query.email}
-                                    onChange={handleChange}
-                                    placeholder="Enter Your Email"
-                                    required
-                                />
-                                {errors.email && <p className="error-message">{errors.email}</p>}
+                    <div className="query-container">
+                    <h2>Send us Your Query</h2>
+                        <form onSubmit={handleSubmit} className="query-form">
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        placeholder="Enter Your Name"
+                                    />
+                                    {errors.name && <p className="error-message">{errors.name}</p>}
+                                </div>
+                                <div className="form-group">
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder="Enter Your Email"
+                                    />
+                                    {errors.email && <p className="error-message">{errors.email}</p>}
+                                </div>
                             </div>
                             <div className="form-group">
                                 <input
                                     type="text"
                                     id="subject"
-                                    name="subject"
-                                    value={query.subject}
-                                    onChange={handleChange}
-                                    placeholder="Your Subject"
-                                    required
+                                    value={subject}
+                                    onChange={(e) => setSubject(e.target.value)}
+                                    placeholder="Enter The Subject"
                                 />
                                 {errors.subject && <p className="error-message">{errors.subject}</p>}
                             </div>
                             <div className="form-group">
                                 <textarea
                                     id="message"
-                                    name="message"
-                                    value={query.message}
-                                    onChange={handleChange}
-                                    placeholder="Your Message"
-                                    required
-                                />
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                    placeholder="Enter Your Message"
+                                ></textarea>
                                 {errors.message && <p className="error-message">{errors.message}</p>}
                             </div>
-                            <button type="submit" className="submit-btn">
-                                Submit Query
-                            </button>
+
+                            {errors.submit && <p className="error-message">{errors.submit}</p>}
+                            <button type="submit" class="contact-submit-btn" title="Click to submit your query">Submit Query</button>
+
                         </form>
                     </div>
-
 
                     <div className="live-location-section">
                         {userLocation.lat && userLocation.lng ? (

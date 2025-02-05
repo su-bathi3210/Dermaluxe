@@ -30,7 +30,7 @@ public class FeedbackService {
         Optional<Feedback> existingFeedback = feedbackRepository.findById(feedbackId);
         if (existingFeedback.isPresent()) {
             Feedback updatedFeedback = existingFeedback.get();
-            updatedFeedback.setStaffResponse(feedback.getStaffResponse());
+            updatedFeedback.setResponse(feedback.getResponse());
             return feedbackRepository.save(updatedFeedback);
         } else {
             return null;
@@ -41,3 +41,4 @@ public class FeedbackService {
         feedbackRepository.deleteById(feedbackId);
     }
 }
+

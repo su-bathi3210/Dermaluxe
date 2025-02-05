@@ -20,6 +20,11 @@ import { Quiz } from './components/AI/Quiz';
 import AdminAI from './components/Admin/AdminAI';
 import { Community } from './components/User/Community';
 import AdminQuery from './components/Admin/AdminQuery';
+import Feedback from "./components/User/Feedback";
+import AdminFeedback from "./components/Admin/AdminFeedback";
+import Gallery from './components/User/Gallery';
+import AdminGallery from './components/Admin/AdminGallery';
+
 
 
 function App() {
@@ -45,8 +50,8 @@ function App() {
         <Route path='/skin-dermaluxe' element={<Dermaluxe />} />
         <Route path='/skin' element={<Quiz />} />
         <Route path='/community' element={<Community />} />
-
-
+        <Route path='/feedback' element={<Feedback />} />
+        <Route path='/gallery' element={<Gallery />} />
 
         {/* Admin routes wrapped in AdminRoute */}
         <Route element={<AdminRoute />}>
@@ -54,6 +59,8 @@ function App() {
           <Route path='/adminconsultation' element={<AdminConsultation />} />
           <Route path='/adminAI' element={<AdminAI />} />
           <Route path='/adminquery' element={<AdminQuery />} />
+          <Route path='/adminfeedback' element={<AdminFeedback />} />
+          <Route path='/admingallery' element={<AdminGallery />} />
         </Route>
       </Routes>
 
