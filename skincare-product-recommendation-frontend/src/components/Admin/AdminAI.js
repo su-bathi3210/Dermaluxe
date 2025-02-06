@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Admin from "./Admin";
 
 const AdminAI = () => {
     const [customers, setCustomers] = useState([]);
@@ -58,6 +59,7 @@ const AdminAI = () => {
 
     return (
         <div className="admin-dashboard">
+            <Admin />
             <h2>Admin Dashboard</h2>
             <div className="customer-list">
                 <h3>Customer List</h3>

@@ -1,0 +1,19 @@
+.gallery {
+    max-width: 1400px;
+    margin: 50px auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.gallery h2 {
+    font-size: 30px;
+    color: brown;
+    TEXT-TRANSFORM: UPPERCASE;
+    margin-bottom: 15px;
+}
+
+.gallery p {
+    font-size: 16.5px;
+    color: black;
+    line-height: 1.8;
+}

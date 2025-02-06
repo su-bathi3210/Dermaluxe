@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GalleryRepository extends MongoRepository<Gallery, String> {
-    // You can add custom queries if needed, for example:
-    // List<Gallery> findBySkinConcern(String skinConcern);
 }

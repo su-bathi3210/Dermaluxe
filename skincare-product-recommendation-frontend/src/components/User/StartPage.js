@@ -5,10 +5,10 @@ import "./StartPage.css";
 import heading from "../../images/heading.png";
 import heading1 from "../../images/heading1.png";
 import heading2 from "../../images/heading2.png";
-import heading6 from "../../images/heading6.png";
+import heading7 from "../../images/heading7.png";
 
 const StartPage = () => {
-  const images = [heading, heading1, heading2, heading6];
+  const images = [heading, heading1, heading2, heading7];
   const links = ["/consultation", "/page2", "/page3", "/consultation"];
   const [currentIndex, setCurrentIndex] = useState(0);
 

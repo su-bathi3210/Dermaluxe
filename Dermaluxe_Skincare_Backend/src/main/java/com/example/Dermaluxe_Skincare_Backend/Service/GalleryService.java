@@ -11,39 +11,34 @@ import java.util.Optional;
 @Service
 public class GalleryService {
 
-    private final GalleryRepository galleryRepository;
-
     @Autowired
-    public GalleryService(GalleryRepository galleryRepository) {
-        this.galleryRepository = galleryRepository;
-    }
+    private GalleryRepository galleryRepository;
 
-    // Get all gallery entries
+    // Get all galleries
     public List<Gallery> getAllGalleries() {
         return galleryRepository.findAll();
     }
 
-    // Get a gallery entry by ID
+    // Get a gallery by ID
     public Optional<Gallery> getGalleryById(String id) {
         return galleryRepository.findById(id);
     }
 
-    // Save a new gallery entry
-    public Gallery createGallery(Gallery gallery) {
+    // Add a new gallery
+    public Gallery addGallery(Gallery gallery) {
         return galleryRepository.save(gallery);
     }
 
-    // Update an existing gallery entry
+    // Update an existing gallery
     public Gallery updateGallery(String id, Gallery gallery) {
         if (galleryRepository.existsById(id)) {
             gallery.setId(id);
             return galleryRepository.save(gallery);
-        } else {
-            throw new RuntimeException("Gallery with ID " + id + " does not exist.");
         }
+        return null;
     }
 
-    // Delete a gallery entry by ID
+    // Delete a gallery by ID
     public void deleteGallery(String id) {
         galleryRepository.deleteById(id);
     }

@@ -54,14 +54,14 @@ const Header = () => {
             {/* Navigation Bar */}
             <nav className="header-nav">
                 <ul>
-                    <li><Link to="/">PRODUCTS</Link></li>
+                    <li><Link to="/product">PRODUCTS</Link></li>
                     <li><Link to="/about">ABOUT</Link></li>
-                    <li><Link to="">GALLERY</Link></li>
-                    <li><Link to="/skin">REVIEWS</Link></li>
-                    <li><Link to="">OFFERS</Link></li>
+                    <li><Link to="/gallery">GALLERY</Link></li>
+                    <li><Link to="/review">REVIEWS</Link></li>
+                    <li><Link to="/offers">OFFERS</Link></li>
                     <li><Link to='/community'>COMMUNITY</Link></li>
-                    <li><Link to="">BLOG</Link></li>
-                    <li><Link to="">SKINCARE SERVICES</Link></li>
+                    <li><Link to="/blog">BLOG</Link></li>
+                    <li><Link to="/skincare-service">SKINCARE SERVICES</Link></li>
                 </ul>
             </nav>
 

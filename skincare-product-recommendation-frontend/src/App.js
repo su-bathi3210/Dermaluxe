@@ -24,6 +24,8 @@ import Feedback from "./components/User/Feedback";
 import AdminFeedback from "./components/Admin/AdminFeedback";
 import Gallery from './components/User/Gallery';
 import AdminGallery from './components/Admin/AdminGallery';
+import Review from './components/User/Review';
+import Blog from './components/User/Blog';
 
 
 
@@ -52,6 +54,9 @@ function App() {
         <Route path='/community' element={<Community />} />
         <Route path='/feedback' element={<Feedback />} />
         <Route path='/gallery' element={<Gallery />} />
+        <Route path='/review' element={<Review />} />
+        <Route path='/blog' element={<Blog />} />
+
 
         {/* Admin routes wrapped in AdminRoute */}
         <Route element={<AdminRoute />}>
