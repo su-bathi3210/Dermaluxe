@@ -9,7 +9,7 @@ const AdminNav = () => {
         <header className="header">
             <div className="header-container">
                 <div className="header-logo" style={{ marginLeft: '29px' }}>
-                    <Link to="/">
+                    <Link to="/admin">
                         <img src={logo} alt="Dermaluxe Logo" />
                     </Link>
                 </div>
@@ -19,19 +19,46 @@ const AdminNav = () => {
             {/* Navigation Bar */}
             <nav className="header-nav">
                 <ul>
-                    <li><Link to="/">USERS</Link></li>
-                    <li><Link to="/">PRODUCTS</Link></li>
-                    <li><Link to="/">ORDERS</Link></li>
+                    <li><Link to="">USERS</Link></li>
+                    <li><Link to="">PRODUCTS</Link></li>
+                    <li><Link to="">ORDERS</Link></li>
                     <li><Link to="/adminAI">PERSONALISED SKINCARE</Link></li>
                     <li><Link to="/adminconsultation">CONSULTATION</Link></li>
-                    <li><Link to='/admingallery'>GALLERY</Link></li>
-                    <li><Link to="/adminquery">QUERY</Link></li>
-                    <li><Link to="/adminfeedback">FEEDBACK</Link></li>
-                    <li><Link to="/">REVIEWS</Link></li>
-                    <li><Link to="/">OFFERS</Link></li>
-                    <li><Link to="/">BLOG</Link></li>
                 </ul>
             </nav>
+
+            <div className="header-promo" style={{ fontWeight: 'bold' }}>
+                <div className="header-promo-item">
+                    <Link to="/admingallery">
+                        <span>GALLERY</span>
+                    </Link>
+                </div>
+                <div className="header-promo-item">
+                    <Link to="/adminquery">
+                        <span>QUERY</span>
+                    </Link>
+                </div>
+                <div className="header-promo-item">
+                    <Link to="/adminfeedback">
+                        <span>FEEDBACK</span>
+                    </Link>
+                </div>
+                <div className="header-promo-item">
+                    <Link to="">
+                        <span>REVIEWS</span>
+                    </Link>
+                </div>
+                <div className="header-promo-item">
+                    <Link to="">
+                        <span>OFFERS</span>
+                    </Link>
+                </div>
+                <div className="header-promo-item">
+                    <Link to="">
+                        <span>BLOG</span>
+                    </Link>
+                </div>
+            </div>
         </header>
     );
 };

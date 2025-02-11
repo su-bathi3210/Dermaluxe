@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import AdminNav from './AdminNav';
 
 const AdminConsultation = () => {
     const [consultations, setConsultations] = useState([]);
@@ -34,6 +35,7 @@ const AdminConsultation = () => {
 
     return (
         <div className="admin-consultations">
+            <AdminNav />
             <h2>Manage Consultations</h2>
             {responseMessage && <p>{responseMessage}</p>}
             <table>

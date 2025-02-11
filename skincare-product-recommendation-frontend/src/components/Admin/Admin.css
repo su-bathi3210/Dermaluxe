@@ -2,3 +2,357 @@
     width: 100%;
     margin-top: -0.7px;
 }
+
+
+/* Admin Query Page */
+.admin-query-container {
+    font-family: Arial, sans-serif;
+}
+
+.admin-query-heading{
+    text-align: center;
+    color: brown;
+    margin-bottom: 10px;
+    margin-top: 40px;
+    font-size: 30px;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+.admin-query-paragraph{
+    text-align: center;
+    font-size: 17px;
+    color: black;
+    width: 1400px;
+    margin: auto;
+    display: block;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.admin-query-error-message{
+    color: red;
+    text-align: center;
+    font-weight: bold;
+}
+
+.admin-query-success-message{
+    color: green;
+    text-align: center;
+    font-weight: bold;
+}
+
+.query-table {
+    width: 95%;
+    border-collapse: collapse;
+    background: white;
+    overflow: hidden;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+.query-table th,
+.query-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.query-table th {
+    background-color: darkolivegreen;
+    color: white;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    letter-spacing: 0.5px;
+    font-size: 14.5px;
+}
+
+.query-table td{
+    font-size: 15px;
+}
+
+.query-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.query-table tr:hover {
+    background-color: #ddd;
+}
+
+.admin-query-edit-button{
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    transition: 0.3s ease-in-out;
+}
+
+.admin-query-delete-button{
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    transition: 0.3s ease-in-out;
+}
+
+.admin-query-modal{
+    width: 450px;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.admin-query-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.admin-query-model-heading{
+    text-align: center;
+    font-size: 22px;
+    margin-top: 10px;
+    color: brown;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-family: Arial, sans-serif;
+}
+
+.admin-edit-query-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-query-form-group{
+    display: flex;
+    flex-direction: column;
+}
+
+input,
+textarea,
+select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.admin-query-submit{
+    background-color: #600000;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+.admin-query-submit-button{
+    background-color: gray;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+.admin-query-submit:hover,
+.admin-query-submit-button:hover{
+    background-color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Admin Feedback Page */
+.feedback-container {
+    font-family: Arial, sans-serif;
+}
+
+.admin-feedback-form-head {
+    text-align: center;
+    color: brown;
+    margin-bottom: 10px;
+    margin-top: 40px;
+    font-size: 30px;
+    TEXT-TRANSFORM: UPPERCASE;
+
+}
+
+.admin-feedback-form-paragraph {
+    text-align: center;
+    font-size: 17px;
+    color: black;
+    width: 1400px;
+    margin: auto;
+    display: block;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+
+.admin-feedback-table {
+    width: 95%;
+    background: white;
+    overflow: hidden;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+.table th, 
+.table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+
+}
+
+.table th {
+    background-color: darkolivegreen;
+    color: white;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    letter-spacing: 0.5px;
+    font-size: 14.5px;
+}
+
+.table td{
+    font-size: 15px;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #ddd;
+}
+
+
+.ReactStars {
+    display: flex;
+    justify-content: center;
+}
+
+/* Buttons */
+.admin-feedback-btn-primary {
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    transition: 0.3s ease-in-out;
+
+}
+
+.admin-feedback-btn-danger {
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    transition: 0.3s ease-in-out;
+    margin-top: 4px;
+}
+
+
+.admin-feedback-modal {
+    width: 450px;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.admin-feedback-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.admin-feedback-model-heading {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 10px;
+    color: brown;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-family: Arial, sans-serif;
+}
+
+.admin-edit-feedback-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-feedback-form-group{
+    display: flex;
+    flex-direction: column;
+}
+
+input,
+textarea,
+select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+

@@ -33,7 +33,9 @@ function App() {
   const shouldShowFooter = window.location.pathname !== '/login'
     && window.location.pathname !== '/admin'
     && window.location.pathname !== '/adminconsultation'
-    && window.location.pathname !== '/admindashboard';;
+    && window.location.pathname !== '/admindashboard'
+    && window.location.pathname !== '/adminquery'
+    && window.location.pathname !== '/adminfeedback';
 
   return (
     <Router>

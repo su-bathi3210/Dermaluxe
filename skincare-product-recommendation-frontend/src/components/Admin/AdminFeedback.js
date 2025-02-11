@@ -3,10 +3,17 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import AOS from 'aos';
 import ReactStars from 'react-stars';
+import Modal from 'react-modal';
+import AdminNav from './AdminNav';
+import "./Admin.css";
+
+Modal.setAppElement('#root');
 
 const AdminFeedback = () => {
     const [feedbacks, setFeedbacks] = useState([]);
+    const [selectedFeedback, setSelectedFeedback] = useState(null);
     const [response, setResponse] = useState('');
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     useEffect(() => {
         AOS.init({ duration: 2000 });
@@ -22,11 +29,20 @@ const AdminFeedback = () => {
         }
     };
 
-    const handleResponseChange = (e) => {
-        setResponse(e.target.value);
+    const openModal = (feedback) => {
+        setSelectedFeedback(feedback);
+        setResponse(feedback.response || '');
+        setModalIsOpen(true);
     };
 
-    const submitResponse = async (feedbackId) => {
+    const closeModal = () => {
+        setModalIsOpen(false);
+        setSelectedFeedback(null);
+        setResponse('');
+    };
+
+    const submitResponse = async (e) => {
+        e.preventDefault();
         if (!response.trim()) {
             Swal.fire({
                 title: 'Error!',
@@ -39,7 +55,7 @@ const AdminFeedback = () => {
         }
 
         try {
-            await axios.put(`/Feedback/${feedbackId}`, { response });
+            await axios.put(`/Feedback/${selectedFeedback.feedbackId}`, { response });
             Swal.fire({
                 title: 'Success!',
                 text: 'Feedback has been responded to.',
@@ -48,6 +64,7 @@ const AdminFeedback = () => {
                 showConfirmButton: false
             });
             fetchFeedbacks();
+            closeModal();
         } catch (error) {
             console.error('Error responding to feedback:', error);
             Swal.fire({
@@ -84,69 +101,111 @@ const AdminFeedback = () => {
     };
 
     return (
-        <div className="feedback-container mt-5" data-aos="fade-up">
-            <h1 className="feedback-form-head">Feedback</h1>
-            <p className="contact-paragraph" data-aos="fade-down">
-                The Feedback Management system at ABC Restaurant allows administrators to efficiently oversee customer feedback, ensuring every comment is reviewed and addressed promptly. With this tool, admins can easily manage feedback entries, assess ratings, respond to customer concerns, and maintain high service standards.
-            </p>
+        <div>
+            <AdminNav />
+            <div className="feedback-container">
+                <h1 className="admin-feedback-form-head">Feedback</h1>
+                <p className="admin-feedback-form-paragraph">
+                    At Dermaluxe Skincare, our admin panel provides a streamlined interface for
+                    efficiently managing customer feedback. This feature ensures that feedback is reviewed and responded to promptly, helping us
+                    continuously improve our services and enhance the overall customer experience.
+                </p>
 
-            <div className="table-responsive">
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Subject</th>
-                            <th>Message</th>
-                            <th>Rating</th>
-                            <th>Response</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {feedbacks.map((feedback) => (
-                            <tr key={feedback.feedbackId}>
-                                <td>{feedback.name}</td>
-                                <td>{feedback.email}</td>
-                                <td>{feedback.subject}</td>
-                                <td>{feedback.message}</td>
-                                <td>
-                                    <ReactStars
-                                        count={5}
-                                        value={feedback.rating}
-                                        size={24}
-                                        color2={'#ffd700'}
-                                        edit={false}
-                                    />
-                                </td>
-                                <td>{feedback.response}</td>
-                                <td>
-                                    <button
-                                        className="btn btn-danger"
-                                        onClick={() => deleteFeedback(feedback.feedbackId)}
-                                    >
-                                        Delete
-                                    </button>
-                                    <div className="mt-2">
-                                        <textarea
-                                            className="form-control"
-                                            placeholder="Write a response..."
-                                            rows="3"
-                                            value={response}
-                                            onChange={handleResponseChange}
-                                        ></textarea>
+                <div className="admin-feedback-table">
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Subject</th>
+                                <th>Message</th>
+                                <th>Rating</th>
+                                <th>Response</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {feedbacks.map((feedback) => (
+                                <tr key={feedback.feedbackId}>
+                                    <td>{feedback.name}</td>
+                                    <td>{feedback.email}</td>
+                                    <td>{feedback.subject}</td>
+                                    <td>{feedback.message}</td>
+                                    <td>
+                                        <ReactStars
+                                            count={5}
+                                            value={feedback.rating}
+                                            size={24}
+                                            color2={'#ffd700'}
+                                            edit={false}
+                                        />
+                                    </td>
+                                    <td>{feedback.response || 'No response yet'}</td>
+                                    <td>
                                         <button
-                                            className="btn btn-primary mt-2"
-                                            onClick={() => submitResponse(feedback.feedbackId)}
+                                            style={{ backgroundColor: '#600000', color: 'white', width: '75px' }}
+                                            className="admin-feedback-btn-danger"
+                                            onClick={() => deleteFeedback(feedback.feedbackId)}
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            style={{ backgroundColor: 'tomato', color: 'white', width: '75px', marginTop: '4px' }}
+                                            className="admin-feedback-btn-primary"
+                                            onClick={() => openModal(feedback)}
                                         >
                                             Respond
                                         </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                <Modal
+                    isOpen={modalIsOpen}
+                    onRequestClose={closeModal}
+                    contentLabel="Edit Feedback "
+                    className="admin-feedback-modal"
+                    overlayClassName="admin-feedback-overlay"
+                >
+                    <h2 className="admin-feedback-model-heading">Edit Feedback Query</h2>
+                    {selectedFeedback && (
+                        <form onSubmit={submitResponse} className="admin-edit-feedback-form">
+                            <div className="admin-feedback-form-group">
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    name="subject"
+                                    value={selectedFeedback.subject}
+                                    required
+                                    readOnly
+                                />
+                            </div>
+                            <div className="admin-feedback-form-group">
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    value={selectedFeedback.message}
+                                    required
+                                    readOnly
+                                ></textarea>
+                            </div>
+                            <div className="admin-feedback-form-group">
+                                <input
+                                    type="text"
+                                    id="respond"
+                                    name="respond"
+                                    value={response}
+                                    onChange={(e) => setResponse(e.target.value)}
+                                />
+                            </div>
+                            <button className="admin-query-submit">Update Query</button>
+                            <button className="admin-query-submit-button" onClick={closeModal}>Cancel</button>
+                        </form>
+                    )}
+                </Modal>
             </div>
         </div>
     );
