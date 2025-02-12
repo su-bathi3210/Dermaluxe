@@ -62,9 +62,9 @@ const AdminQuery = () => {
             setModalIsOpen(false);
             setSelectedQuery(null);
 
-            Swal.fire("Updated!", "Query updated successfully.", "success"); // ✅ Success message
+            Swal.fire("Updated!", "Query updated successfully.", "success");
         } catch (error) {
-            Swal.fire("Error", "Failed to update the query.", "error"); // ✅ Error alert
+            Swal.fire("Error", "Failed to update the query.", "error");
         }
     };
 
@@ -74,9 +74,8 @@ const AdminQuery = () => {
     };
 
     return (
-        <div>
-            <AdminNav />
             <div className="admin-query-container">
+                 <AdminNav />
                 <h2 className="admin-query-heading">Query</h2>
                 <p className="admin-query-paragraph">
                     At Dermaluxe Skincare, our admin panel offers a seamless interface for efficiently managing customer inquiries.
@@ -184,7 +183,6 @@ const AdminQuery = () => {
                     </Modal>
                 )}
             </div>
-        </div>
     );
 };
 

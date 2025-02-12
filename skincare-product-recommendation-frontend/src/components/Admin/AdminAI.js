@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Admin from "./Admin";
+import Modal from "react-modal";
+import AdminNav from './AdminNav';
+import "./Admin.css";
+
+Modal.setAppElement("#root"); // Ensures accessibility
 
 const AdminAI = () => {
     const [customers, setCustomers] = useState([]);
     const [selectedCustomer, setSelectedCustomer] = useState(null);
-    const [updatedData, setUpdatedData] = useState({
-        name: "",
-        email: "",
-        skin_type: "",
-        skin_tone: "",
-        skin_concern: "",
-        environmental_impact: "",
-        skin_goals: ""
-    });
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    // Fetch customer data from the backend
     useEffect(() => {
         const fetchCustomers = async () => {
             try {
@@ -30,120 +25,61 @@ const AdminAI = () => {
 
     const handleSelectCustomer = (customer) => {
         setSelectedCustomer(customer);
-        setUpdatedData({
-            name: customer.name,
-            email: customer.email,
-            skin_type: customer.skin_type,
-            skin_tone: customer.skin_tone,
-            skin_concern: customer.skin_concern,
-            environmental_impact: customer.environmental_impact,
-            skin_goals: customer.skin_goals
-        });
+        setModalIsOpen(true);
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUpdatedData({ ...updatedData, [name]: value });
-    };
-
-    const handleUpdateCustomer = async () => {
-        if (selectedCustomer) {
-            try {
-                await axios.put(`http://127.0.0.1:5000/admin/customer/${selectedCustomer._id}`, updatedData);
-                alert("Customer updated successfully!");
-            } catch (err) {
-                console.error("Error updating customer:", err);
-            }
-        }
+    const closeModal = () => {
+        setModalIsOpen(false);
+        setSelectedCustomer(null);
     };
 
     return (
         <div className="admin-dashboard">
-            <Admin />
-            <h2>Admin Dashboard</h2>
+            <AdminNav />
+            <h2 className="admin-personalized-heading">Skincare Personalized System</h2>
+            <p className="admin-query-paragraph">
+                At Dermaluxe Skincare, our admin panel offers a seamless interface for efficiently managing customer inquiries.
+                This feature ensures that customer concerns are addressed promptly and effectively, enhancing the overall customer experience.
+            </p>
+
+            <h3 className="customer-heading">Customer List</h3>
             <div className="customer-list">
-                <h3>Customer List</h3>
-                <ul>
-                    {customers.map((customer) => (
-                        <li key={customer._id} onClick={() => handleSelectCustomer(customer)}>
-                            {customer.name} - {customer.email}
-                        </li>
-                    ))}
-                </ul>
+                {customers.map((customer) => (
+                    <div key={customer._id} className="customer-box" onClick={() => handleSelectCustomer(customer)}>
+                        <h4>{customer.name}</h4>
+                        <p> {customer.email}</p>
+                        <p><strong>Skin Type:</strong> {customer.skin_type}</p>
+                        <p><strong>Skin Tone:</strong> {customer.skin_tone}</p>
+                        <p><strong>Skin Concern:</strong> {customer.skin_concern}</p>
+                        <p><strong>Environmental Impact:</strong> {customer.environmental_impact}</p>
+                        <p><strong>Skin Goals:</strong> {customer.skin_goals}</p>
+                        
+                    </div>
+                ))}
             </div>
-            {selectedCustomer && (
-                <div className="customer-form">
-                    <h3>Edit Customer</h3>
-                    <form>
-                        <label>
-                            Name:
-                            <input
-                                type="text"
-                                name="name"
-                                value={updatedData.name}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Email:
-                            <input
-                                type="email"
-                                name="email"
-                                value={updatedData.email}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Skin Type:
-                            <input
-                                type="text"
-                                name="skin_type"
-                                value={updatedData.skin_type}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Skin Tone:
-                            <input
-                                type="text"
-                                name="skin_tone"
-                                value={updatedData.skin_tone}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Skin Concern:
-                            <input
-                                type="text"
-                                name="skin_concern"
-                                value={updatedData.skin_concern}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Environmental Impact:
-                            <input
-                                type="text"
-                                name="environmental_impact"
-                                value={updatedData.environmental_impact}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Skin Goals:
-                            <input
-                                type="text"
-                                name="skin_goals"
-                                value={updatedData.skin_goals}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <button type="button" onClick={handleUpdateCustomer}>
-                            Update Customer
-                        </button>
-                    </form>
-                </div>
-            )}
+
+            {/* Modal for Viewing Customer Details */}
+            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal-content" overlayClassName="modal-overlay">
+                <button className="close-button" onClick={closeModal}>×</button>
+                <h3>Customer Skincare personalized Details</h3>
+                {selectedCustomer && (
+                    <div className="customer-details">
+                        <p><strong>Name:</strong> {selectedCustomer.name}</p>
+                        <p><strong>Email:</strong> {selectedCustomer.email}</p>
+
+                        {/* Display Prediction Details */}
+                        <h5>Predictions:</h5>
+                        <p><strong>Product Name:</strong> {selectedCustomer.predictions.product_name}</p>
+                        <p><strong>Brand:</strong> {selectedCustomer.predictions.brand}</p>
+                        <p><strong>Product Type:</strong> {selectedCustomer.predictions.product_type}</p>
+                        <p><strong>Ingredients:</strong> {selectedCustomer.predictions.ingredients}</p>
+                        <p><strong>Price:</strong> {selectedCustomer.predictions.price}</p>
+                        <p><strong>Benefit:</strong> {selectedCustomer.predictions.benefit}</p>
+                        <p><strong>How To Use:</strong> {selectedCustomer.predictions.how_to_use}</p>
+                        <img src={selectedCustomer.predictions.image_URL} alt="Product" width="100" />
+                    </div>
+                )}
+            </Modal>
         </div>
     );
 };

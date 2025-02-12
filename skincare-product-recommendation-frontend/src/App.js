@@ -32,9 +32,11 @@ import Blog from './components/User/Blog';
 function App() {
   const shouldShowFooter = window.location.pathname !== '/login'
     && window.location.pathname !== '/admin'
+    && window.location.pathname !== '/adminAI'
     && window.location.pathname !== '/adminconsultation'
     && window.location.pathname !== '/admindashboard'
     && window.location.pathname !== '/adminquery'
+    && window.location.pathname !== '/admingallery'
     && window.location.pathname !== '/adminfeedback';
 
   return (
