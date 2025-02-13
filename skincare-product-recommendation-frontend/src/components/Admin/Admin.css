@@ -373,11 +373,12 @@ textarea {
 
 
 /* Admin Personalize Page */
+/* Admin Panel Layout */
 .admin-dashboard {
     font-family: Arial, sans-serif;
 }
 
-.admin-personalized-heading{
+.admin-personalized-heading {
     text-align: center;
     color: brown;
     margin-bottom: 10px;
@@ -386,81 +387,172 @@ textarea {
     TEXT-TRANSFORM: UPPERCASE;
 }
 
-.customer-heading{
-    text-align: left;
-    color: black;
-    font-weight: bold;
-    margin: 80px 50px;
-    font-size: 22px;
-    TEXT-TRANSFORM: UPPERCASE;
-}
-
-.customer-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto 40px; /* Centering the grid */
-    justify-items: center; 
-}
-
-.customer-box {
-    width: 250px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+.admin-query-paragraph {
     text-align: center;
+    font-size: 17px;
+    color: black;
+    width: 1400px;
+    margin: auto;
+    display: block;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+
+.customer-table {
+    width: 95%;
+    border-collapse: collapse;
+    background: white;
+    overflow: hidden;
+    margin: auto;
+    margin-bottom: 50px;
+    margin-left: 37px;
+}
+
+.customer-table th, .customer-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.customer-table th {
+    background-color: darkolivegreen;
+    color: white;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    letter-spacing: 0.5px;
+    font-size: 14.5px;
+}
+
+.customer-table td{
+    font-size: 15px;
+}
+
+.customer-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.customer-table tr:hover {
+    background-color: #ddd;
+}
+
+.see-more-btn {
+    background-color: #600000;
+    color: white;
+    width: 90px;
+    padding: 7px;
+    border: none;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out;
+    font-size: 13px;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    transition: 0.3s ease-in-out;
 }
 
-.customer-box:hover {
-    transform: scale(1.05);
-    background-color: #fff;
+.see-more-btn:hover {
+    background-color: black;
 }
 
-.customer-box h4 {
-    margin: 10px 0;
-    color: #333;
-}
-
-.customer-box p {
-    font-size: 14px;
-    color: #666;
-}
-
-.customer-form {
-    margin-top: 30px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.customer-form input {
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
 }
 
-.customer-form button {
-    margin-top: 15px;
-    padding: 10px 15px;
-    background-color: #28a745;
+.modal-content {
+    width: 600px;
+    height: 600px;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    overflow-y: auto;
+    top: 50%;
+    left: 50%;
+    
+    transform: translate(-50%, -50%);
+}
+
+.close-button {
+    background: rgb(143, 2, 2);
     color: white;
     border: none;
-    border-radius: 5px;
+    padding: 3px 8px;
     cursor: pointer;
-    transition: background 0.3s;
+    float: right;
+    font-size: 22px;
+    transition: background 0.3s ease;
 }
 
-.customer-form button:hover {
-    background-color: #218838;
+.close-button:hover {
+    background: black;
+}
+
+.csp-details{
+    text-align: center;
+    font-size: 22px;
+    margin-top: 60px;
+    color: brown;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-family: Arial, sans-serif;
+}
+
+.name-email-details{
+    font-family: Arial, sans-serif;
+    TEXT-TRANSFORM: UPPERCASE;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.customer-details h5 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: 60px;
+    color: rgb(74, 103, 136);;
+    text-align: center;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-family: Arial, sans-serif;
+}
+
+.prediction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+.prediction-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+}
+
+.prediction-table td strong {
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+.prediction-table td:last-child {
+    width: 80%;
+    text-align: left;
+    font-size: 13.8px;
+    line-height: 1.8;
+    font-family: Arial, sans-serif;
+    border-right: 2px solid #ccc;
+}
+
+.prediction-table tr:last-child td {
+    text-align: center;
+    padding-top: 15px;
+    border: none;
+}
+
+.prediction-table img {
+    width: 500px;
+    height: auto;
 }

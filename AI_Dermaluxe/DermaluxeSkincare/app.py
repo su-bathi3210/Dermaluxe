@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, send_from_directory
 import pickle
 from flask_cors import CORS
 from flask_pymongo import PyMongo
+from flask_mail import Mail, Message
 from bson import ObjectId
 
 app = Flask(__name__)
@@ -10,6 +11,15 @@ CORS(app)
 # MongoDB connection URI
 app.config["MONGO_URI"] = "mongodb+srv://ksuba3210:Subathi123456@cluster1.ob9bh.mongodb.net/mydatabase?retryWrites=true&w=majority"
 mongo = PyMongo(app)
+
+# Flask-Mail setup
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Update with your SMTP server
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'youremail@example.com'  # Your email address
+app.config['MAIL_PASSWORD'] = 'yourpassword'  # Your email password (or app-specific password)
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 # Load the model and encoders
 with open('Dermaluxe_Skincare.pkl', 'rb') as file:
@@ -116,6 +126,9 @@ def predict():
         customer_collection = mongo.db.customers
         customer_collection.insert_one(customer_data)
 
+        # Send email notification
+        send_email(input_data["email"], "Skincare Product Recommendation", "Your product recommendation was generated successfully!")
+
         # Return predictions as JSON
         return jsonify({
             "Product Name": product_name,
@@ -128,8 +141,47 @@ def predict():
             "How To Use": how_to_use,
         })
     except Exception as e:
+        # Send email notification on error
+        send_email(input_data["email"], "Error with your Product Recommendation", f"Error occurred: {str(e)}")
+
         return jsonify({"error": str(e)}), 400
 
+@app.route('/admin/edit-predictions/<id>', methods=['PUT'])
+def edit_predictions(id):
+    try:
+        # Get updated prediction data from the request
+        updated_predictions = request.json.get('predictions')
+        if not updated_predictions:
+            return jsonify({"error": "Predictions data is required"}), 400
+
+        # Update the predictions in the database
+        customer_collection = mongo.db.customers
+        result = customer_collection.update_one(
+            {"_id": ObjectId(id)},
+            {"$set": {"predictions": updated_predictions}}
+        )
+
+        if result.matched_count > 0:
+            # Send email to the customer after updating predictions
+            customer_data = customer_collection.find_one({"_id": ObjectId(id)})
+            send_email(
+                customer_data["email"],
+                "Your Skincare Product Prediction Has Been Updated",
+                "Your skincare product prediction has been updated by the admin. Please check your profile."
+            )
+            return jsonify({"message": "Predictions updated successfully!"})
+        else:
+            return jsonify({"error": "Customer not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+def send_email(recipient, subject, body):
+    msg = Message(subject, recipients=[recipient])
+    msg.body = body
+    try:
+        mail.send(msg)
+    except Exception as e:
+        print(f"Error sending email: {e}")
 
 @app.route('/admin/customers', methods=['GET'])
 def get_customers():
