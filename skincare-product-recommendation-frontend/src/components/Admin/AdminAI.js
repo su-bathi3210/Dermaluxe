@@ -10,8 +10,6 @@ const AdminAI = () => {
     const [customers, setCustomers] = useState([]);
     const [selectedCustomer, setSelectedCustomer] = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [editModalIsOpen, setEditModalIsOpen] = useState(false);
-    const [updatedPredictions, setUpdatedPredictions] = useState(null);
 
     useEffect(() => {
         const fetchCustomers = async () => {
@@ -30,33 +28,11 @@ const AdminAI = () => {
         setModalIsOpen(true);
     };
 
-    const handleEditPredictions = () => {
-        setUpdatedPredictions(selectedCustomer.predictions);  // Pre-fill with current predictions
-        setEditModalIsOpen(true);
-    };
-
-    const handleSavePredictions = async () => {
-        try {
-            const response = await axios.put(
-                `http://127.0.0.1:5000/admin/customer/${selectedCustomer._id}/update_predictions`,
-                { predictions: updatedPredictions }
-            );
-            alert(response.data.message);
-            setEditModalIsOpen(false);
-            setModalIsOpen(false);  // Close the customer modal
-        } catch (err) {
-            console.error("Error updating predictions:", err);
-        }
-    };
-
     const closeModal = () => {
         setModalIsOpen(false);
         setSelectedCustomer(null);
     };
 
-    const closeEditModal = () => {
-        setEditModalIsOpen(false);
-    };
 
     return (
         <div className="admin-dashboard">
@@ -95,7 +71,6 @@ const AdminAI = () => {
                             <td>{customer.skin_goals}</td>
                             <td>
                                 <button className="see-more-btn" onClick={() => handleSelectCustomer(customer)}>See More</button>
-                                <button className="edit-predictions-btn" onClick={handleEditPredictions}>Edit Predictions</button>
                             </td>
                         </tr>
                     ))}
@@ -156,57 +131,6 @@ const AdminAI = () => {
                         </table>
                     </div>
                 )}
-            </Modal>
-
-            {/* Modal for editing predictions */}
-            <Modal
-                isOpen={editModalIsOpen}
-                onRequestClose={closeEditModal}
-                className="modal-content"
-                overlayClassName="modal-overlay">
-                <button className="close-button" onClick={closeEditModal}>×</button>
-                <h3>Edit Product Predictions</h3>
-                <div className="customer-details">
-                    {updatedPredictions && (
-                        <form onSubmit={handleSavePredictions}>
-                            <div>
-                                <label>Product Name:</label>
-                                <input
-                                    type="text"
-                                    value={updatedPredictions.product_name}
-                                    onChange={(e) => setUpdatedPredictions({
-                                        ...updatedPredictions,
-                                        product_name: e.target.value
-                                    })}
-                                />
-                            </div>
-                            <div>
-                                <label>Brand:</label>
-                                <input
-                                    type="text"
-                                    value={updatedPredictions.brand}
-                                    onChange={(e) => setUpdatedPredictions({
-                                        ...updatedPredictions,
-                                        brand: e.target.value
-                                    })}
-                                />
-                            </div>
-                            <div>
-                                <label>Product Type:</label>
-                                <input
-                                    type="text"
-                                    value={updatedPredictions.product_type}
-                                    onChange={(e) => setUpdatedPredictions({
-                                        ...updatedPredictions,
-                                        product_type: e.target.value
-                                    })}
-                                />
-                            </div>
-                            {/* Add other fields as needed */}
-                            <button type="submit">Save Predictions</button>
-                        </form>
-                    )}
-                </div>
             </Modal>
         </div>
     );

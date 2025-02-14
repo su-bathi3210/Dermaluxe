@@ -184,8 +184,8 @@
 
 .footer-logo {
   max-width: 220px;
-  margin-bottom: -97px;
-  margin-top: -50px;
+  margin-bottom: -98px;
+  margin-top: -60px;
   margin-left: -40px;
 }
 
@@ -199,18 +199,18 @@
   font-weight: 700;
   margin-left: 370px;
   color: #74432e;
-  margin-top: 36px;
+  margin-top: 25px;
   margin-bottom: 10px;
   width: 180px;
 }
 
 .footer-content-right h3 {
   font-size: 22px;
-  margin-bottom: 9px;
+  margin-bottom: -3px;
   font-weight: 700;
   margin-left: 239px;
   color: #74432e;
-  margin-top: 36px;
+  margin-top: 25px;
 }
 
 .footer-content-center ul {

@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify, send_from_directory
 import pickle
 from flask_cors import CORS
 from flask_pymongo import PyMongo
-from flask_mail import Mail, Message
 from bson import ObjectId
 
 app = Flask(__name__)
@@ -11,15 +10,6 @@ CORS(app)
 # MongoDB connection URI
 app.config["MONGO_URI"] = "mongodb+srv://ksuba3210:Subathi123456@cluster1.ob9bh.mongodb.net/mydatabase?retryWrites=true&w=majority"
 mongo = PyMongo(app)
-
-# Flask-Mail setup
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Update with your SMTP server
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'youremail@example.com'  # Your email address
-app.config['MAIL_PASSWORD'] = 'yourpassword'  # Your email password (or app-specific password)
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
 
 # Load the model and encoders
 with open('Dermaluxe_Skincare.pkl', 'rb') as file:
@@ -48,7 +38,7 @@ def static_files(filename):
 
 @app.route('/favicon.ico')
 def favicon():
-    return '', 204  # Return No Content for the favicon request
+    return '', 204
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -69,39 +59,22 @@ def predict():
         # Predict product attributes
         predictions = model.predict(features)
 
-        # Ensure predictions output is valid
         if len(predictions[0]) < 8:
             raise ValueError("Model output does not have the expected 8 predictions.")
 
-        # Extract predictions
-        product_name_prediction = predictions[0][0]
-        brand_prediction = predictions[0][1]
-        product_type_prediction = predictions[0][2]
-        ingredients_prediction = predictions[0][3]
-        price_prediction = predictions[0][4]
-        image_URL_prediction = predictions[0][5]
-        benefit_prediction = predictions[0][6]
-        how_to_use_prediction = predictions[0][7]
+        # Extract and decode predictions
+        product_name = le_product_name.inverse_transform([int(predictions[0][0])])[0]
+        brand = le_brand.inverse_transform([int(predictions[0][1])])[0]
+        product_type = le_product_type.inverse_transform([int(predictions[0][2])])[0]
+        ingredients = le_ingredients.inverse_transform([int(predictions[0][3])])[0]
+        price = le_price.inverse_transform([int(predictions[0][4])])[0]
+        image_URL = le_image_URL.inverse_transform([int(predictions[0][5])])[0]
+        benefit = le_benefit.inverse_transform([int(predictions[0][6])])[0]
+        how_to_use = le_how_to_use.inverse_transform([int(predictions[0][7])])[0]
 
-        # Decode predictions
-        product_name = le_product_name.inverse_transform([int(product_name_prediction)])[0]
-        brand = le_brand.inverse_transform([int(brand_prediction)])[0]
-        product_type = le_product_type.inverse_transform([int(product_type_prediction)])[0]
-        ingredients = le_ingredients.inverse_transform([int(ingredients_prediction)])[0]
-        price = le_price.inverse_transform([int(price_prediction)])[0]
-        image_URL = le_image_URL.inverse_transform([int(image_URL_prediction)])[0]
-        benefit = le_benefit.inverse_transform([int(benefit_prediction)])[0]
-        how_to_use = le_how_to_use.inverse_transform([int(how_to_use_prediction)])[0]
-
-        # Prepend base URL for images
         base_url = "http://127.0.0.1:5000/predict/"
-        if not image_URL.startswith("http"):
-            if image_URL:  # Check if the image URL exists
-                images_URL = base_url + image_URL
-            else:
-                images_URL = base_url + "0011.png"
+        images_URL = base_url + image_URL if image_URL and not image_URL.startswith("http") else base_url + "0011.png"
 
-        # Save the form data along with predictions to the database
         customer_data = {
             "name": input_data["name"],
             "email": input_data["email"],
@@ -123,92 +96,40 @@ def predict():
                 "how_to_use": how_to_use
             }
         }
-        customer_collection = mongo.db.customers
-        customer_collection.insert_one(customer_data)
+        mongo.db.customers.insert_one(customer_data)
 
-        # Send email notification
-        send_email(input_data["email"], "Skincare Product Recommendation", "Your product recommendation was generated successfully!")
-
-        # Return predictions as JSON
-        return jsonify({
-            "Product Name": product_name,
-            "Brand": brand,
-            "Product Type": product_type,
-            "Ingredients": ingredients,
-            "Price": price,
-            "Image_URL": images_URL,
-            "Benefit": benefit,
-            "How To Use": how_to_use,
-        })
+        return jsonify(customer_data["predictions"])
     except Exception as e:
-        # Send email notification on error
-        send_email(input_data["email"], "Error with your Product Recommendation", f"Error occurred: {str(e)}")
-
         return jsonify({"error": str(e)}), 400
 
 @app.route('/admin/edit-predictions/<id>', methods=['PUT'])
 def edit_predictions(id):
     try:
-        # Get updated prediction data from the request
         updated_predictions = request.json.get('predictions')
         if not updated_predictions:
             return jsonify({"error": "Predictions data is required"}), 400
 
-        # Update the predictions in the database
-        customer_collection = mongo.db.customers
-        result = customer_collection.update_one(
+        result = mongo.db.customers.update_one(
             {"_id": ObjectId(id)},
             {"$set": {"predictions": updated_predictions}}
         )
 
-        if result.matched_count > 0:
-            # Send email to the customer after updating predictions
-            customer_data = customer_collection.find_one({"_id": ObjectId(id)})
-            send_email(
-                customer_data["email"],
-                "Your Skincare Product Prediction Has Been Updated",
-                "Your skincare product prediction has been updated by the admin. Please check your profile."
-            )
-            return jsonify({"message": "Predictions updated successfully!"})
-        else:
-            return jsonify({"error": "Customer not found"}), 404
+        return jsonify({"message": "Predictions updated successfully!"}) if result.matched_count > 0 else jsonify({"error": "Customer not found"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-def send_email(recipient, subject, body):
-    msg = Message(subject, recipients=[recipient])
-    msg.body = body
-    try:
-        mail.send(msg)
-    except Exception as e:
-        print(f"Error sending email: {e}")
-
 @app.route('/admin/customers', methods=['GET'])
 def get_customers():
-    # Fetch all customer data from MongoDB
-    customer_collection = mongo.db.customers
-    customers = list(customer_collection.find())
-
-    # Remove MongoDB ObjectId for JSON serialization
+    customers = list(mongo.db.customers.find())
     for customer in customers:
         customer["_id"] = str(customer["_id"])
-
     return jsonify(customers)
 
 @app.route('/admin/customer/<id>', methods=['PUT'])
 def update_customer(id):
-    # Get the updated customer data from the request
     updated_data = request.json
-
-    # Update customer information in MongoDB
-    customer_collection = mongo.db.customers
-    result = customer_collection.update_one({"_id": ObjectId(id)}, {"$set": updated_data})
-
-    if result.matched_count > 0:
-        return jsonify({"message": "Customer information updated successfully!"})
-    else:
-        return jsonify({"error": "Customer not found"}), 404
-
+    result = mongo.db.customers.update_one({"_id": ObjectId(id)}, {"$set": updated_data})
+    return jsonify({"message": "Customer information updated successfully!"}) if result.matched_count > 0 else jsonify({"error": "Customer not found"}), 404
 
 if __name__ == "__main__":
     app.run(debug=True)

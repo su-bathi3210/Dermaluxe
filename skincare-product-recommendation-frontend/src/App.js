@@ -26,7 +26,7 @@ import Gallery from './components/User/Gallery';
 import AdminGallery from './components/Admin/AdminGallery';
 import Review from './components/User/Review';
 import Blog from './components/User/Blog';
-
+import Service from './components/User/Service';
 
 
 function App() {
@@ -60,6 +60,7 @@ function App() {
         <Route path='/gallery' element={<Gallery />} />
         <Route path='/review' element={<Review />} />
         <Route path='/blog' element={<Blog />} />
+        <Route path='/skincare-services' element={<Service />} />
 
 
         {/* Admin routes wrapped in AdminRoute */}

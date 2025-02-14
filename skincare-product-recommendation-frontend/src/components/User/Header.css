@@ -11,19 +11,6 @@
     margin-top: 18px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .header-left {
     display: flex;
     align-items: center;
@@ -117,26 +104,6 @@
 .sign-in-button:hover {
     background-color: #333;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .header-nav {
     background-color: #894c2b;

@@ -5,11 +5,12 @@ import "./StartPage.css";
 import heading from "../../images/heading.png";
 import heading1 from "../../images/heading1.png";
 import heading2 from "../../images/heading2.png";
-import heading7 from "../../images/heading7.png";
+import heading3 from "../../images/heading3.png";
+import heading8 from "../../images/heading8.png";
 
 const StartPage = () => {
-  const images = [heading, heading1, heading2, heading7];
-  const links = ["/consultation", "/page2", "/page3", "/consultation"];
+  const images = [heading, heading1, heading3, heading2, heading8];
+  const links = ["", "", "", "", "/consultation"];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {

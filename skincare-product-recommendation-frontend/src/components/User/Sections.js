@@ -11,7 +11,13 @@ import Serum from '../../images/Serum.png';
 import Tips from '../../images/Tips.png';
 import VitaminC from '../../images/VitamiC.png';
 
+import new1 from '../../images/new1.png';
+import new2 from '../../images/new2.png';
+import new3 from '../../images/new3.png';
+import val from '../../images/val.png';
+
 import Video from '../../images/Video4.mp4';
+import Video1 from '../../images/Video9.mp4';
 
 
 import judithafter from '../../images-gallery/judith-afte.png';
@@ -174,7 +180,6 @@ const Sections = () => {
             </div>
 
 
-
             <div className="start-section-video">
                 <video autoPlay loop muted>
                     <source src={Video} type="video/mp4" />
@@ -183,6 +188,49 @@ const Sections = () => {
             </div>
 
 
+
+
+            <div className="new-and-trending-container">
+                <h2 className="new-and-trending-title">NEW & TRENDING</h2>
+                <p className="new-and-trending-paragraph">Discover the latest in skincare innovation with Dermaluxe. 
+                    From hydrating serums to rejuvenating treatments, our new & trending 
+                    collection is designed to enhance your natural glow and keep your skin radiant every day.</p>
+                <div className="new-and-trending-items">
+                    <div className="new-and-trending-item">
+                        <img src={new1} alt="VT Cosmetics Reclic Shot" />
+                        <h3>VT Cosmetics Reclic Shot</h3>
+                        <p>
+                            The VT Cosmetics Reclic Shot 100 serves as an at-home micro-needling
+                            experience, delivering targeted benefits for smoother, radiant skin.
+                        </p>
+                        <button>SHOP NOW</button>
+                    </div>
+
+                    <div className="new-and-trending-item">
+                        <img src={new2} alt="Blush Me Beauty" />
+                        <h3>Blush Me Beauty</h3>
+                        <p>
+                            Unleash your beauty with our high-tech products at unbeatable prices!
+                            Dive into the fabulous world of Blush Me and see what we have in store for you!
+                        </p>
+                        <button>SHOP NOW</button>
+                    </div>
+
+                    <div className="new-and-trending-item">
+                        <img src={new3} alt="Sunscreen Glossary" />
+                        <h3>Sunscreen Glossary</h3>
+                        <p>
+                            Helping you find the only SPF you want to wear. Every. Single. Day.
+                            Click the button below and discover our wide range of sunscreens now!
+                        </p>
+                        <button>SHOP NOW</button>
+                    </div>
+                </div>
+            </div>
+
+            <div className="se-image">
+                    <img src={val} alt="se" />
+                </div>
 
             <div className="real-result">
                 <h2 className="real-result-title">REAL ROUTINES, REAL RESULTS</h2>
@@ -203,11 +251,17 @@ const Sections = () => {
                         </div>
                     ))}
                 </div>
-                <button className="real-result-button">SEE MORE SKIN TRANSFIRMATIONS</button>
+                <Link to="/gallery"><button className="real-result-button">SEE MORE SKIN TRANSFIRMATIONS</button></Link>
             </div>
 
 
 
+            <div className="com-section-video">
+                <video autoPlay loop muted>
+                    <source src={Video1} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
 
 
             <div className="icon-section">
