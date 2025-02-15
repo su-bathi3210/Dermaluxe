@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import './Sections.css';
+import '../../App.css';
 
 import Cleanser from '../../images/Cleanser.png';
 import Face from '../../images/Face.png';

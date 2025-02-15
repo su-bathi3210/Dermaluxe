@@ -1,0 +1,145 @@
+.service-section-video video {
+    width: 100%;
+}
+
+
+.service-options {
+    text-align: left;
+    margin: 70px 50px;
+}
+
+.service-options h2 {
+    font-size: 28px;
+    color: brown;
+    margin-bottom: 50px;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+.service-options h2::after {
+    content: "";
+    display: block;
+    width: 960px;
+    height: 1px;
+    background-color: #ccc;
+    margin: -17px 450px 0;
+}
+
+.service-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: nowrap;
+    max-width: 1500px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.service-card {
+    background: #f9f7f6;
+    padding: 20px;
+    flex: 1 1 calc(33.333% - 30px);
+    max-width: calc(33.333% - 30px);
+    min-width: 280px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.service-card h3 {
+    font-size: 20px;
+    color: #a88c89;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-family: Arial, sans-serif;
+}
+
+.service-card p {
+    font-size: 16px;
+    color: black;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+}
+
+
+.service-button {
+    background: #555;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.service-button:hover {
+    background: black;
+}
+
+
+.meet-the-experts {
+    margin: 10px 50px;
+}
+
+.meet-the-experts h2 {
+    font-size: 28px;
+    color: #546486;
+    margin-bottom: 50px;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-family: Arial, sans-serif;
+    position: relative;
+    text-align: right;
+}
+
+.meet-the-experts h2::after {
+    content: "";
+    display: block;
+    width: 1120px;
+    height: 1px;
+    background-color: #ccc;
+    margin: -17px -10px 0;
+}
+
+.experts-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.expert-card {
+    flex: 0 0 30%;
+    margin-bottom: 10px;
+}
+
+.expert-card img {
+    width: 200px;
+    width: 95%;
+    height: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.AOS {
+    text-align: left;
+    margin: 70px 50px;
+}
+
+.AOS h2 {
+    font-size: 28px;
+    color: rgb(28, 106, 63);
+    margin-bottom: 50px;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+.AOS h2::after {
+    content: "";
+    display: block;
+    width: 1021px;
+    height: 1px;
+    background-color: #ccc;
+    margin: -17px 390px 0;
+}

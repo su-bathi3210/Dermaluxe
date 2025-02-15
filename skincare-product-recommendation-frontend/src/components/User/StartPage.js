@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./StartPage.css";
+import '../../App.css';
 
 import heading from "../../images/heading.png";
 import heading1 from "../../images/heading1.png";

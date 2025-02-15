@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../../components/User/Header";
 import axios from "axios";
 import { useSwipeable } from "react-swipeable";
-import "./AI.css";
+import "./Dermaluxe.css";
 
 import dry from "../../images/Dry.png";
 import oily from "../../images/Oily.png";
@@ -116,84 +116,98 @@ const Dermaluxe = () => {
                     ))}
                 </div>
 
-                <h2 className="dermaluxe-title">Let's start with your facial skincare</h2>
+                <h2 className="dermaluxe-title">
+                    {!prediction ? "Let's start with your facial skincare" : ""}
+                </h2>
 
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor={formSteps[currentStep].name} className="form-label">
-                            {formSteps[currentStep].label}:
-                        </label>
+                {prediction ? (
+                    // Show only prediction and the "Previous" button
+                    <div className="prediction-result">
+                        <h3>This Is Your Personalized Product According to Your Skin:</h3>
+                        <p>{prediction["Product Name"]}</p>
+                        <p>{prediction.Brand}</p>
+                        <p>{prediction["Product Type"]}</p>
+                        <p>{prediction.Ingredients}</p>
+                        <p>{prediction.Price}</p>
+                        {prediction.Image_URL && <img src={prediction.Image_URL} alt="Product" className="prediction-image" />}
+                        <p><strong>Benefit</strong> {prediction.Benefit}</p>
+                        <p><strong>How to Use</strong> {prediction["How To Use"]}</p>
 
-                        {formSteps[currentStep].fields ? (
-                            <div className="text-input-group">
-                                {formSteps[currentStep].fields.map((field, index) => (
-                                    <input
-                                        key={index}
-                                        type={field.type}
-                                        name={field.name}
-                                        value={formData[field.name]}
-                                        onChange={handleChange}
-                                        placeholder={field.label}
-                                        className="text-input"
-                                        required
-                                    />
-                                ))}
-                            </div>
-                        ) : formSteps[currentStep].options ? (
-                            <div className="radio-options">
-                                {formSteps[currentStep].options.map((option, index) => (
-                                    <label key={index} className="radio-option">
-                                        {typeof option === "object" && option.image && <img src={option.image} alt={option.label} className="option-image" />}
-                                        <input
-                                            type="radio"
-                                            name={formSteps[currentStep].name}
-                                            value={option.label || option}
-                                            checked={formData[formSteps[currentStep].name] === (option.label || option)}
-                                            onChange={handleChange}
-                                            required
-                                        />
-                                        <span className="radio-label">{option.label || option}</span>
-                                    </label>
-                                ))}
-                            </div>
-                        ) : null}
-                    </div>
-
-                    {validationError && <div className="validation-error">Please enter valid details before proceeding.</div>}
-
-                    <div className="form-navigation">
-                        {currentStep > 0 && (
+                        <div className="form-navigation">
                             <button type="button" className="nav-button" onClick={handlePrevious}>
                                 Previous
                             </button>
-                        )}
-                        {currentStep < formSteps.length - 1 ? (
-                            <button type="button" className="nav-button" onClick={handleNext}>
-                                Next
-                            </button>
-                        ) : (
-                            <button type="submit" className="predict-button">
-                                Predict
-                            </button>
-                        )}
+                        </div>
                     </div>
-                </form>
+                ) : (
+                    // Show form if no prediction
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor={formSteps[currentStep].name} className="form-label">
+                                {formSteps[currentStep].label}:
+                            </label>
 
-                {error && <div className="error-message">Error: {error}</div>}
-                {prediction && (
-                    <div className="prediction-result">
-                        <h3>This Is Your Personalized Product According to Your Skin:</h3>
-                        <p><strong>Product Name:</strong> {prediction["Product Name"]}</p>
-                        <p><strong>Brand:</strong> {prediction.Brand}</p>
-                        <p><strong>Product Type:</strong> {prediction["Product Type"]}</p>
-                        <p><strong>Ingredients:</strong> {prediction.Ingredients}</p>
-                        <p><strong>Price:</strong> {prediction.Price}</p>
-                        {prediction.Image_URL && <img src={prediction.Image_URL} alt="Product" className="prediction-image" />}
-                        <p><strong>Benefit:</strong> {prediction.Benefit}</p>
-                        <p><strong>How to Use:</strong> {prediction["How To Use"]}</p>
-                    </div>
+                            {formSteps[currentStep].fields ? (
+                                <div className="text-input-group">
+                                    {formSteps[currentStep].fields.map((field, index) => (
+                                        <input
+                                            key={index}
+                                            type={field.type}
+                                            name={field.name}
+                                            value={formData[field.name]}
+                                            onChange={handleChange}
+                                            placeholder={field.label}
+                                            className="text-input"
+                                            required
+                                        />
+                                    ))}
+                                </div>
+                            ) : formSteps[currentStep].options ? (
+                                <div className="radio-options">
+                                    {formSteps[currentStep].options.map((option, index) => (
+                                        <label key={index} className="radio-option">
+                                            {typeof option === "object" && option.image && <img src={option.image} alt={option.label} className="option-image" />}
+                                            <input
+                                                type="radio"
+                                                name={formSteps[currentStep].name}
+                                                value={option.label || option}
+                                                checked={formData[formSteps[currentStep].name] === (option.label || option)}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                            <span className="radio-label">{option.label || option}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            ) : null}
+                        </div>
+
+                        {validationError && <div className="validation-error">Please enter valid details before proceeding.</div>}
+
+                        <div className="form-navigation">
+                            {currentStep > 0 && (
+                                <button type="button" className="nav-button" onClick={handlePrevious}>
+                                    Previous
+                                </button>
+                            )}
+                            {currentStep === 0 ? (
+                                <button type="button" className="nav-button lets-go" onClick={handleNext}>
+                                    Let's Go
+                                </button>
+                            ) : currentStep < formSteps.length - 1 ? (
+                                <button type="button" className="nav-button next" onClick={handleNext}>
+                                    Next
+                                </button>
+                            ) : (
+                                <button type="submit" className="predict-button">
+                                    Predict
+                                </button>
+                            )}
+                        </div>
+                    </form>
                 )}
 
+                {error && <div className="error-message">Error: {error}</div>}
             </div>
         </div>
     );

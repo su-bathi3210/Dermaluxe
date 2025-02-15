@@ -11,6 +11,7 @@ import referIcon from '../../images/refer.png';
 import rewardsIcon from '../../images/reward.png';
 import search from '../../images/search.png';
 import shippingIcon from '../../images/shipping.png';
+import lanka from '../../images/lanka.png';
 
 const Header = () => {
     return (
@@ -31,20 +32,27 @@ const Header = () => {
 
                 {/* Right Section */}
                 <div className="header-right">
-                    {/* Cart Section */}
+
+                    <div className="user-options">
+                        <Link to="">
+                            <img src={lanka} alt="Cart Icon" className="icon" />
+                            <p>LKR</p>
+                        </Link>
+                    </div>
+            
                     <div className="user-options">
                         <Link to="/cart">
                             <img src={cart} alt="Cart Icon" className="icon" />
-                            <p>Cart</p>
+                            <p>CART</p>
                         </Link>
                     </div>
 
-                    {/* Sign In Button */}
+                    
                     <div className="user-options">
-                        <Link to="/skin"><button className="sign-in-button">
-                            <img src={sign} alt="Login Icon" className="icon1" />
-                            <span1>Sign In</span1>
-                        </button></Link>
+                        <Link to="/skin">
+                            <img src={sign} alt="Login Icon" className="icon" />
+                            <span1>SIGN IN</span1>
+                        </Link>
                     </div>
                 </div>
 
