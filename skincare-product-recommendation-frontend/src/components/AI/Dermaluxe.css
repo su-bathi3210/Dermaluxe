@@ -11,7 +11,8 @@ body {
     margin: 50px auto;
     background: #fff;
     padding: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: -30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 h2.dermaluxe-title {
@@ -43,7 +44,7 @@ h2.dermaluxe-title {
 }
 
 .progress-step.active {
-    background: rgb(74, 103, 136);
+    background: #546486;
     border: none;
 }
 
@@ -57,7 +58,7 @@ h2.dermaluxe-title {
     font-weight: bold;
     margin-bottom: 40px;
     display: block;
-    color: rgb(44, 140, 188);
+    color: darkgreen;
     text-align: center;
     TEXT-TRANSFORM: UPPERCASE;
     font-family: Arial, sans-serif;
@@ -113,14 +114,14 @@ h2.dermaluxe-title {
     transform: scale(1.05);
 }
 
-.radio-option input:checked + .radio-label {
+.radio-option input:checked+.radio-label {
     font-weight: bold;
 }
 
 
-.radio-option input:checked ~ .radio-label,
-.radio-option input:checked ~ img {
-    color: rgb(213, 81, 213);
+.radio-option input:checked~.radio-label,
+.radio-option input:checked~img {
+    color: darkgreen;
 }
 
 .radio-option input {
@@ -201,30 +202,97 @@ h2.dermaluxe-title {
 .prediction-result {
     padding: 20px;
     margin-top: -47px;
-    text-align: center;
 }
 
 .prediction-result h3 {
     font-size: 26px;
-    color: brown;
+    color: darkgreen;
     margin-bottom: 15px;
+    text-align: center;
     TEXT-TRANSFORM: UPPERCASE;
 }
 
-.prediction-result p {
-    font-size: 16px;
-    color: #555;
-    margin: 5px 0;
+.prediction-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 20px;
 }
 
-.prediction-result p strong {
-    font-weight: bold;
+.prediction-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.prediction-result .prediction-image {
-    width: 200px;
+
+.prediction-image {
+    width: 450px;
     height: auto;
-    margin-top: 15px;
-    border-radius: 8px;
+    margin-top: -100px;
 }
 
+.prediction-details p {
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+.product-name {
+    TEXT-TRANSFORM: UPPERCASE;
+    font-weight: bold;
+    font-size: 19px;
+    color: #546486;
+}
+
+.product-brand {
+    TEXT-TRANSFORM: UPPERCASE;
+    font-weight: bold;
+    font-size: 19px;
+    color: #546486;
+
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: rgb(203, 10, 10);
+}
+
+.product-type {
+    TEXT-TRANSFORM: UPPERCASE;
+    font-size: 15px;
+}
+
+.product-ingredients {
+    line-height: 1.9;
+    TEXT-TRANSFORM: UPPERCASE;
+    color: #444;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.product-benefit {
+    line-height: 1.9;
+    TEXT-TRANSFORM: UPPERCASE;
+    color: #444;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.product-use {
+    line-height: 1.9;
+    TEXT-TRANSFORM: UPPERCASE;
+    color: #444;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.product-ingredients strong,
+.product-benefit strong,
+.product-use strong {
+    color: black;
+}

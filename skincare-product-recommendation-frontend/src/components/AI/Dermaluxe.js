@@ -120,26 +120,36 @@ const Dermaluxe = () => {
                     {!prediction ? "Let's start with your facial skincare" : ""}
                 </h2>
 
+
                 {prediction ? (
-                    // Show only prediction and the "Previous" button
                     <div className="prediction-result">
                         <h3>This Is Your Personalized Product According to Your Skin:</h3>
-                        <p>{prediction["Product Name"]}</p>
-                        <p>{prediction.Brand}</p>
-                        <p>{prediction["Product Type"]}</p>
-                        <p>{prediction.Ingredients}</p>
-                        <p>{prediction.Price}</p>
-                        {prediction.Image_URL && <img src={prediction.Image_URL} alt="Product" className="prediction-image" />}
-                        <p><strong>Benefit</strong> {prediction.Benefit}</p>
-                        <p><strong>How to Use</strong> {prediction["How To Use"]}</p>
+                        <div className="prediction-container">
+                            {/* Image on the Left */}
+                            {prediction.Image_URL && (
+                                <div className="prediction-image-container">
+                                    <img src={prediction.Image_URL} alt="Product" className="prediction-image" />
+                                </div>
+                            )}
 
-                        <div className="form-navigation">
-                            <button type="button" className="nav-button" onClick={handlePrevious}>
-                                Previous
-                            </button>
+                            {/* Details on the Right */}
+                            <div className="prediction-details">
+                                <p className="product-name">{prediction["Product Name"]}</p>
+                                <p className="product-brand">{prediction.Brand}</p>
+                                <p className="product-price">{prediction.Price}</p>
+                                <p className="product-type">{prediction["Product Type"]}</p>
+                                <p className="product-ingredients"><strong>Ingredients</strong> <br></br>{prediction.Ingredients}</p>
+                                <p className="product-benefit"><strong>Benefit</strong> <br></br>{prediction.Benefit}</p>
+                                <p className="product-use"><strong>How to Use</strong> <br></br>{prediction["How To Use"]}</p>
+
+                                <div className="form-navigation">
+                                        <button type="button" className="nav-button">Re-Start</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 ) : (
+
                     // Show form if no prediction
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
