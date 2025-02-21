@@ -22,6 +22,7 @@ const AdminNav = () => {
                     <li><Link to="">USERS</Link></li>
                     <li><Link to="">PRODUCTS</Link></li>
                     <li><Link to="">ORDERS</Link></li>
+                    <li><Link to="">CAREERS</Link></li>
                     <li><Link to='/adminAI'>PERSONALISED SKINCARE</Link></li>
                     <li><Link to="/adminconsultation">CONSULTATION</Link></li>
                 </ul>
@@ -56,6 +57,11 @@ const AdminNav = () => {
                 <div className="header-promo-item">
                     <Link to="">
                         <span>BLOG</span>
+                    </Link>
+                </div>
+                <div className="header-promo-item">
+                    <Link to="">
+                        <span>ARTICLES</span>
                     </Link>
                 </div>
             </div>

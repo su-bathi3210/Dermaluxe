@@ -1,0 +1,196 @@
+/** Service Page **/
+.service-section-video video {
+    width: 100%;
+}
+
+.skincare-tips-section {
+    text-align: center;
+    padding: 40px;
+}
+
+.skincare-tips-section h2 {
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    color: darkgreen;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.skincare-tips-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.skincare-tip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.skincare-tip.reverse {
+    flex-direction: row-reverse;
+}
+
+.skincare-tip img {
+    width: 40%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.skincare-tip-text {
+    width: 55%;
+    text-align: left;
+}
+
+.skincare-tip-text h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.skincare-tip-text p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+}
+
+
+
+
+
+
+
+
+
+
+
+.shorts-section {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.shorts-section h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: brown;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+.slick-slider {
+    max-width: 95%;
+    margin: auto;
+}
+
+.shorts-card {
+    text-align: center;
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.shorts-card iframe {
+    display: block;
+    border: none;
+}
+
+.subscription-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    max-width: 1300px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+
+.subscription-content {
+    width: 50%;
+    text-align: left;
+}
+
+.subscription-content h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #546486;
+    TEXT-TRANSFORM: UPPERCASE;
+    margin-top: -70px;
+}
+
+.subscription-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.subscription-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+}
+
+.subscription-form button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.subscription-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 600px;
+    font-size: 14px;
+}
+
+.subscription-checkbox input {
+    margin-top: 5px;
+}
+
+.subscription-checkbox label {
+    line-height: 1.7;
+    color: #333;
+}
+
+.fake-link {
+    color: darkred;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.social-media h3 {
+    margin-top: 15px;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.social-icons img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.1);
+}
+
+.subscription-image img {
+    width: 105%;
+}
