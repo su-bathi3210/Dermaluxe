@@ -1,0 +1,97 @@
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.login-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.login-form-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.login-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 25px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.login-form h2 {
+    color: brown;
+    text-transform: uppercase;
+    font-size: 25px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 13.5px;
+    text-transform: uppercase;
+}
+
+.form-group input::placeholder {
+    font-size: 12px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.login-button {
+    width: 90%;
+    padding: 10px;
+    background-color: #546486;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+.login-button:hover {
+    background-color: #333;
+}
+
+.error-message {
+    color: #600000;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-size: 13px;
+}
+
+.login-paragraph {
+    TEXT-TRANSFORM: UPPERCASE;
+    font-size: 13px;
+    margin-top: 20px;
+    font-weight: bold;
+}

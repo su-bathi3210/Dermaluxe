@@ -16,6 +16,6 @@ public class Gallery {
     private String description;
     private String skinConcern;
     private String recommendation;
-    private String beforeImage;
-    private String afterImage;
+    private String beforeImageUrl;
+    private String afterImageUrl;
 }

@@ -27,6 +27,8 @@ import AdminGallery from './components/Admin/AdminGallery';
 import Review from './components/User/Review';
 import Blog from './components/User/Blog';
 import Service from './components/User/Service';
+import Register from './components/Logins/Register';
+import Customer from './components/Customer/Customer';
 
 
 function App() {
@@ -37,6 +39,7 @@ function App() {
     && window.location.pathname !== '/admindashboard'
     && window.location.pathname !== '/adminquery'
     && window.location.pathname !== '/admingallery'
+    && window.location.pathname !== '/register'
     && window.location.pathname !== '/adminfeedback';
 
   return (
@@ -61,6 +64,8 @@ function App() {
         <Route path='/review' element={<Review />} />
         <Route path='/blog' element={<Blog />} />
         <Route path='/skincare-services' element={<Service />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/customer' element={<Customer />} />
 
 
         {/* Admin routes wrapped in AdminRoute */}

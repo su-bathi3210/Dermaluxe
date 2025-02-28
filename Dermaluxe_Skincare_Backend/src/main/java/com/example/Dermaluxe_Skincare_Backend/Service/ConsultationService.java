@@ -14,39 +14,47 @@ public class ConsultationService {
     @Autowired
     private ConsultationRepository consultationRepository;
 
-    // Retrieve all consultations
     public List<Consultation> getAllConsultations() {
         return consultationRepository.findAll();
     }
 
-    // Retrieve a consultation by ID
     public Optional<Consultation> getConsultationById(String id) {
         return consultationRepository.findById(id);
     }
 
-    // Create a new consultation
     public Consultation createConsultation(Consultation consultation) {
-        consultation.setResponseMessage("Your consultation has been successfully scheduled.");
         return consultationRepository.save(consultation);
     }
 
-    // Update an existing consultation
     public Consultation updateConsultation(String id, Consultation updatedConsultation) {
-        if (consultationRepository.existsById(id)) {
-            updatedConsultation.setId(id);
-            updatedConsultation.setResponseMessage("Your consultation details have been updated successfully.");
-            return consultationRepository.save(updatedConsultation);
+        Optional<Consultation> optionalConsultation = consultationRepository.findById(id);
+        if (optionalConsultation.isPresent()) {
+            Consultation existingConsultation = optionalConsultation.get();
+            // Update fields of existing consultation with new values
+            existingConsultation.setClientName(updatedConsultation.getClientName());
+            existingConsultation.setContactNo(updatedConsultation.getContactNo());
+            existingConsultation.setEmail(updatedConsultation.getEmail());
+            existingConsultation.setConsultationDate(updatedConsultation.getConsultationDate());
+            existingConsultation.setConsultationTime(updatedConsultation.getConsultationTime());
+            existingConsultation.setSkinType(updatedConsultation.getSkinType());
+            existingConsultation.setConcerns(updatedConsultation.getConcerns());
+            existingConsultation.setConsultantName(updatedConsultation.getConsultantName());
+            existingConsultation.setConsultationStatus(updatedConsultation.getConsultationStatus());
+            existingConsultation.setResponseMessage(updatedConsultation.getResponseMessage());
+
+            // Save the updated consultation
+            return consultationRepository.save(existingConsultation);
         } else {
-            throw new RuntimeException("Consultation not found with ID: " + id);
+            return null; // Or throw an exception
         }
     }
 
-    // Delete a consultation by ID
-    public void deleteConsultation(String id) {
+    public boolean deleteConsultation(String id) {
         if (consultationRepository.existsById(id)) {
             consultationRepository.deleteById(id);
+            return true;
         } else {
-            throw new RuntimeException("Consultation not found with ID: " + id);
+            return false;
         }
     }
 }

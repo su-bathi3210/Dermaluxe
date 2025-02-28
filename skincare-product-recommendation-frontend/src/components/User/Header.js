@@ -49,7 +49,7 @@ const Header = () => {
 
                     
                     <div className="user-options">
-                        <Link to="/skin">
+                        <Link to="/login">
                             <img src={sign} alt="Login Icon" className="icon" />
                             <span1>SIGN IN</span1>
                         </Link>
