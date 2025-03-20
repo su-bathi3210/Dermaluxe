@@ -62,7 +62,7 @@ const Header = () => {
             {/* Navigation Bar */}
             <nav className="header-nav">
                 <ul>
-                    <li><Link to="/product">PRODUCTS</Link></li>
+                    <li><Link to="">PRODUCTS</Link></li>
                     <li><Link to="/about">ABOUT</Link></li>
                     <li><Link to="/gallery">GALLERY</Link></li>
                     <li><Link to="/review">REVIEWS</Link></li>

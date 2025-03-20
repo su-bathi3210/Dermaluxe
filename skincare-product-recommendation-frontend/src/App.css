@@ -2254,3 +2254,124 @@ textarea.form-control {
 
 
 
+
+
+
+
+
+
+
+/*Gallery Page*/
+.gallery-container {
+  text-align: center;
+  padding: 20px;
+  margin-top: 15px;
+  font-family: Arial, sans-serif;
+  margin-bottom: -90px;
+}
+
+
+.gallery-title {
+  font-size: 2.4rem;
+  color: brown;
+  TEXT-TRANSFORM: UPPERCASE;
+  margin-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+.gallery-subtitle {
+  font-size: 17.5px;
+  line-height: 1.8;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #555;
+}
+
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  margin: 40px 35px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+}
+
+
+.gallery-item {
+  background: #fff;
+  overflow: hidden;
+  text-align: left;
+  max-width: 430px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.before-after-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.before-image,
+.after-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.after-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  transition: width 3s ease-in-out;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #fff;
+  transition: left 3s ease-in-out;
+  cursor: pointer;
+}
+
+.slider-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.gallery-description {
+  padding: 15px;
+}
+
+.gallery-name {
+  font-size: 16px;
+  color: darkgreen;
+  TEXT-TRANSFORM: UPPERCASE;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.gallery-text {
+  font-size: 13px;
+  TEXT-TRANSFORM: UPPERCASE;
+  color: #555;
+  font-weight: 600;
+  line-height: 1.8;
+  margin-bottom: -5px;
+}

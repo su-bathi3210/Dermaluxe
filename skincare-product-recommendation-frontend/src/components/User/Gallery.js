@@ -1,136 +1,94 @@
-import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Header from "../../components/User/Header";
+import '../../App.css';
 
-const GalleryForm = () => {
-    const [formData, setFormData] = useState({
-        productName: '',
-        description: '',
-        skinConcern: '',
-        recommendation: '',
-        beforeImage: null,
-        afterImage: null,
-    });
+const Gallery = () => {
+    const [galleries, setGalleries] = useState([]);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
+    useEffect(() => {
+        fetchGalleries();
+    }, []);
 
-    const handleImageChange = (e) => {
-        const { name, files } = e.target;
-        setFormData({
-            ...formData,
-            [name]: files[0],  // Save the first selected file (image)
-        });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const formDataToSend = new FormData();
-        formDataToSend.append('productName', formData.productName);
-        formDataToSend.append('description', formData.description);
-        formDataToSend.append('skinConcern', formData.skinConcern);
-        formDataToSend.append('recommendation', formData.recommendation);
-        formDataToSend.append('beforeImage', formData.beforeImage);
-        formDataToSend.append('afterImage', formData.afterImage);
-
+    // Fetch all galleries for customers
+    const fetchGalleries = async () => {
         try {
-            // POST request to your backend
-            const response = await axios.post('http://localhost:8081/Gallery', formDataToSend, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            alert('Gallery item added successfully!');
-            setFormData({
-                productName: '',
-                description: '',
-                skinConcern: '',
-                recommendation: '',
-                beforeImage: null,
-                afterImage: null,
-            });
+            const response = await axios.get("/api/gallery");
+            setGalleries(response.data);
         } catch (error) {
-            console.error('Error uploading gallery item:', error);
-            alert('Failed to add gallery item!');
+            console.error("Error fetching galleries", error);
         }
     };
 
     return (
         <div>
-            <h2>Upload Gallery Item</h2>
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
-                <div>
-                    <label>Product Name:</label>
-                    <input
-                        type="text"
-                        name="productName"
-                        value={formData.productName}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
+            <Header />
+            <div className="gallery-container">
+                <h1 className="gallery-title">Real Routines, Real Results</h1>
+                <p className="gallery-subtitle">
+                    See real-life skin transformations from our happy customers who’ve achieved their
+                    best skin yet with Dermaluxe Skincare! Discover how simple, consistent routines can deliver
+                    glowing, flawless results. Want to be featured as one of our Flawless Faces? Tag us on
+                    Instagram with your before-and-after transformation @dermaluxeskincare!
+                </p>
 
-                <div>
-                    <label>Description:</label>
-                    <textarea
-                        name="description"
-                        value={formData.description}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label>Skin Concern:</label>
-                    <input
-                        type="text"
-                        name="skinConcern"
-                        value={formData.skinConcern}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label>Recommendation:</label>
-                    <input
-                        type="text"
-                        name="recommendation"
-                        value={formData.recommendation}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label>Before Image:</label>
-                    <input
-                        type="file"
-                        name="beforeImage"
-                        onChange={handleImageChange}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label>After Image:</label>
-                    <input
-                        type="file"
-                        name="afterImage"
-                        onChange={handleImageChange}
-                        required
-                    />
-                </div>
-
-                <button type="submit">Submit</button>
-            </form>
+                {galleries.length === 0 ? (
+                    <p>No galleries available</p>
+                ) : (
+                    <div className="gallery-grid">
+                        {galleries.map((gallery) => (
+                            <div key={gallery.id} className="gallery-item">
+                                {gallery.images.length >= 2 ? (
+                                    <BeforeAfterImage
+                                        beforeImage={gallery.images[0].imageData}
+                                        afterImage={gallery.images[1].imageData}
+                                    />
+                                ) : (
+                                    <img src={gallery.images[0]?.imageData} alt={gallery.name} className="single-image" />
+                                )}
+                                <div className="gallery-description">
+                                    <h3 className="gallery-name">{gallery.name}</h3>
+                                    <p className="gallery-text">{gallery.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
 
-export default GalleryForm;
+// BeforeAfterImage Component (Included in the same file)
+const BeforeAfterImage = ({ beforeImage, afterImage }) => {
+    const [sliderPosition, setSliderPosition] = useState(50);
+
+    const handleMouseMove = (event) => {
+        const container = event.currentTarget;
+        const rect = container.getBoundingClientRect();
+        const newPosition = ((event.clientX - rect.left) / rect.width) * 100;
+        setSliderPosition(newPosition);
+    };
+
+    return (
+        <div className="before-after-container" onMouseMove={handleMouseMove}>
+            {/* Before Image */}
+            <img src={beforeImage} alt="Before" className="before-image" />
+
+            {/* After Image with Smooth Transition */}
+            <div
+                className="after-image-wrapper"
+                style={{ width: `${sliderPosition}%`, transition: "width 3s ease-in-out" }}
+            >
+                <img src={afterImage} alt="After" className="after-image" />
+            </div>
+
+            {/* Slider Control */}
+            <div className="slider" style={{ left: `${sliderPosition}%` }}>
+                <div className="slider-circle"></div>
+            </div>
+        </div>
+    );
+};
+
+export default Gallery;

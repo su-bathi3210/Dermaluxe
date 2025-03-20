@@ -5,11 +5,11 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
 @Getter
 @Setter
 @Document(collection = "Article")
 public class Article {
+
     @Id
     private String id;
     private String category;
@@ -18,6 +18,7 @@ public class Article {
     private String link;
     private String imageUrl;
 
+    // Constructor
     public Article(String id, String category, String topic, String description, String link, String imageUrl) {
         this.id = id;
         this.category = category;
@@ -26,5 +27,7 @@ public class Article {
         this.link = link;
         this.imageUrl = imageUrl;
     }
-}
 
+    public Article() {
+    }
+}

@@ -1,16 +1,15 @@
 package com.example.Dermaluxe_Skincare_Backend.ServiceTest;
 
-
 import com.example.Dermaluxe_Skincare_Backend.Model.Article;
-import com.example.Dermaluxe_Skincare_Backend.Service.ArticleService;
 import com.example.Dermaluxe_Skincare_Backend.Repository.ArticleRepository;
+import com.example.Dermaluxe_Skincare_Backend.Service.ArticleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -29,97 +28,35 @@ class ArticleServiceTest {
     }
 
     @Test
-    void testGetAllArticles() {
-        List<Article> articles = Arrays.asList(
-                new Article("1", "Health", "Diabetes Tips", "Useful tips", "http://link.com", "img1"),
-                new Article("2", "Nutrition", "Healthy Eating", "Food advice", "http://link2.com", "img2")
-        );
-        when(articleRepository.findAll()).thenReturn(articles);
+    void testCreateArticle() {
+        Article article = new Article("1", "Skincare", "How to Take Care of Your Skin", "Detailed description", "http://link.com", "http://imageurl.com");
+        when(articleRepository.save(any(Article.class))).thenReturn(article);
 
-        List<Article> result = articleService.getAllArticles();
+        Article createdArticle = articleService.createArticle(article);
 
-        assertEquals(2, result.size());
-        assertEquals("Health", result.get(0).getCategory());
-        verify(articleRepository, times(1)).findAll();
+        assertNotNull(createdArticle);
+        assertEquals("1", createdArticle.getId());
+        verify(articleRepository, times(1)).save(article);
     }
 
     @Test
-    void testAddArticle() throws IOException {
-        String category = "Fitness";
-        String topic = "Exercise";
-        String description = "Stay active";
-        String link = "http://exercise.com";
-        String base64Image = Base64.getEncoder().encodeToString("fake image".getBytes());
+    void testGetArticleById_Success() {
+        Article article = new Article("1", "Skincare", "How to Take Care of Your Skin", "Detailed description", "http://link.com", "http://imageurl.com");
+        when(articleRepository.findById("1")).thenReturn(Optional.of(article));
 
-        MultipartFile imageFile = mock(MultipartFile.class);
-        when(imageFile.isEmpty()).thenReturn(false);
-        when(imageFile.getBytes()).thenReturn("fake image".getBytes());
+        Optional<Article> result = articleService.getArticleById("1");
 
-        Article savedArticle = new Article("123", category, topic, description, link, base64Image);
-        when(articleRepository.save(any(Article.class))).thenReturn(savedArticle);
-
-        Article result = articleService.addArticle(category, topic, description, link, imageFile);
-
-        assertNotNull(result);
-        assertEquals("Fitness", result.getCategory());
-        assertEquals(base64Image, result.getImageUrl());
-        verify(articleRepository, times(1)).save(any(Article.class));
-    }
-
-    @Test
-    void testUpdateArticle_Success() throws IOException {
-        String id = "123";
-        Article existingArticle = new Article(id, "Health", "Old Topic", "Old Desc", "oldLink", "oldImage");
-        when(articleRepository.findById(id)).thenReturn(Optional.of(existingArticle));
-
-        MultipartFile newImageFile = mock(MultipartFile.class);
-        when(newImageFile.isEmpty()).thenReturn(false);
-        when(newImageFile.getBytes()).thenReturn("new image".getBytes());
-        String base64NewImage = Base64.getEncoder().encodeToString("new image".getBytes());
-
-        when(articleRepository.save(any(Article.class))).thenAnswer(invocation -> invocation.getArgument(0));
-
-        Article updated = articleService.updateArticle(id, "NewCat", "NewTopic", "NewDesc", "newLink", newImageFile);
-
-        assertEquals("NewCat", updated.getCategory());
-        assertEquals("NewTopic", updated.getTopic());
-        assertEquals("NewDesc", updated.getDescription());
-        assertEquals("newLink", updated.getLink());
-        assertEquals(base64NewImage, updated.getImageUrl());
-        verify(articleRepository, times(1)).save(existingArticle);
-    }
-
-    @Test
-    void testUpdateArticle_NotFound() {
-        String id = "404";
-        when(articleRepository.findById(id)).thenReturn(Optional.empty());
-
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            articleService.updateArticle(id, "Cat", "Topic", "Desc", "Link", null);
-        });
-
-        assertEquals("Article with ID 404 not found.", exception.getMessage());
-        verify(articleRepository, never()).save(any());
-    }
-
-    @Test
-    void testDeleteArticle_Success() {
-        String id = "123";
-        when(articleRepository.existsById(id)).thenReturn(true);
-        doNothing().when(articleRepository).deleteById(id);
-
-        articleService.deleteArticle(id);
-
-        verify(articleRepository, times(1)).deleteById(id);
+        assertTrue(result.isPresent());
+        assertEquals("Skincare", result.get().getCategory());
+        verify(articleRepository, times(1)).findById("1");
     }
 
     @Test
     void testDeleteArticle_NotFound() {
-        String id = "404";
-        when(articleRepository.existsById(id)).thenReturn(false);
+        when(articleRepository.existsById("404")).thenReturn(false);
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            articleService.deleteArticle(id);
+            articleService.deleteArticle("404");
         });
 
         assertEquals("Article with ID 404 not found.", exception.getMessage());

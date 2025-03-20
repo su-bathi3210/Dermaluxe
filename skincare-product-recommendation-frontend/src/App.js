@@ -30,6 +30,7 @@ import Service from './components/User/Service';
 import Register from './components/Logins/Register';
 import Customer from './components/Customer/Customer';
 import CustomerStartPage from './components/Customer/CustomerStatPage';
+import AdminArticle from './components/Admin/AdminArticle';
 
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
           <Route path='/adminquery' element={<AdminQuery />} />
           <Route path='/adminfeedback' element={<AdminFeedback />} />
           <Route path='/admingallery' element={<AdminGallery />} />
+          <Route path='/adminArticle' element={<AdminArticle />} />
         </Route>
       </Routes>
 

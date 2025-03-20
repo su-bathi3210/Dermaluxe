@@ -11,8 +11,12 @@ import java.util.Optional;
 @Service
 public class GalleryService {
 
+    private final GalleryRepository galleryRepository;
+
     @Autowired
-    private GalleryRepository galleryRepository;
+    public GalleryService(GalleryRepository galleryRepository) {
+        this.galleryRepository = galleryRepository;
+    }
 
     // Get all galleries
     public List<Gallery> getAllGalleries() {
@@ -24,22 +28,25 @@ public class GalleryService {
         return galleryRepository.findById(id);
     }
 
-    // Add a new gallery
-    public Gallery addGallery(Gallery gallery) {
+    // Create a new gallery
+    public Gallery createGallery(Gallery gallery) {
         return galleryRepository.save(gallery);
     }
 
     // Update an existing gallery
-    public Gallery updateGallery(String id, Gallery gallery) {
+    public Gallery updateGallery(String id, Gallery galleryDetails) {
         if (galleryRepository.existsById(id)) {
-            gallery.setId(id);
-            return galleryRepository.save(gallery);
+            galleryDetails.setId(id);
+            return galleryRepository.save(galleryDetails);
         }
-        return null;
+        return null; // Or throw an exception if gallery not found
     }
 
-    // Delete a gallery by ID
+    // Delete a gallery
     public void deleteGallery(String id) {
+        if (!galleryRepository.existsById(id)) {
+            throw new RuntimeException("Gallery with ID " + id + " not found.");
+        }
         galleryRepository.deleteById(id);
     }
 }

@@ -52,7 +52,7 @@ const AdminNav = () => {
                     </Link>
                 </div>
                 <div className="header-promo-item">
-                    <Link to="">
+                    <Link to="/adminArticle">
                         <span>ARTICLES</span>
                     </Link>
                 </div>

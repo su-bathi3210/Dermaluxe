@@ -3,18 +3,23 @@ package com.example.Dermaluxe_Skincare_Backend.Controller;
 import com.example.Dermaluxe_Skincare_Backend.Model.Article;
 import com.example.Dermaluxe_Skincare_Backend.Service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/Article")
+@RequestMapping("/api/article")
 public class ArticleController {
 
+    private final ArticleService articleService;
+
     @Autowired
-    private ArticleService articleService;
+    public ArticleController(ArticleService articleService) {
+        this.articleService = articleService;
+    }
 
     // Get all articles
     @GetMapping
@@ -22,34 +27,38 @@ public class ArticleController {
         return articleService.getAllArticles();
     }
 
-    // Add a new article
-    @PostMapping
-    public Article addArticle(
-            @RequestParam String category,
-            @RequestParam String topic,
-            @RequestParam String description,
-            @RequestParam String link,
-            @RequestParam(required = false) MultipartFile image
-    ) throws IOException {
-        return articleService.addArticle(category, topic, description, link, image);
+    // Get article by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Article> getArticleById(@PathVariable String id) {
+        Optional<Article> article = articleService.getArticleById(id);
+        return article.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    // Update an article
+    // Create a new article
+    @PostMapping
+    public ResponseEntity<Article> createArticle(@RequestBody Article article) {
+        Article createdArticle = articleService.createArticle(article);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdArticle);
+    }
+
+    // Update an existing article
     @PutMapping("/{id}")
-    public Article updateArticle(
-            @PathVariable String id,
-            @RequestParam String category,
-            @RequestParam String topic,
-            @RequestParam String description,
-            @RequestParam String link,
-            @RequestParam(required = false) MultipartFile image
-    ) throws IOException {
-        return articleService.updateArticle(id, category, topic, description, link, image);
+    public ResponseEntity<Article> updateArticle(@PathVariable String id, @RequestBody Article articleDetails) {
+        Article updatedArticle = articleService.updateArticle(id, articleDetails);
+        if (updatedArticle != null) {
+            return ResponseEntity.ok(updatedArticle);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     // Delete an article
     @DeleteMapping("/{id}")
-    public void deleteArticle(@PathVariable String id) {
-        articleService.deleteArticle(id);
+    public ResponseEntity<Void> deleteArticle(@PathVariable String id) {
+        if (articleService.getArticleById(id).isPresent()) {
+            articleService.deleteArticle(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }
