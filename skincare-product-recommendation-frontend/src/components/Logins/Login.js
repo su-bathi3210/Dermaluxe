@@ -29,7 +29,7 @@ const Login = () => {
                     localStorage.setItem("userId", userId);
                     localStorage.setItem("userName", name);
                     sessionStorage.setItem("userSession", JSON.stringify({ userId, name, role: "user" }));
-                    navigate("/customer");
+                    navigate("/CustomerDashboard");
                 } else {
                     setError("Invalid credentials. Please try again.");
                 }
@@ -52,7 +52,7 @@ const Login = () => {
                         <h2>Login</h2>
                         {error && <p className="error-message">{error}</p>}
                         <div className="form-group">
-                            <label>Email</label>
+                            <label1>Email</label1>
                             <input
                                 type="text"
                                 placeholder="ENTER YOUR EMAIL"
@@ -62,7 +62,7 @@ const Login = () => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>Password</label>
+                            <label1>Password</label1>
                             <input
                                 type="password"
                                 placeholder="ENTER YOUR PASSWORD"

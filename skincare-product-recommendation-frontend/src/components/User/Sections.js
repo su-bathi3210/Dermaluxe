@@ -14,7 +14,7 @@ import VitaminC from '../../images/VitamiC.png';
 import new1 from '../../images/new1.png';
 import new2 from '../../images/new2.png';
 import new3 from '../../images/new3.png';
-import val from '../../images/val.png';
+import val from '../../images/val1.png';
 
 import Video from '../../images/Video4.mp4';
 import Video1 from '../../images/Video9.mp4';
@@ -229,7 +229,7 @@ const Sections = () => {
             </div>
 
             <div className="se-image">
-                    <img src={val} alt="se" />
+            <Link to='/feedback'><img src={val} alt="se" /></Link>
                 </div>
 
             <div className="real-result">

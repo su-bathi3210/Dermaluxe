@@ -10,7 +10,7 @@ import heading8 from "../../images/heading8.png";
 
 const StartPage = () => {
   const images = [heading, heading1, heading3, heading2, heading8];
-  const links = ["", "", "", "", "/consultation"];
+  const links = ["/login", "", "", "", "/consultation"];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const StartPage = () => {
               Get closer to your skin and hair goals with a treatment that's <br></br>
             </p>
             <p className="headline4">customized for you.</p>
-            <Link to="/skin"><button className="get-started-button">Get Started</button></Link>
+            <Link to="/login"><button className="get-started-button">Get Started</button></Link>
           </div>
         )}
       </div>

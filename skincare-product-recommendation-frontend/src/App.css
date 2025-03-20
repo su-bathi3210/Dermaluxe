@@ -1834,6 +1834,7 @@
 .se-image img {
   max-width: 100%;
   margin-top: -5px;
+  cursor: pointer;
 }
 
 
@@ -2100,6 +2101,153 @@
 }
 
 
+
+
+
+
+
+
+
+
+
+/*Feedback Page*/
+.feedback-container2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20px;
+  margin-bottom: -120px;
+  font-family: Arial, sans-serif;
+}
+
+.feedback-form-head2 {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: darkgreen;
+  TEXT-TRANSFORM: UPPERCASE;
+  margin-top: -30px;
+}
+
+.feedback-form-para2{
+  color: #333;
+  line-height: 1.8;
+  text-align: center;
+  width: 1200px;
+  font-size: 17px;
+  margin-bottom: 20px;
+  margin-top: -10px;
+}
+
+.feedback-container2 form {
+  background: #ffffff;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-control {
+  width: 96%;
+  margin: 10px 0;
+  border: 1px solid #ced4da;
+  font-size: 13px;
+  TEXT-TRANSFORM: UPPERCASE;
+  transition: border 0.3s;
+}
+
+.form-control:focus {
+  border-color: brown;
+  outline: none;
+  box-shadow: 0 0 5px rgba(228, 59, 8, 0.3);
+}
+
+select.form-control {
+  appearance: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+
+textarea.form-control {
+  resize: none;
+}
+
+
+.invalid-feedback {
+  color: red;
+  font-size: 10px;
+  margin-top: -5px;
+  font-weight: bold;
+  TEXT-TRANSFORM: UPPERCASE;
+}
+
+
+.feedback-rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.feedback-rating-container label {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 0px;
+  TEXT-TRANSFORM: UPPERCASE;
+  color: #c1640c;
+}
+
+
+.feedback-btn-primary-submit {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #600000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  TEXT-TRANSFORM: UPPERCASE;
+  margin-top: 15px;
+  transition: background 0.3s ease-in-out;
+}
+
+.feedback-btn-primary-submit:hover {
+  background-color: #546486;
+}
+
+.feedback-col select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: #555;
+  border: 1px solid #ccc;
+  padding: 9.8px;
+  font-size: 13px;
+  width: 100%;
+  cursor: pointer;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+}
+
+.feedback-col select:focus {
+  outline: none;
+  border-color: brown;
+}
+
+.feedback-col select option {
+  font-size: 12px;
+  padding: 10px;
+}
 
 
 

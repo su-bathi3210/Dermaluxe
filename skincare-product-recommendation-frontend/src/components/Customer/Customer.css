@@ -1,0 +1,39 @@
+/*Consultation Page*/
+.expert-consualtation1-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.expert-consualtation1-image img {
+    width: 100%;
+    max-width: 1520px;
+    height: auto;
+}
+
+.consultation-conditions {
+    margin: 30px 70px;
+}
+
+.consultation-conditions h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #546486;
+    text-align: left;
+}
+
+.consultation-conditions ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: black;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.consultation-conditions li {
+    margin-bottom: 10px;
+}
+
+
+/*Customer Page*/

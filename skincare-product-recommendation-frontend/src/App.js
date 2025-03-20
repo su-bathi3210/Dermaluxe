@@ -29,6 +29,7 @@ import Blog from './components/User/Blog';
 import Service from './components/User/Service';
 import Register from './components/Logins/Register';
 import Customer from './components/Customer/Customer';
+import CustomerStartPage from './components/Customer/CustomerStatPage';
 
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
         <Route path='/skincare-services' element={<Service />} />
         <Route path='/register' element={<Register />} />
         <Route path='/customer' element={<Customer />} />
+        <Route path='/CustomerDashboard' element={<CustomerStartPage />} />
 
 
         {/* Admin routes wrapped in AdminRoute */}

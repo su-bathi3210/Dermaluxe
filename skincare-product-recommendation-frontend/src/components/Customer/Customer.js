@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const Customer = () => {
-    const [isMenuOpen, setMenuOpen] = useState(false);
     const [user, setUser] = useState({ name: '', userId: '' });
-    const location = useLocation();
 
     useEffect(() => {
         const userId = localStorage.getItem('userId');
@@ -12,7 +10,7 @@ const Customer = () => {
         if (userId) {
             const fetchUserData = async () => {
                 try {
-                    const response = await fetch(`/User/${userId}`); // Fixed URL formatting
+                    const response = await fetch(`/User/${userId}`);
                     if (response.ok) {
                         const data = await response.json();
                         setUser({ name: data.name, userId: data.userId });
@@ -47,10 +45,6 @@ const Customer = () => {
         };
     }, []);
 
-    const toggleMenu = () => {
-        setMenuOpen(!isMenuOpen);
-    };
-
     return (
         <div>
             <nav className="navbar">
@@ -68,14 +62,14 @@ const Customer = () => {
 
                     <div className="right-corner-icons">
                         <div className="login-container">
-                            <Link to="/">
+                            <Link to="/login">
                                 <button className="login-button">Logout</button>
                             </Link>
                         </div>
                     </div>
                 </div>
 
-                <div className={`nav-links-container ${isMenuOpen ? 'open' : ''}`}>
+                <div className="nav-links-container">
                     <ul className="nav-links">
                         <li><NavLink to="/diabetic-monitoring" className={({ isActive }) => (isActive ? 'active' : '')}>DIABETIC MONITORING</NavLink></li>
                         <li><NavLink to="/view-records" className={({ isActive }) => (isActive ? 'active' : '')}>VIEW RECORDS</NavLink></li>

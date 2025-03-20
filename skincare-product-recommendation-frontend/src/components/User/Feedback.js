@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Swal from 'sweetalert2';
 import AOS from 'aos';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import ReactStars from 'react-rating-stars-component';
+import Swal from 'sweetalert2';
+import '../../App.css';
+import Header from '../../components/User/Header';
 
 const Feedback = () => {
     const [feedback, setFeedback] = useState({
@@ -79,94 +81,101 @@ const Feedback = () => {
     };
 
     return (
-        <div className="container mt-5" data-aos="fade-up">
-            <h1 className="form-head">Send Us Your Feedback</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3 row">
-                    <div className="col-sm-10">
-                        <input
-                            type="text"
-                            className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                            id="name"
-                            name="name"
-                            value={feedback.name}
-                            onChange={handleChange}
-                            placeholder="Enter your Name"
+        <div>
+            <Header />
+            <div className="feedback-container2">
+                <h1 className="feedback-form-head2">Send Us Your Feedback</h1>
+                <p className="feedback-form-para2">At Dermaluxe Skincare, we are dedicated
+                    to providing you with the most accurate and personalized AI-powered skincare
+                    recommendations. Your feedback is invaluable in helping us refine our system,
+                    ensuring that you receive the best-matched products for your unique skin type and concerns.
+                </p>
+                <form onSubmit={handleSubmit}>
+                    <div className="feedback-row">
+                        <div className="feedback-col">
+                            <input
+                                type="text"
+                                className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                                id="name"
+                                name="name"
+                                value={feedback.name}
+                                onChange={handleChange}
+                                placeholder="Enter your Name"
+                            />
+                            {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                        </div>
+                    </div>
+
+                    <div className="feedback-row">
+                        <div className="feedback-col">
+                            <input
+                                type="text"
+                                className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                                id="email"
+                                name="email"
+                                value={feedback.email}
+                                onChange={handleChange}
+                                placeholder="Enter your Email"
+                            />
+                            {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+                        </div>
+                    </div>
+
+
+                    <div className="feedback-row">
+                        <div className="feedback-col">
+                            <select
+                                className={`form-control ${errors.subject ? 'is-invalid' : ''}`}
+                                id="subject"
+                                name="subject"
+                                value={feedback.subject}
+                                onChange={handleChange}
+                            >
+                                <option value="">Select Subject</option>
+                                <option value="Product Recommendation">Product Recommendation</option>
+                                <option value="Skin Type Accuracy">Skin Type Accuracy</option>
+                                <option value="Product Effectiveness">Product Effectiveness</option>
+                                <option value="Ease of Use">Ease of Use</option>
+                                <option value="User Experience">User Experience</option>
+                                <option value="Website/App Performance">Website/App Performance</option>
+                                <option value="Customer Support">Customer Support</option>
+                                <option value="Overall Satisfaction">Overall Satisfaction</option>
+                                <option value="Feature Suggestions">Feature Suggestions</option>
+                            </select>
+                            {errors.subject && <div className="invalid-feedback">{errors.subject}</div>}
+                        </div>
+                    </div>
+
+                    <div className="feedback-row">
+                        <div className="feedback-col">
+                            <textarea
+                                className={`form-control ${errors.message ? 'is-invalid' : ''}`}
+                                id="message"
+                                name="message"
+                                value={feedback.message}
+                                onChange={handleChange}
+                                rows="4"
+                                placeholder="Enter your message..."
+                            ></textarea>
+                            {errors.message && <div className="invalid-feedback">{errors.message}</div>}
+                        </div>
+                    </div>
+
+                    <div className="feedback-rating-container">
+                        <label>Rating</label>
+                        <ReactStars
+                            count={5}
+                            value={feedback.rating}
+                            onChange={handleRatingChange}
+                            size={40}
+                            activeColor="#ffd700"
                         />
-                        {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                        {errors.rating && <div className="invalid-feedback">{errors.rating}</div>}
                     </div>
-                </div>
 
-                <div className="mb-3 row">
-                    <div className="col-sm-10">
-                        <input
-                            type="text"
-                            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                            id="email"
-                            name="email"
-                            value={feedback.email}
-                            onChange={handleChange}
-                            placeholder="Enter your Email"
-                        />
-                        {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-                    </div>
-                </div>
-
-
-                <div className="mb-3 row">
-                    <div className="col-sm-10">
-                        <select
-                            className={`form-control ${errors.subject ? 'is-invalid' : ''}`}
-                            id="subject"
-                            name="subject"
-                            value={feedback.subject}
-                            onChange={handleChange}
-                        >
-                            <option value="">Select Subject</option>
-                            <option value="Food Quality">Food Quality</option>
-                            <option value="Service">Service</option>
-                            <option value="Ambiance">Ambiance</option>
-                            <option value="Value for Money">Value for Money</option>
-                            <option value="Menu Variety">Menu Variety</option>
-                            <option value="Order Accuracy">Order Accuracy</option>
-                            <option value="Speed of Service">Speed of Service</option>
-                            <option value="Overall Experience">Overall Experience</option>
-                            <option value="Reservations and Wait Time">Reservations and Wait Time</option>
-                            <option value="Accessibility">Accessibility</option>
-                        </select>
-                        {errors.subject && <div className="invalid-feedback">{errors.subject}</div>}
-                    </div>
-                </div>
-
-                <div className="mb-3 row">
-                    <div className="col-sm-10">
-                        <textarea
-                            className={`form-control ${errors.message ? 'is-invalid' : ''}`}
-                            id="message"
-                            name="message"
-                            value={feedback.message}
-                            onChange={handleChange}
-                            rows="4"
-                            placeholder="Enter your message..."
-                        ></textarea>
-                        {errors.message && <div className="invalid-feedback">{errors.message}</div>}
-                    </div>
-                </div>
-
-                <div className="rating-container">
-                    <label>Rating</label>
-                    <ReactStars
-                        count={5}
-                        value={feedback.rating}
-                        onChange={handleRatingChange}
-                        size={30}
-                        activeColor="#ffd700"
-                    />
-                    {errors.rating && <div className="invalid-feedback">{errors.rating}</div>}
-                </div>
-
-                <button type="submit" className="btn-primary-submit">Submit your Feedback</button>
-            </form>
+                    <button type="submit" className="feedback-btn-primary-submit">Submit your Feedback</button>
+                </form>
+            </div>
         </div>
     );
 };

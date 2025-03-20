@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import './Consultation.css';
+import './Customer.css';
 
 // Schema for validating the consultation form
 const consultationSchema = yup.object().shape({

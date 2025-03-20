@@ -20,6 +20,7 @@ public class Query {
     private String status;
     private String respond;
 
+
     // Constructors
     public Query() {}
 
