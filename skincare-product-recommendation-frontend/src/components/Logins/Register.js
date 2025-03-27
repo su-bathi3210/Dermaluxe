@@ -65,7 +65,6 @@ const Register = () => {
         axios
             .post('/User/register', { name, username, password, userId })
             .then((response) => {
-                // Handle successful registration
                 console.log('Registration successful:', response.data);
 
                 // Navigate to the login page

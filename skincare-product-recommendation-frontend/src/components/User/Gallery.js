@@ -10,7 +10,7 @@ const Gallery = () => {
         fetchGalleries();
     }, []);
 
-    // Fetch all galleries for customers
+    
     const fetchGalleries = async () => {
         try {
             const response = await axios.get("/api/gallery");

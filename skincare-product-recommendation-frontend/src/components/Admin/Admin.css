@@ -10,7 +10,7 @@
     margin-left: -15px;
 }
 
-.admin-query-heading{
+.admin-query-heading {
     text-align: center;
     color: brown;
     margin-bottom: 10px;
@@ -19,7 +19,7 @@
     TEXT-TRANSFORM: UPPERCASE;
 }
 
-.admin-query-paragraph{
+.admin-query-paragraph {
     text-align: center;
     font-size: 17px;
     color: black;
@@ -30,13 +30,13 @@
     margin-bottom: 30px;
 }
 
-.admin-query-error-message{
+.admin-query-error-message {
     color: red;
     text-align: center;
     font-weight: bold;
 }
 
-.admin-query-success-message{
+.admin-query-success-message {
     color: green;
     text-align: center;
     font-weight: bold;
@@ -68,7 +68,7 @@
     font-size: 14.5px;
 }
 
-.query-table td{
+.query-table td {
     font-size: 15px;
 }
 
@@ -80,7 +80,7 @@
     background-color: #ddd;
 }
 
-.admin-query-edit-button{
+.admin-query-edit-button {
     padding: 5px;
     border: none;
     cursor: pointer;
@@ -90,7 +90,7 @@
     transition: 0.3s ease-in-out;
 }
 
-.admin-query-delete-button{
+.admin-query-delete-button {
     padding: 6px 12px;
     border: none;
     cursor: pointer;
@@ -101,7 +101,7 @@
     transition: 0.3s ease-in-out;
 }
 
-.admin-query-modal{
+.admin-query-modal {
     width: 450px;
     background: white;
     padding: 20px;
@@ -112,7 +112,7 @@
     transform: translate(-50%, -50%);
 }
 
-.admin-query-overlay{
+.admin-query-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -121,7 +121,7 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
-.admin-query-model-heading{
+.admin-query-model-heading {
     text-align: center;
     font-size: 22px;
     margin-top: 10px;
@@ -130,13 +130,13 @@
     font-family: Arial, sans-serif;
 }
 
-.admin-edit-query-form{
+.admin-edit-query-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.admin-query-form-group{
+.admin-query-form-group {
     display: flex;
     flex-direction: column;
 }
@@ -155,7 +155,7 @@ textarea {
     min-height: 80px;
 }
 
-.admin-query-submit{
+.admin-query-submit {
     background-color: #600000;
     color: white;
     font-weight: bold;
@@ -167,7 +167,7 @@ textarea {
     TEXT-TRANSFORM: UPPERCASE;
 }
 
-.admin-query-submit-button{
+.admin-query-submit-button {
     background-color: gray;
     color: white;
     font-weight: bold;
@@ -180,7 +180,7 @@ textarea {
 }
 
 .admin-query-submit:hover,
-.admin-query-submit-button:hover{
+.admin-query-submit-button:hover {
     background-color: black;
 }
 
@@ -244,7 +244,7 @@ textarea {
     border-collapse: collapse;
 }
 
-.table th, 
+.table th,
 .table td {
     border: 1px solid #ddd;
     padding: 12px;
@@ -261,7 +261,7 @@ textarea {
     font-size: 14.5px;
 }
 
-.table td{
+.table td {
     font-size: 15px;
 }
 
@@ -332,13 +332,13 @@ textarea {
     font-family: Arial, sans-serif;
 }
 
-.admin-edit-feedback-form{
+.admin-edit-feedback-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.admin-feedback-form-group{
+.admin-feedback-form-group {
     display: flex;
     flex-direction: column;
 }
@@ -409,7 +409,8 @@ textarea {
     margin-left: 37px;
 }
 
-.customer-table th, .customer-table td {
+.customer-table th,
+.customer-table td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: center;
@@ -424,7 +425,7 @@ textarea {
     font-size: 14.5px;
 }
 
-.customer-table td{
+.customer-table td {
     font-size: 15px;
 }
 
@@ -472,7 +473,7 @@ textarea {
     overflow-y: auto;
     top: 50%;
     left: 50%;
-    
+
     transform: translate(-50%, -50%);
 }
 
@@ -491,7 +492,7 @@ textarea {
     background: black;
 }
 
-.csp-details{
+.csp-details {
     text-align: center;
     font-size: 22px;
     margin-top: 60px;
@@ -500,7 +501,7 @@ textarea {
     font-family: Arial, sans-serif;
 }
 
-.name-email-details{
+.name-email-details {
     font-family: Arial, sans-serif;
     TEXT-TRANSFORM: UPPERCASE;
     text-align: center;
@@ -512,7 +513,7 @@ textarea {
     font-size: 18px;
     margin-bottom: 10px;
     margin-top: 60px;
-    color: rgb(74, 103, 136);;
+    color: rgb(74, 103, 136);
     text-align: center;
     TEXT-TRANSFORM: UPPERCASE;
     font-family: Arial, sans-serif;
@@ -709,4 +710,406 @@ textarea {
 
 .admin-gallery-modal button:hover {
     background-color: #555;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Admin Review Page*/
+.admin-article-container {
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    margin-bottom: 100px;
+}
+
+.admin-article-form-head {
+    text-align: center;
+    color: brown;
+    margin-bottom: 10px;
+    margin-top: 40px;
+    font-size: 30px;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+.admin-article-form-paragraph {
+    text-align: center;
+    font-size: 17px;
+    color: black;
+    width: 1400px;
+    margin: auto;
+    display: block;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.add-article-btn {
+    TEXT-TRANSFORM: UPPERCASE;
+    background-color: rgb(74, 103, 136);
+    font-weight: bold;
+    color: #fff;
+    padding: 12px 12px;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    margin: 0px 60px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-article-btn:hover {
+    background-color: #546486;
+    transform: translateY(-2px);
+}
+
+.admin-article-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.admin-article-modal-content {
+    background: #fff;
+    padding: 20px;
+    width: 450px;
+    max-width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.admin-article-close {
+    position: absolute;
+    padding: 0px 6px;
+    top: 0px;
+    right: 0px;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(192, 9, 9);
+}
+
+.admin-article-close:hover {
+    color: black;
+}
+
+.admin-article-modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 23px;
+    text-align: center;
+    color: #546486;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+.admin-article-modal-content input,
+.admin-article-modal-content textarea {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+.admin-article-modal-content textarea {
+    resize: vertical;
+    height: 100px;
+    font-family: Arial, sans-serif;
+}
+
+.admin-article-modal-content button {
+    width: 100%;
+    background: brown;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-weight: bold;
+}
+
+.admin-article-modal-content button:hover {
+    background: rgb(204, 71, 5);
+}
+
+.admin-article-preview-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+    margin: 10px auto;
+    border: 1px solid #ddd;
+}
+
+
+.article-table-container {
+    margin: 20px auto;
+    width: 92%;
+    background-color: #fff;
+    overflow-x: auto;
+}
+
+.article-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.article-table th,
+.article-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.article-table th {
+    background-color: darkolivegreen;
+    color: white;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    letter-spacing: 0.5px;
+    font-size: 14.5px;
+}
+
+.article-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.article-table td {
+    font-size: 16px;
+    color: black;
+}
+
+.preview-img {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+
+.admin-article-btn {
+    padding: 5px 8px;
+    cursor: pointer;
+    border: none;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+    margin-right: 5px;
+}
+
+.edit-btn {
+    background-color: #007BFF;
+}
+
+.edit-btn:hover {
+    background-color: #555;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: #555;
+}
+
+
+
+
+
+
+/*Admin Consultation Page*/
+.admin-consultation-container {
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+.admin-consultation-form-head {
+    text-align: center;
+    color: brown;
+    margin-bottom: 10px;
+    margin-top: 40px;
+    font-size: 30px;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+.admin-consultation-form-paragraph {
+    text-align: center;
+    font-size: 17px;
+    color: black;
+    width: 1400px;
+    margin: auto;
+    display: block;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.admin-consultation-table11 {
+    margin: 0 auto;
+    width: 92%;
+    background-color: #fff;
+    overflow-x: auto;
+}
+
+
+.admin-consultation-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-consultation-table th,
+.admin-consultation-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.admin-consultation-table th {
+    background-color: darkolivegreen;
+    color: white;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    letter-spacing: 0.5px;
+    font-size: 14.5px;
+}
+
+.admin-consultation-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.admin-consultation-table td button {
+    margin-right: 10px;
+    padding: 8px 12px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-consultation-table td button:hover {
+    background-color: #333;
+}
+
+.admin-consultation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    
+}
+
+.admin-consultation-modal-content {
+    background-color: white;
+    padding: 20px;
+    width: 450px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.admin-consultation-modal-heading {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    text-align: center;
+    color: brown;
+    margin-top: 5px;
+}
+
+.admin-consultation-modal label {
+    display: block;
+    TEXT-TRANSFORM: UPPERCASE;
+    font-weight: bold;
+    font-size: 12px;
+    margin: 10px 0 5px;
+    color: #555;
+}
+
+.admin-consultation-modal input,
+.admin-consultation-modal select,
+.admin-consultation-modal textarea {
+    width: 95%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+.admin-consultation-modal textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.admin-consultation-modal button {
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    padding: 10px 15px;
+    background-color: #600000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.admin-consultation-modal button:hover {
+    background-color: #555;
+}
+
+.admin-consultation-modal button:last-child {
+    background-color: #dc3545;
+}
+
+.admin-consultation-modal button:last-child:hover {
+    background-color: #555;
+}
+
+
+#consultationStatus {
+    font-weight: bold;
+    TEXT-TRANSFORM: UPPERCASE;
+    width: 100%;
+    padding: 12px;
+    font-size: 12px;
+    background-color: #fff;
+    color: black;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+#consultationStatus:focus {
+    border-color: brown;
+    outline: none;
+}
+
+#consultationStatus option {
+    font-size: 1em;
+    padding: 10px;
 }

@@ -1,24 +1,11 @@
-.expert-consualtation1-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.expert-consualtation1-image img {
-    width: 100%;
-    max-width: 1520px;
-    height: auto;
-}
-
 .consultation-conditions {
-    margin: 30px 70px;
+    margin: 60px 70px;
 }
 
 .consultation-conditions h2 {
     font-size: 28px;
     margin-bottom: 20px;
-    color: #546486;
+    color: rgb(194, 7, 7);
     text-align: left;
 }
 
@@ -32,4 +19,169 @@
 
 .consultation-conditions li {
     margin-bottom: 10px;
+}
+
+.consultation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin-top: -60px;
+    margin-bottom: -120px;
+    font-family: Arial, sans-serif;
+}
+
+.consultation-form {
+    background: white;
+    padding: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+}
+
+
+.consultation-form-heading {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    TEXT-TRANSFORM: UPPERCASE;
+    color: darkgreen;
+    font-size: 28px;
+}
+
+
+.consultation-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.consultation-form-group input,
+.consultation-form-group textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    width: 96.4%;
+    TEXT-TRANSFORM: UPPERCASE;
+    color: black;
+    font-weight: bold;
+}
+
+
+.consultation-form-group textarea {
+    resize: none;
+    height: 100px;
+    font-family: Arial, sans-serif;
+}
+
+/* Error message styling */
+.consultation-form-group p {
+    color: rgb(208, 14, 14);
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 5px;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+/* Submit button */
+.consultation-submit-button {
+    display: block;
+    margin-left: 30px;
+    TEXT-TRANSFORM: UPPERCASE;
+    width: 90%;
+    padding: 12px;
+    font-weight: bold;
+    background-color: #546486;
+    color: white;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.consultation-submit-button:hover {
+    background-color: #600000;
+}
+
+
+/* Style for select dropdown */
+.consultation-form-group select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    width: 100.7%;
+    TEXT-TRANSFORM: UPPERCASE;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+
+    /* Remove default arrow (for most browsers) */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* Custom dropdown arrow */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="%23000000" d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+    padding-right: 30px;
+    /* Space for arrow */
+}
+
+.consultation-form-group select:focus {
+    border-color: brown;
+    outline: none;
+}
+
+
+/* Dialog Background Overlay */
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+
+.dialog {
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 400px;
+    max-width: 90%;
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.8;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+/* Dialog Buttons */
+.dialog button {
+    margin: 10px;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    TEXT-TRANSFORM: UPPERCASE;
+}
+
+/* Confirm Button */
+.dialog button:first-of-type {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Cancel Button */
+.dialog button:last-of-type {
+    background-color: #dc3545;
+    color: white;
 }

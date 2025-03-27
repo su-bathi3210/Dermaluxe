@@ -29,7 +29,7 @@ const Login = () => {
                     localStorage.setItem("userId", userId);
                     localStorage.setItem("userName", name);
                     sessionStorage.setItem("userSession", JSON.stringify({ userId, name, role: "user" }));
-                    navigate("/CustomerDashboard");
+                    navigate("/skin");
                 } else {
                     setError("Invalid credentials. Please try again.");
                 }

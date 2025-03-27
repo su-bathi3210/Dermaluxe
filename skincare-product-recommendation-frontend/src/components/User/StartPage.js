@@ -6,7 +6,7 @@ import heading from "../../images/heading.png";
 import heading1 from "../../images/heading1.png";
 import heading2 from "../../images/heading2.png";
 import heading3 from "../../images/heading3.png";
-import heading8 from "../../images/heading8.png";
+import heading8 from "../../images/heading10.png";
 
 const StartPage = () => {
   const images = [heading, heading1, heading3, heading2, heading8];

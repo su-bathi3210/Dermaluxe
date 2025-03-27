@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./AdminArticle.css";
-import { Button, Input, Table, Modal } from "antd";
+import { useState, useEffect } from 'react';
+import AdminNav from './AdminNav';
+import "./Admin.css";
+import axios from 'axios';
 
 const AdminArticle = () => {
     const [articles, setArticles] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [form, setForm] = useState({
-        id: "",
-        category: "",
-        topic: "",
-        description: "",
-        link: "",
-        imageUrl: "",
+    const [showForm, setShowForm] = useState(false); // Controls popup visibility
+    const [formData, setFormData] = useState({
+        category: '',
+        topic: '',
+        description: '',
+        link: '',
+        imageUrl: '',
     });
+    const [selectedFile, setSelectedFile] = useState(null);
 
     useEffect(() => {
         fetchArticles();
@@ -21,64 +21,197 @@ const AdminArticle = () => {
 
     const fetchArticles = async () => {
         try {
-            const response = await axios.get("http://localhost:8081/api/article");
+            const response = await axios.get('/Articles');
             setArticles(response.data);
         } catch (error) {
-            console.error("Error fetching articles:", error);
+            console.error('Error fetching articles:', error);
         }
     };
 
-    const handleInputChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async () => {
-        if (form.id) {
-            // Update article
-            await axios.put(`http://localhost:8081/api/article/${form.id}`, form);
-        } else {
-            // Create new article
-            await axios.post("http://localhost:8081/api/article", form);
+    const handleFileChange = (e) => {
+        setSelectedFile(e.target.files[0]);
+    };
+
+    const uploadImage = async () => {
+        if (!selectedFile) return null;
+
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        try {
+            const response = await axios.post('/Articles/upload', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            return null;
         }
-        fetchArticles();
-        setIsModalOpen(false);
-        setForm({ id: "", category: "", topic: "", description: "", link: "", imageUrl: "" });
     };
 
-    const handleEdit = (article) => {
-        setForm(article);
-        setIsModalOpen(true);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        let uploadedImageUrl = formData.imageUrl;
+
+        if (selectedFile) {
+            uploadedImageUrl = await uploadImage();
+            if (!uploadedImageUrl) return;
+        }
+
+        const articleData = { ...formData, imageUrl: uploadedImageUrl };
+
+        try {
+            if (formData.id) {
+                await axios.put(`/Articles/${formData.id}`, articleData);
+            } else {
+                await axios.post('/Articles', articleData);
+            }
+
+            fetchArticles();
+            closeForm();
+        } catch (error) {
+            console.error('Error saving article:', error);
+        }
     };
 
     const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:8081/api/article/${id}`);
-        fetchArticles();
+        try {
+            await axios.delete(`/Articles/${id}`);
+            fetchArticles();
+        } catch (error) {
+            console.error('Error deleting article:', error);
+        }
+    };
+
+    const handleEdit = (article) => {
+        setFormData(article);
+        setShowForm(true); // Open form when editing
+    };
+
+    const openForm = () => {
+        setFormData({
+            category: '',
+            topic: '',
+            description: '',
+            link: '',
+            imageUrl: '',
+        });
+        setSelectedFile(null);
+        setShowForm(true);
+    };
+
+    const closeForm = () => {
+        setShowForm(false);
+        setFormData({
+            category: '',
+            topic: '',
+            description: '',
+            link: '',
+            imageUrl: '',
+        });
+        setSelectedFile(null);
     };
 
     return (
-        <div style={{ padding: "20px" }}>
-            <h2>Admin - Manage Articles</h2>
-            <Button type="primary" onClick={() => setIsModalOpen(true)}>Add Article</Button>
-            <Table dataSource={articles} rowKey="id" pagination={{ pageSize: 5 }} style={{ marginTop: "20px" }}>
-                <Table.Column title="Category" dataIndex="category" key="category" />
-                <Table.Column title="Topic" dataIndex="topic" key="topic" />
-                <Table.Column title="Actions" key="actions"
-                    render={(_, record) => (
-                        <>
-                            <Button onClick={() => handleEdit(record)} style={{ marginRight: "10px" }}>Edit</Button>
-                            <Button danger onClick={() => handleDelete(record.id)}>Delete</Button>
-                        </>
-                    )}
-                />
-            </Table>
+        <div>
+            <AdminNav />
+            <div className="admin-article-container">
+                <h1 className="admin-article-form-head">Articles</h1>
+                <p className="admin-article-form-paragraph">
+                    At Dermaluxe Skincare, our admin panel offers a streamlined solution for managing
+                    consultations efficiently. This feature allows admins to review, schedule, update, and
+                    respond to consultations promptly, ensuring clients receive timely and personalized care.
+                    The admin panel makes it easy to manage consultation dates, times, statuses, and responses,
+                    helping maintain a smooth and organized process while enhancing the overall customer experience.
+                </p>
+                <button className="add-article-btn" onClick={openForm}>Add New Article</button>
 
-            <Modal title={form.id ? "Edit Article" : "Add Article"} visible={isModalOpen} onOk={handleSubmit} onCancel={() => setIsModalOpen(false)}>
-                <Input placeholder="Category" name="category" value={form.category} onChange={handleInputChange} style={{ marginBottom: "10px" }} />
-                <Input placeholder="Topic" name="topic" value={form.topic} onChange={handleInputChange} style={{ marginBottom: "10px" }} />
-                <Input.TextArea placeholder="Description" name="description" value={form.description} onChange={handleInputChange} style={{ marginBottom: "10px" }} />
-                <Input placeholder="Link" name="link" value={form.link} onChange={handleInputChange} style={{ marginBottom: "10px" }} />
-                <Input placeholder="Image URL" name="imageUrl" value={form.imageUrl} onChange={handleInputChange} />
-            </Modal>
+                {showForm && (
+                    <div className="admin-article-modal">
+                        <div className="admin-article-modal-content">
+                            <span className="admin-article-close" onClick={closeForm}>&times;</span>
+                            <h2>{formData.id ? 'Edit Article' : 'Add New Article'}</h2>
+                            <form onSubmit={handleSubmit}>
+                                <input
+                                    type="text"
+                                    name="category"
+                                    value={formData.category}
+                                    onChange={handleChange}
+                                    placeholder="Category"
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    name="topic"
+                                    value={formData.topic}
+                                    onChange={handleChange}
+                                    placeholder="Topic"
+                                    required
+                                />
+                                <textarea
+                                    name="description"
+                                    value={formData.description}
+                                    onChange={handleChange}
+                                    placeholder="Description"
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    name="link"
+                                    value={formData.link}
+                                    onChange={handleChange}
+                                    placeholder="Link"
+                                />
+                                <input type="file" onChange={handleFileChange} accept="image/*" />
+                                {formData.imageUrl && (
+                                    <img src={formData.imageUrl} alt="Preview" className="admin-article-preview-img" />
+                                )}
+                                <button type="submit">
+                                    {formData.id ? 'Update Article' : 'Add Article'}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                )}
+
+                <div className="article-table-container">
+                    <table className="article-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Topic</th>
+                                <th>Description</th>
+                                <th>URL</th>
+                                <th>Image</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {articles.map((article) => (
+                                <tr key={article.id}>
+                                    <td>{article.category}</td>
+                                    <td>{article.topic}</td>
+                                    <td>{article.description}</td>
+                                    <td>{article.link}</td>
+                                    <td>
+                                        {article.imageUrl && <img src={article.imageUrl} alt={article.topic} className="preview-img" />}
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleEdit(article)} className="admin-article-btn edit-btn">Edit</button>
+                                        <button onClick={() => handleDelete(article.id)} className="admin-article-btn delete-btn">Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </div>
     );
 };

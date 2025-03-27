@@ -12,7 +12,6 @@ import AppOrder from './components/User/AppOrder';
 import Contact from './components/User/Contact';
 import Footer from './components/User/Footer';
 import Home from './components/User/Home';
-import Offers from './components/User/Offers';
 import { Reward } from './components/User/Reward';
 import Shipping from './components/User/Shipping';
 import Dermaluxe from './components/AI/Dermaluxe';
@@ -24,13 +23,12 @@ import Feedback from "./components/User/Feedback";
 import AdminFeedback from "./components/Admin/AdminFeedback";
 import Gallery from './components/User/Gallery';
 import AdminGallery from './components/Admin/AdminGallery';
-import Review from './components/User/Review';
-import Blog from './components/User/Blog';
 import Service from './components/User/Service';
 import Register from './components/Logins/Register';
 import Customer from './components/Customer/Customer';
 import CustomerStartPage from './components/Customer/CustomerStatPage';
 import AdminArticle from './components/Admin/AdminArticle';
+import Article from './components/User/Article';
 
 
 function App() {
@@ -42,6 +40,7 @@ function App() {
     && window.location.pathname !== '/adminquery'
     && window.location.pathname !== '/admingallery'
     && window.location.pathname !== '/register'
+    && window.location.pathname !== '/adminArticle'
     && window.location.pathname !== '/adminfeedback';
 
   return (
@@ -53,7 +52,6 @@ function App() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/expert' element={<Expert />} />
         <Route path='/Apporder' element={<AppOrder />} />
-        <Route path='/Offers' element={<Offers />} />
         <Route path='/Reward' element={<Reward />} />
         <Route path='/shipping' element={<Shipping />} />
         <Route path='/consultation' element={<Consultation />} />
@@ -63,8 +61,7 @@ function App() {
         <Route path='/community' element={<Community />} />
         <Route path='/feedback' element={<Feedback />} />
         <Route path='/gallery' element={<Gallery />} />
-        <Route path='/review' element={<Review />} />
-        <Route path='/blog' element={<Blog />} />
+        <Route path='/blog' element={<Article />} />
         <Route path='/skincare-services' element={<Service />} />
         <Route path='/register' element={<Register />} />
         <Route path='/customer' element={<Customer />} />

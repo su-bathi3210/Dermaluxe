@@ -71,8 +71,8 @@ const Customer = () => {
 
                 <div className="nav-links-container">
                     <ul className="nav-links">
-                        <li><NavLink to="/diabetic-monitoring" className={({ isActive }) => (isActive ? 'active' : '')}>DIABETIC MONITORING</NavLink></li>
-                        <li><NavLink to="/view-records" className={({ isActive }) => (isActive ? 'active' : '')}>VIEW RECORDS</NavLink></li>
+                        <li><NavLink to="/personalized system" className={({ isActive }) => (isActive ? 'active' : '')}>DERMALUXE SKINCARE PERSONALIZED SYSTEM</NavLink></li>
+                        <li><NavLink to="/personalized-consultation" className={({ isActive }) => (isActive ? 'active' : '')}>CONSULTATION</NavLink></li>
                     </ul>
                 </div>
             </nav>

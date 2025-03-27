@@ -65,8 +65,8 @@ const Header = () => {
                     <li><Link to="">PRODUCTS</Link></li>
                     <li><Link to="/about">ABOUT</Link></li>
                     <li><Link to="/gallery">GALLERY</Link></li>
-                    <li><Link to="/review">REVIEWS</Link></li>
-                    <li><Link to="/offers">OFFERS</Link></li>
+                    <li><Link to=" ">REVIEWS</Link></li>
+                    <li><Link to="">OFFERS</Link></li>
                     <li><Link to='/community'>COMMUNITY</Link></li>
                     <li><Link to="/blog">BLOG</Link></li>
                     <li><Link to="/skincare-services">EXPERT ADVICE</Link></li>

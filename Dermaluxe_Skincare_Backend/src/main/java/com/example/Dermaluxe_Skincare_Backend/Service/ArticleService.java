@@ -24,28 +24,34 @@ public class ArticleService {
     }
 
     // Get article by ID
-    public Optional<Article> getArticleById(String id) {
-        return articleRepository.findById(id);
+    public Article getArticleById(String id) {
+        return articleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Article not found with id: " + id));
     }
 
-    // Create a new article
-    public Article createArticle(Article article) {
+    // Create new article
+    public Article addArticle(Article article) {
         return articleRepository.save(article);
     }
 
-    // Update an existing article
+    // Update existing article
     public Article updateArticle(String id, Article articleDetails) {
-        if (articleRepository.existsById(id)) {
-            articleDetails.setId(id);
-            return articleRepository.save(articleDetails);
-        }
-        return null; // You can throw an exception if you prefer
+        Article existingArticle = getArticleById(id);
+
+        existingArticle.setCategory(articleDetails.getCategory());
+        existingArticle.setTopic(articleDetails.getTopic());
+        existingArticle.setDescription(articleDetails.getDescription());
+        existingArticle.setLink(articleDetails.getLink());
+        existingArticle.setImageUrl(articleDetails.getImageUrl());
+
+        return articleRepository.save(existingArticle);
     }
 
-    // Delete an article
+    // Delete article
     public void deleteArticle(String id) {
-        if (articleRepository.existsById(id)) {
-            articleRepository.deleteById(id);
+        if (!articleRepository.existsById(id)) {
+            throw new RuntimeException("Article with ID " + id + " not found.");
         }
+        articleRepository.deleteById(id);
     }
 }
